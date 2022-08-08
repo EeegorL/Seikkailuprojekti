@@ -18,7 +18,7 @@ app.use(bodyParser.urlencoded({limit: "50mb", extended: true, parameterLimit:500
 
 app.use(
     session({
-        key: "user_idd",
+        key: "user_id",
         secret: null,
         resave: false,
         saveUninitialized: false,
