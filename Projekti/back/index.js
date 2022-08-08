@@ -19,12 +19,9 @@ app.use(bodyParser.urlencoded({limit: "50mb", extended: true, parameterLimit:500
 app.use(
     session({
         key: "user_id",
-        secret: "superSecretKeyDontShowToAnyone",
+        secret: null,
         resave: false,
         saveUninitialized: false,
-        cookie: {
-            maxAge: 15 * 60 * 1000,
-        }, // 15 minuuttia
     })
 );
 
