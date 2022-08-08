@@ -37,7 +37,7 @@
         });
  
     }
-    console.log("testi");
+    console.log("testii");
     function uusiPeli() {
         peli=new Peli();
         pohjoinen.addEventListener('click', ()=>{suoritaToiminto(Peli.SUUNTA.POHJOINEN);});
