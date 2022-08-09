@@ -5,7 +5,6 @@ const Tietokanta = require('./tietokanta');
 
 const optiot =require('./yhteysoptiot.json');
 
-const sql=require('./sqllauseet.json');
 
 
 
