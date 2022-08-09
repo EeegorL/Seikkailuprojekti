@@ -1,7 +1,7 @@
 {
     "host":"localhost",
     "port": 3306,
-    "user":"paula",
-    "password":"FhO3rbPX",
-    "database":"pelitietokanta"
+    "user":"paakayttaja",
+    "password":"salasana",
+    "database":"seikkailupeli"
 }

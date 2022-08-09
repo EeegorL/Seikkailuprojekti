@@ -1,0 +1,9 @@
+body{
+    background-color:darkkhaki;
+}
+.canvas{
+    background-image: url("background.jpg");
+    border:2px solid red;
+    visibility:none;
+
+}

@@ -3,11 +3,15 @@ const k = kanvaasi.getContext("2d");
 kanvaasi.width = 1014;
 kanvaasi.height = 576;
 
+
+
+
 k.fillRect(0, 0, k.width, k.height);
-let kiihtyvyyskerroin = 0.7;
+
+let kiihtyvyyskerroin = 0;
 
 class Homo_Habilis {
-    constructor({ koord, kiihtyvyys, vari,vari2,onAse,onAi}) {
+    constructor({ koord, kiihtyvyys, vari,vari2}) {
         this.koord = koord;
         this.kiihtyvyys = kiihtyvyys;
         this.korkeus = 150;
@@ -21,9 +25,6 @@ class Homo_Habilis {
             height: 50
         }
         this.hyokkaamassa;
-        this.onAse=onAse;
-        this.onAi=onAi;
-
     }
 
 
@@ -31,24 +32,13 @@ class Homo_Habilis {
         k.fillStyle = this.vari;
         k.fillRect(this.koord.x, this.koord.y, this.leveys, this.korkeus);
         k.fillStyle = this.vari2;
-        if(this.onAse){
-            k.fillRect(this.ase.position.x, this.ase.position.y, this.ase.width, this.ase.height);
-
-        }
+        k.fillRect(this.ase.position.x, this.ase.position.y, this.ase.width, this.ase.height);
     }
     paivita() { //paivittaa jokaisen framen
         this.piirra();
         this.koord.y += this.kiihtyvyys.y;
         this.koord.x += this.kiihtyvyys.x;
-
-        if (this.koord.y + this.kiihtyvyys.y + this.korkeus > kanvaasi.height) { //jos hahmon korkeus (matka esineen alusta (koord) loppuun (korkeus)) 
-            //                                                                   +seuraava siirto kiihtyvyys on suurempi kuin kanvaasin korkeus
-            this.kiihtyvyys.y = 0;
-        }
-        else {
-            this.kiihtyvyys.y += kiihtyvyyskerroin;
-
-        }
+        this.kiihtyvyys.y=0;
     }
     hyokkaa() {
         this.hyokkaamassa = true;
@@ -65,33 +55,29 @@ const pelaaja = new Homo_Habilis({
     },
     kiihtyvyys: {
         x: 0,
-        y: 10
+        y: 0
     },
-    vari: "green",vari2:"yellow",
-    onAse:true,
-    onAi:false
+    vari: "green",vari2:"yellow"
 
 });
 
 
-const dummy = new Homo_Habilis({
+const vihollinen = new Homo_Habilis({
     koord: {
         x: 900,
         y: 100
     },
     kiihtyvyys: {
         x: 0,
-        y: 10
+        y: 0
     },
-    vari: "red",vari2:"cyan",
-    onAse:false,
-    onAi:true
+    vari: "red",vari2:"cyan"
 });
 
 
 const nappaimet = {
     a: {
-        pohjassa: false
+        pohjassa: false,
     },
     d: {
         pohjassa: false
@@ -99,14 +85,8 @@ const nappaimet = {
     w: {
         pohjassa: false
     },
-    ArrowLeft: {
-        pohjassa: false
-    },
-    ArrowRight: {
-        pohjassa: false
-    },
-    ArrowUp: {
-        pohjassa: false
+    s:{
+        pohjassa:false
     }
 };
 
@@ -115,7 +95,7 @@ function moottori() { // pistää koko paskan pyörimään
     k.fillStyle = "black";
     k.fillRect(0, 0, kanvaasi.width, kanvaasi.height);
     pelaaja.paivita();
-    dummy.paivita();
+    vihollinen.paivita();
 
     pelaaja.kiihtyvyys.x = 0;//asettaa nollaan ennen jokaista liikettä
 
@@ -123,16 +103,30 @@ function moottori() { // pistää koko paskan pyörimään
         pelaaja.kiihtyvyys.x = -5;
     } else if (nappaimet.d.pohjassa && pelaaja.viimeisin === "d") {
         pelaaja.kiihtyvyys.x = 5;
+    }else if (nappaimet.w.pohjassa && pelaaja.viimeisin === "w") {
+        pelaaja.kiihtyvyys.y = -5;
+    }else if (nappaimet.s.pohjassa && pelaaja.viimeisin === "s") {
+        pelaaja.kiihtyvyys.y = 5;
     }
 
-    if (pelaaja.ase.position.x + pelaaja.ase.width >= dummy.koord.x &&
-        pelaaja.ase.position.x <= dummy.koord.x + dummy.leveys &&
-        pelaaja.ase.position.y + pelaaja.ase.height >= dummy.koord.y &&
-        pelaaja.ase.position.y <= dummy.koord.y + dummy.korkeus &&
+    if (pelaaja.ase.position.x + pelaaja.ase.width >= vihollinen.koord.x &&
+        pelaaja.ase.position.x <= vihollinen.koord.x + vihollinen.leveys &&
+        pelaaja.ase.position.y + pelaaja.ase.height >= vihollinen.koord.y &&
+        pelaaja.ase.position.y <= vihollinen.koord.y + vihollinen.korkeus &&
         pelaaja.hyokkaamassa
     ) {
         console.log("Pelaajan osuma!");
         pelaaja.hyokkaamassa = false;
+    }
+    if (vihollinen.ase.position.x + vihollinen.ase.width >= pelaaja.koord.x &&
+        vihollinen.ase.position.x <= pelaaja.koord.x + pelaaja.leveys &&
+        vihollinen.ase.position.y + vihollinen.ase.height >= pelaaja.koord.y &&
+        vihollinen.ase.position.y <= pelaaja.koord.y + pelaaja.korkeus &&
+        vihollinen.hyokkaamassa
+    ) {
+        console.log("Vihollisen osuma!");
+        vihollinen.hyokkaamassa = false;
+
     }
 
 }
@@ -152,9 +146,14 @@ window.addEventListener("keydown", (event) => {
             pelaaja.viimeisin = "a";
             break;
         case "w":
-            if(pelaaja.koord.y>420)pelaaja.kiihtyvyys.y = -17;
+            nappaimet.w.pohjassa = true;
+            pelaaja.viimeisin = "w";
             break;
-        case "e":
+        case "s":
+            nappaimet.s.pohjassa = true;
+            pelaaja.viimeisin = "s";
+            break;
+        case "Enter":
             pelaaja.hyokkaa();
             break;
     }
@@ -171,7 +170,14 @@ window.addEventListener("keyup", (event) => {
         case "w":
             nappaimet.w.pohjassa = false;
             break;
+        case "s":
+            nappaimet.s.pohjassa = false;
+            break;
     }
+    var background = new Image();
+background.src = "background.jpg";
+
+kanvaasi.onload = k.draw(background,0,0);
 });
 
 
