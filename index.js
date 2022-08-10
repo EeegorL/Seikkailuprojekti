@@ -9,5 +9,5 @@ const Tietovarasto = require("./back/tietovarastokerros");
 const varasto = new Tietovarasto();
 
 
-
+varasto.testi();
 exp.listen(port, host, () => console.log(`${host}:${port} kuuntelee korvat höröllä`));
