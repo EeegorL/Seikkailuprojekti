@@ -4,14 +4,14 @@ const kanvaasi = document.querySelector("canvas");
 const k = kanvaasi.getContext("2d");
 kanvaasi.width = 1014;
 kanvaasi.height = 576;
+    document.getElementById("fetch").innerHTML= JSON.stringify(fetch("http://localhost:3000/testi"));
 
 
 k.fillRect(0, 0, k.width, k.height);
 
 let kiihtyvyyskerroin = 0;
-
 class Hahmo {
-    constructor({ koord, kiihtyvyys, vari,vari2,elossa,menosuunta}) {
+    constructor({ koord, kiihtyvyys, vari,vari2,elossa,menosuunta,hp}) {
         this.koord = koord;
         this.kiihtyvyys = kiihtyvyys;
         this.korkeus = 75;
@@ -27,6 +27,7 @@ class Hahmo {
         this.hyokkaamassa;
         this.elossa=elossa;
         this.menosuunta=menosuunta;
+        this.hp=hp;
     }
     liikehdinta() { //piirtää hahmon
         k.fillStyle = this.vari;
@@ -55,11 +56,6 @@ class Hahmo {
             pelaaja.ase.position.y+30 <= vihollinen.koord.y + vihollinen.korkeus &&
             pelaaja.hyokkaamassa
         ) {
-            console.log(`
-            ase pos x: ${pelaaja.ase.position.x} 
-            ase pos y: ${pelaaja.ase.position.y}
-            `)
-            console.log("Pelaajan osuma!");
             dmgIndicator();
             pelaaja.hyokkaamassa = false;
         }
@@ -70,11 +66,6 @@ class Hahmo {
             pelaaja.ase.position.y+30 <= vihollinen.koord.y + vihollinen.korkeus &&
             pelaaja.hyokkaamassa
         ) {
-            console.log(`
-            ase pos x: ${pelaaja.ase.position.x} 
-            ase pos y: ${pelaaja.ase.position.y}
-            `)
-            console.log("Pelaajan osuma!");
             dmgIndicator();
             pelaaja.hyokkaamassa = false;
         }
@@ -85,11 +76,6 @@ class Hahmo {
         pelaaja.ase.position.y-75<= vihollinen.koord.y + vihollinen.korkeus &&
         pelaaja.hyokkaamassa
         ) {
-           console.log(`
-           ase pos x: ${pelaaja.ase.position.x} 
-           ase pos y: ${pelaaja.ase.position.y}
-           `)
-           console.log("Pelaajan osuma!");
            dmgIndicator();
            pelaaja.hyokkaamassa = false;
         }
@@ -100,11 +86,6 @@ class Hahmo {
         pelaaja.ase.position.y<= vihollinen.koord.y + vihollinen.korkeus &&
         pelaaja.hyokkaamassa
         ) {
-           console.log(`
-           ase pos x: ${pelaaja.ase.position.x} 
-           ase pos y: ${pelaaja.ase.position.y}
-           `)
-           console.log("Pelaajan osuma!");
            dmgIndicator();
            pelaaja.hyokkaamassa = false;
         }
@@ -146,6 +127,7 @@ const pelaaja = new Hahmo({
         x: 0,
         y: 0
     },
+    hp:100,
     vari: "green",vari2:"yellow",
     elossa:true,
     menosuunta:"alas"
@@ -160,6 +142,7 @@ const vihollinen = new Hahmo({
         x: 0,
         y: 0
     },
+    hp:100,
     vari: "red",vari2:"cyan",
     elossa:true,
     menosuunta:"alas"
@@ -206,6 +189,11 @@ function dmgIndicator(){//testaamista varten
     let indicator=document.getElementById("dmgIndicator");
     indicator.style.color="red";
     setTimeout(()=>indicator.style.color="black",700);
+    vihollinen.hp-=10;
+    console.log(vihollinen.hp);
+    if(vihollinen.hp<=0){
+        vihollinen.elossa=false;
+    }
 }
 //kuuntelijat ->
 window.addEventListener("keydown", (event) => {

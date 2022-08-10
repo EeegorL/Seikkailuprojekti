@@ -2,7 +2,7 @@
 
 
 const Tietokanta = require('./tietokanta');
-
+const sql = require("./sqllauseet.json");
 const optiot =require('./yhteysoptiot.json');
 
 module.exports = class Tietovarasto{
@@ -11,7 +11,17 @@ module.exports = class Tietovarasto{
     }
 
     testi(){
-        console.log("testi");
+        return new Promise((resolve,reject)=>{
+            try{
+                let tulos=this.db.suoritaKysely(sql.testi,[]);
+                resolve(tulos.kyselynTulos);
+            }
+            catch(err){
+                reject(err);
+            }
+
+        })
+
     }
 
     

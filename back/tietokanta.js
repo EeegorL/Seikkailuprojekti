@@ -24,12 +24,11 @@ module.exports = class Tietokanta {
                 }
                 else {
                     resolve({
-                        kyselynTulos: {
+
                             muutetutRivitLkm: kyselynTulos.affectedRows,
                             insertId: kyselynTulos.insertId,
                             status: kyselynTulos.warningStatus
-                        },
-                        tulosjoukko: false
+
                     });
                 }
 
