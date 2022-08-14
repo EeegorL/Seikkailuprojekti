@@ -20,16 +20,10 @@ module.exports = class Tietokanta {
                 }
                 else if (typeof kyselynTulos.affectedRows === 'undefined') {
                     delete kyselynTulos.meta;
-                    resolve({ kyselynTulos, tulosjoukko: true });
+                    resolve(kyselynTulos);
                 }
                 else {
-                    resolve({
-
-                            muutetutRivitLkm: kyselynTulos.affectedRows,
-                            insertId: kyselynTulos.insertId,
-                            status: kyselynTulos.warningStatus
-
-                    });
+                    resolve({muutetutRivitLkm: kyselynTulos.affectedRows});
                 }
 
             }

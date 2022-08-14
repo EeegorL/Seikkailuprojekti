@@ -4,7 +4,12 @@ const kanvaasi = document.querySelector("canvas");
 const k = kanvaasi.getContext("2d");
 kanvaasi.width = 1014;
 kanvaasi.height = 576;
-    document.getElementById("fetch").innerHTML= JSON.stringify(fetch("http://localhost:3000/testi"));
+(async()=>{
+    let testi=JSON.stringify(await fetch("http://localhost:3000/testi"));
+    console.log(testi);
+    document.getElementById("fetch").innerHTML= testi;
+})();
+
 
 
 k.fillRect(0, 0, k.width, k.height);
@@ -28,6 +33,36 @@ class Hahmo {
         this.elossa=elossa;
         this.menosuunta=menosuunta;
         this.hp=hp;
+    }
+
+    dmgIndicator(){//testaamista varten
+        let indicator=document.getElementById("dmgIndicator");
+        let ogVarit=["red","cyan"];
+
+        if(vihollinen.elossa==true){
+            vihollinen.hp-=10;
+            console.log(vihollinen.hp);
+            indicator.style.color="red";
+            vihollinen.vari="red";
+            vihollinen.vari2="red";
+
+            setTimeout(()=>{
+                indicator.style.color="black",700
+                vihollinen.vari=ogVarit[0];
+                vihollinen.vari2=ogVarit[1];
+
+            },350);
+            vihollinen.hp-=10;
+            console.log(vihollinen.hp);
+        }
+
+
+
+
+        if(vihollinen.hp<=0){
+            vihollinen.elossa=false;
+        }
+
     }
     liikehdinta() { //piirtää hahmon
         k.fillStyle = this.vari;
@@ -56,7 +91,7 @@ class Hahmo {
             pelaaja.ase.position.y+30 <= vihollinen.koord.y + vihollinen.korkeus &&
             pelaaja.hyokkaamassa
         ) {
-            dmgIndicator();
+            pelaaja.dmgIndicator();
             pelaaja.hyokkaamassa = false;
         }
         else if(pelaaja.menosuunta=="vasen"&&
@@ -66,7 +101,7 @@ class Hahmo {
             pelaaja.ase.position.y+30 <= vihollinen.koord.y + vihollinen.korkeus &&
             pelaaja.hyokkaamassa
         ) {
-            dmgIndicator();
+            pelaaja.dmgIndicator();
             pelaaja.hyokkaamassa = false;
         }
         else if(pelaaja.menosuunta=="ylos"&&
@@ -76,7 +111,7 @@ class Hahmo {
         pelaaja.ase.position.y-75<= vihollinen.koord.y + vihollinen.korkeus &&
         pelaaja.hyokkaamassa
         ) {
-           dmgIndicator();
+           pelaaja.dmgIndicator();
            pelaaja.hyokkaamassa = false;
         }
         else if(pelaaja.menosuunta=="alas"&&
@@ -86,7 +121,7 @@ class Hahmo {
         pelaaja.ase.position.y<= vihollinen.koord.y + vihollinen.korkeus &&
         pelaaja.hyokkaamassa
         ) {
-           dmgIndicator();
+           pelaaja.dmgIndicator();
            pelaaja.hyokkaamassa = false;
         }
         
@@ -185,16 +220,7 @@ function moottori() { // pistää koko paskan pyörimään
 }
 moottori();
 
-function dmgIndicator(){//testaamista varten
-    let indicator=document.getElementById("dmgIndicator");
-    indicator.style.color="red";
-    setTimeout(()=>indicator.style.color="black",700);
-    vihollinen.hp-=10;
-    console.log(vihollinen.hp);
-    if(vihollinen.hp<=0){
-        vihollinen.elossa=false;
-    }
-}
+
 //kuuntelijat ->
 window.addEventListener("keydown", (event) => {
     switch (event.key) {

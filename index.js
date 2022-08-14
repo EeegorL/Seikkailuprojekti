@@ -11,16 +11,16 @@ const varasto = new Tietovarasto();
 const cors=require("cors");
 const corsOptions ={
    origin:'*', 
-   credentials:true,            //access-control-allow-credentials:true
+   credentials:true,
    optionSuccessStatus:200,
 }
 
 exp.use(cors(corsOptions));
 
-exp.get("/testi",(req,res)=>{
+exp.get("/testi",async (req,res)=>{
     try{
-        console.log(varasto.testi());
-        res.json("varasto.testi()");
+        // console.log(varasto.testi());
+        res.send(await varasto.testi());
     }
     catch(err){
         res.send(err);

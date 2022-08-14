@@ -11,10 +11,11 @@ module.exports = class Tietovarasto{
     }
 
     testi(){
-        return new Promise((resolve,reject)=>{
+        return new Promise(async(resolve,reject)=>{
             try{
                 let tulos=this.db.suoritaKysely(sql.testi,[]);
-                resolve(tulos.kyselynTulos);
+                console.log(await tulos);
+                resolve(tulos);
             }
             catch(err){
                 reject(err);
