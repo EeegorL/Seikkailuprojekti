@@ -14,7 +14,6 @@ module.exports = class Tietovarasto{
         return new Promise(async(resolve,reject)=>{
             try{
                 let tulos=this.db.suoritaKysely(sql.testi,[]);
-                console.log(await tulos);
                 resolve(tulos);
             }
             catch(err){

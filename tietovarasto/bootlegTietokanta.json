@@ -1,0 +1,44 @@
+[
+    {
+        "huone":1,
+        "pohjoinen":2,
+        "etela":null,
+        "lansi":null,
+        "ita":null,
+        "kuvaus":"Ensimmäinen huone. Täällä haisee home",
+        "items":[
+
+        ],
+        "viholliset":[
+
+        ]
+    },
+    {
+        "huone":2,
+        "pohjoinen":null,
+        "etela":null,
+        "lansi":3,
+        "ita":null,
+        "kuvaus":"Toinen huone. Täällä haisee, mutta jokin muu kuin home",
+        "items":[
+
+        ],
+        "viholliset":[
+
+        ]
+    },    {
+        "huone":3,
+        "pohjoinen":null,
+        "etela":null,
+        "lansi":null,
+        "ita":null,
+        "kuvaus":"Kolmas huone. Täällä ei haise",
+        "items":[
+
+        ],
+        "viholliset":[
+
+        ]
+    }
+
+]
