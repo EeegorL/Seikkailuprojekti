@@ -9,3 +9,18 @@ body{
     visibility:none;
 
 }
+.peliContainer{
+    float:right;
+
+}
+.dmgIndicator{
+    float:right;
+    margin-right:10em;
+    font-size:65px;
+}
+.vihHp{
+    font-size:xx-large;
+}
+.pelitieto{
+    text-align: right;
+}

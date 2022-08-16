@@ -2,14 +2,19 @@
 <html lang="fi">
 <head>
     <meta charset="UTF-8">
-    <title>Peli</title>
+    <title>Seikkailupeli</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+
 </head>
 <body>
-    
+    <div class="pelicontainer">
     <canvas id="canvas" class="canvas"></canvas>
+    <h1 id="dmgIndicator" class="dmgIndicator">◍</h1>
+    <div class="vihHp">Vihollisen HP:<span id="vihHp" class="vihHp"></span></div>
+    
+    </div>
     </body>
     <div>
-        <h1 id="dmgIndicator">◍</h1>
         Ohjaaminen:
         <p>W: Ylös</p>
         <p>A: Vasemmalle</p>
@@ -20,6 +25,8 @@
     </div>
 
     <script src="js/Hahmo.js"></script>
+    <!-- <script src="js/Pelaaja.js"></script> -->
+    <script src="js/Seina.js"></script>
     <script src="js/Peli.js"></script>
     <link rel="stylesheet" href="style.css">
     </html>

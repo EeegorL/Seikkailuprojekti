@@ -5,7 +5,8 @@ const k = kanvaasi.getContext("2d");
 kanvaasi.width = 1014;
 kanvaasi.height = 576;
 
-    
+let seinat=[];
+
 async function testi(){//toimii
     const optiot={
         method:'GET',
@@ -16,10 +17,6 @@ async function testi(){//toimii
 
     return a[0];
 }testi();
-
-(async()=>{
-    let huone=await fetch(`https://localhost:3000/huone/${1}`)
-})();
 
 
 let kiihtyvyyskerroin = 0;
@@ -51,63 +48,45 @@ const vihollinen = new Hahmo({
     elossa:true,
     menosuunta:"alas"
 });
+
+function teeSeinat(){
+    const seinaP=new Seina({koord:{x:0,y:0},leveys:kanvaasi.width,korkeus:15,kanvaasi:k,vari:"red"})
+        seinaP.piirra();//Pohjoisseinä
+    const seinaI=new Seina({koord:{x:0,y:0},leveys:15,korkeus:kanvaasi.height,kanvaasi:k,vari:"red"})
+        seinaI.piirra();//Itäseinä
+    const seinaE=new Seina({koord:{x:0,y:kanvaasi.height-15},leveys:kanvaasi.width,korkeus:15,kanvaasi:k,vari:"red"})
+        seinaE.piirra();//Eteläseinä 
+    const seinaL=new Seina({koord:{x:kanvaasi.width-15,y:0},leveys:15,korkeus:kanvaasi.height,kanvaasi:k,vari:"red"})
+        seinaL.piirra();//Länsiseinä
+        seinat=[seinaE,seinaP,seinaL,seinaI];
+}
+
+function tarkistaTormaaminen(hahmo){
+
+}
+
 function moottori() {
     window.requestAnimationFrame(moottori);
-    k.fillStyle = "#7B6753";
+    k.fillStyle = "lightgrey"; //taustaväri
 
     k.fillRect(0, 0, kanvaasi.width, kanvaasi.height);
-    if(pelaaja.elossa){
+    if(pelaaja.elossa){ //päivittää pelaajaa jos tämä on elossa
         pelaaja.paivita();
+        tarkistaTormaaminen(pelaaja);
     }
     if(vihollinen.elossa){
         vihollinen.paivita();
-    }
+        tarkistaTormaaminen(vihollinen);
 
-    
+    }
+    teeSeinat();
+
 }
 moottori();
 
 
 //nappikuuntelijat ->
-window.addEventListener("keydown", (event) => {
-    switch (event.key) {
-        case "d":
-            nappaimet.d.pohjassa = true;
-            pelaaja.viimeisin = "d";
-            break;
-        case "a":
-            nappaimet.a.pohjassa = true;
-            pelaaja.viimeisin = "a";
-            break;
-        case "w":
-            nappaimet.w.pohjassa = true;
-            pelaaja.viimeisin = "w";
-            break;
-        case "s":
-            nappaimet.s.pohjassa = true;
-            pelaaja.viimeisin = "s";
-            break;
-        case "Enter":
-            pelaaja.hyokkaa();
-            break;
-    }
-});
-window.addEventListener("keyup", (event) => {
-    switch (event.key) {
-        case "d":
-            nappaimet.d.pohjassa = false;
-            break;
-        case "a":
-            nappaimet.a.pohjassa = false;
-            break;
-        case "w":
-            nappaimet.w.pohjassa = false;
-            break;
-        case "s":
-            nappaimet.s.pohjassa = false;
-            break;
-    }
-});
+
 
 async function siirry(){
 

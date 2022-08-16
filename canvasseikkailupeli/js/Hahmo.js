@@ -1,5 +1,7 @@
+"use strict";
+
 class Hahmo {
-    constructor({ koord, kiihtyvyys, vari,vari2,elossa,menosuunta,hp}) {
+    constructor({ koord, kiihtyvyys, vari,vari2,elossa,hp}) {
         this.koord = koord;
         this.kiihtyvyys = kiihtyvyys;
         this.korkeus = 75;
@@ -18,94 +20,55 @@ class Hahmo {
         this.hp=hp;
     }
 
-    dmgIndicator(){//testaamista varten & vahingon tunnistaminen
+    dmgIndicator(kohde){//testaamista varten & vahingon tunnistaminen
         let indicator=document.getElementById("dmgIndicator");
         let ogVarit=["red","cyan"];
 
-        if(vihollinen.elossa==true){
-            vihollinen.hp-=10;
+        if(kohde.elossa==true){
+            kohde.hp-=10;
+            document.getElementById("vihHp").innerHTML=kohde.hp;
             indicator.style.color="red";
-            vihollinen.vari="red";
-            vihollinen.vari2="red";
+            kohde.vari="red";
+            kohde.vari2="red";
 
             setTimeout(()=>{
                 indicator.style.color="black",700
-                vihollinen.vari=ogVarit[0];
-                vihollinen.vari2=ogVarit[1];
+                kohde.vari=ogVarit[0];
+                kohde.vari2=ogVarit[1];
 
             },350);
-            console.log(vihollinen.hp);
+            console.log(kohde.hp);
         }
-
-
-
-
-        if(vihollinen.hp<=0){
-            vihollinen.elossa=false;
+        if(kohde.hp<=0){
+            kohde.elossa=false;
+            setTimeout(()=>{//respawn koska miks ei
+                kohde.elossa=true;
+                kohde.hp=100;
+            },1500);
         }
 
     }
-    liikehdinta() { //liikkuminen ja hyökkääminen
+    liikehdinta() { //liikkuminen
         k.fillStyle = this.vari;
         k.fillRect(this.koord.x, this.koord.y, this.leveys, this.korkeus);
         k.fillStyle = this.vari2;
         pelaaja.kiihtyvyys.x = 0;//asettaa liikehdinnän nollaan ennen jokaista liikettä
 
-        if (nappaimet.a.pohjassa && pelaaja.viimeisin === "a") {
+        //tarkistaa viimeisimpänä painetun napin ja toimii sen mukaan
+        if (liikenappaimet.a.pohjassa && pelaaja.viimeisin === "a") {
             pelaaja.kiihtyvyys.x = -5;
             pelaaja.menosuunta="vasen";
-        } else if (nappaimet.d.pohjassa && pelaaja.viimeisin === "d") {
+        }else if (liikenappaimet.d.pohjassa && pelaaja.viimeisin === "d") {
             pelaaja.kiihtyvyys.x = 5;
             pelaaja.menosuunta="oikea";
-        }else if (nappaimet.w.pohjassa && pelaaja.viimeisin === "w") {
+        }else if (liikenappaimet.w.pohjassa && pelaaja.viimeisin === "w") {
             pelaaja.kiihtyvyys.y = -5;
             pelaaja.menosuunta="ylos";
-        }else if (nappaimet.s.pohjassa && pelaaja.viimeisin === "s") {
+        }else if (liikenappaimet.s.pohjassa && pelaaja.viimeisin === "s") {
             pelaaja.kiihtyvyys.y = 5;
             pelaaja.menosuunta="alas";
-        }
-    //pelaajan osumaehdot
-        if (pelaaja.menosuunta=="oikea" &&
-            pelaaja.ase.position.x + pelaaja.ase.width >= vihollinen.koord.x &&
-            pelaaja.ase.position.x <= vihollinen.koord.x + vihollinen.leveys &&
-            pelaaja.ase.position.y+pelaaja.korkeus*0.4+ pelaaja.ase.height >= vihollinen.koord.y &&
-            pelaaja.ase.position.y+pelaaja.korkeus*0.4 <= vihollinen.koord.y + vihollinen.korkeus &&
-            pelaaja.hyokkaamassa
-        ) {
-            pelaaja.dmgIndicator();
-            pelaaja.hyokkaamassa = false;
-        }
-        else if(pelaaja.menosuunta=="vasen"&&
-            pelaaja.ase.position.x - pelaaja.ase.width <= vihollinen.koord.x &&
-            pelaaja.ase.position.x >= vihollinen.koord.x - vihollinen.leveys &&
-            pelaaja.ase.position.y+pelaaja.korkeus*0.4 + pelaaja.ase.height >= vihollinen.koord.y &&
-            pelaaja.ase.position.y+pelaaja.korkeus*0.4 <= vihollinen.koord.y + vihollinen.korkeus &&
-            pelaaja.hyokkaamassa
-        ) {
-            pelaaja.dmgIndicator();
-            pelaaja.hyokkaamassa = false;
-        }
-        else if(pelaaja.menosuunta=="ylos"&&
-        pelaaja.ase.position.x+pelaaja.leveys*0.667 + pelaaja.ase.width >= vihollinen.koord.x &&
-        pelaaja.ase.position.x+pelaaja.leveys*0.667 <= vihollinen.koord.x + vihollinen.leveys &&
-        pelaaja.ase.position.y-pelaaja.korkeus+pelaaja.ase.height >= vihollinen.koord.y &&
-        pelaaja.ase.position.y-pelaaja.korkeus<= vihollinen.koord.y + vihollinen.korkeus &&
-        pelaaja.hyokkaamassa
-        ) {
-           pelaaja.dmgIndicator();
-           pelaaja.hyokkaamassa = false;
-        }
-        else if(pelaaja.menosuunta=="alas"&&
-        pelaaja.ase.position.x+pelaaja.leveys*0.3 + pelaaja.ase.width >= vihollinen.koord.x &&
-        pelaaja.ase.position.x+pelaaja.leveys*0.5 <= vihollinen.koord.x + vihollinen.leveys &&
-        pelaaja.ase.position.y+pelaaja.ase.height >= vihollinen.koord.y &&
-        pelaaja.ase.position.y<= vihollinen.koord.y + vihollinen.korkeus &&
-        pelaaja.hyokkaamassa
-        ) {
-           pelaaja.dmgIndicator();
-           pelaaja.hyokkaamassa = false;
-        }
-        //aseen osoitussuunta
+        }       
+        //aseen osoitussuunta riippuen liikesuunnasta
         if(this.menosuunta=="vasen"){
             k.fillRect(this.ase.position.x-100, this.ase.position.y+30, this.ase.width=150, this.ase.height=10);
         }
@@ -121,13 +84,54 @@ class Hahmo {
         
     }
     paivita() { //paivittaa jokaisen framen
-        this.liikehdinta();
+        this.liikehdinta(); //liikuttaa hahmoa ja hoitaa piirtämisen
         this.koord.y += this.kiihtyvyys.y;
         this.koord.x += this.kiihtyvyys.x;
         this.kiihtyvyys.y=0;
     }
-    hyokkaa() {
+    hyokkaa(kohde) {
         this.hyokkaamassa = true;
+
+        if (this.menosuunta=="oikea" &&
+        this.ase.position.x + this.ase.width >= kohde.koord.x &&
+        this.ase.position.x <= kohde.koord.x + kohde.leveys &&
+        this.ase.position.y+this.korkeus*0.4+ this.ase.height >= kohde.koord.y &&
+        this.ase.position.y+this.korkeus*0.4 <= kohde.koord.y + kohde.korkeus &&
+        this.hyokkaamassa
+    ) {
+        this.dmgIndicator(kohde);
+        this.hyokkaamassa = false;
+    }
+    else if(this.menosuunta=="vasen"&&
+        this.ase.position.x - this.ase.width <= kohde.koord.x &&
+        this.ase.position.x >= kohde.koord.x - kohde.leveys &&
+        this.ase.position.y+this.korkeus*0.4 + this.ase.height >= kohde.koord.y &&
+        this.ase.position.y+this.korkeus*0.4 <= kohde.koord.y + kohde.korkeus &&
+        this.hyokkaamassa
+    ) {
+        this.dmgIndicator(kohde);
+        this.hyokkaamassa = false;
+    }
+    else if(this.menosuunta=="ylos"&&
+    this.ase.position.x+this.leveys*0.667 + this.ase.width >= kohde.koord.x &&
+    this.ase.position.x+this.leveys*0.667 <= kohde.koord.x + kohde.leveys &&
+    this.ase.position.y-this.korkeus+this.ase.height >= kohde.koord.y &&
+    this.ase.position.y-this.korkeus<= kohde.koord.y + kohde.korkeus &&
+    this.hyokkaamassa
+    ) {
+       this.dmgIndicator(kohde);
+       this.hyokkaamassa = false;
+    }
+    else if(this.menosuunta=="alas"&&
+    this.ase.position.x+this.leveys*0.3 + this.ase.width >= kohde.koord.x &&
+    this.ase.position.x+this.leveys*0.5 <= kohde.koord.x + kohde.leveys &&
+    this.ase.position.y+this.ase.height >= kohde.koord.y &&
+    this.ase.position.y<= kohde.koord.y + kohde.korkeus &&
+    this.hyokkaamassa
+    ) {
+       this.dmgIndicator(kohde);
+       this.hyokkaamassa = false;
+    }
         setTimeout(() => {
             this.hyokkaamassa = false;
         }, 100
@@ -135,7 +139,7 @@ class Hahmo {
     }
 }
 
-const nappaimet = {
+const liikenappaimet = {
     a: {
         pohjassa: false,
     },
@@ -149,3 +153,44 @@ const nappaimet = {
         pohjassa:false
     }
 };
+
+//nappikuuntelijat
+window.addEventListener("keydown", (event) => {
+    switch (event.key) {
+        case "d":
+            liikenappaimet.d.pohjassa = true;
+            pelaaja.viimeisin = "d";
+            break;
+        case "a":
+            liikenappaimet.a.pohjassa = true;
+            pelaaja.viimeisin = "a";
+            break;
+        case "w":
+            liikenappaimet.w.pohjassa = true;
+            pelaaja.viimeisin = "w";
+            break;
+        case "s":
+            liikenappaimet.s.pohjassa = true;
+            pelaaja.viimeisin = "s";
+            break;
+        case "Enter":
+            pelaaja.hyokkaa(vihollinen);
+            break;
+    }
+});
+window.addEventListener("keyup", (event) => {
+    switch (event.key) {
+        case "d":
+            liikenappaimet.d.pohjassa = false;
+            break;
+        case "a":
+            liikenappaimet.a.pohjassa = false;
+            break;
+        case "w":
+            liikenappaimet.w.pohjassa = false;
+            break;
+        case "s":
+            liikenappaimet.s.pohjassa = false;
+            break;
+    }
+});

@@ -24,7 +24,6 @@ exp.get("/"),(req,res)=>res.sendFile(__dirname,"index.html");
 
 exp.get("/testi",async (req,res)=>{
     try{
-        console.log(await varasto.testi());
         res.json(await varasto.testi());
     }
     catch(err){
@@ -33,6 +32,7 @@ exp.get("/testi",async (req,res)=>{
 });
 exp.get("/pelaaja",async (req,res)=>{
     try{
+        
         console.log(await varasto.testi());
         res.json(await varasto.testi());
     }
