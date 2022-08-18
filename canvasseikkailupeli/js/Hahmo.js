@@ -85,6 +85,8 @@ class Hahmo {
     }
     paivita() { //paivittaa jokaisen framen
         this.liikehdinta(); //liikuttaa hahmoa ja hoitaa piirtämisen
+        k.font = "Bold 40px Brush Script MT";
+        k.strokeText(this.hp, this.koord.x+3.5,this.koord.y);
         this.koord.y += this.kiihtyvyys.y;
         this.koord.x += this.kiihtyvyys.x;
         this.kiihtyvyys.y=0;
@@ -132,10 +134,7 @@ class Hahmo {
        this.dmgIndicator(kohde);
        this.hyokkaamassa = false;
     }
-        setTimeout(() => {
-            this.hyokkaamassa = false;
-        }, 100
-        )
+
     }
 }
 

@@ -19,7 +19,6 @@ async function testi(){//toimii
 }testi();
 
 
-let kiihtyvyyskerroin = 0;
 const pelaaja = new Hahmo({
     koord: {
         x: 100,
@@ -46,17 +45,17 @@ const vihollinen = new Hahmo({
     hp:100,
     vari: "red",vari2:"cyan",
     elossa:true,
-    menosuunta:"alas"
+    menosuunta:"oikea"
 });
 
 function teeSeinat(){
-    const seinaP=new Seina({koord:{x:0,y:0},leveys:kanvaasi.width,korkeus:15,kanvaasi:k,vari:"red"})
+    const seinaP=new Seina({koord:{x:0,y:0},leveys:kanvaasi.width,korkeus:15,kanvaasi:k,vari:"brown"})
         seinaP.piirra();//Pohjoisseinä
-    const seinaI=new Seina({koord:{x:0,y:0},leveys:15,korkeus:kanvaasi.height,kanvaasi:k,vari:"blue"})
+    const seinaI=new Seina({koord:{x:0,y:0},leveys:15,korkeus:kanvaasi.height,kanvaasi:k,vari:"brown"})
         seinaI.piirra();//Itäseinä
-    const seinaE=new Seina({koord:{x:0,y:kanvaasi.height-15},leveys:kanvaasi.width,korkeus:15,kanvaasi:k,vari:"yellow"})
+    const seinaE=new Seina({koord:{x:0,y:kanvaasi.height-15},leveys:kanvaasi.width,korkeus:15,kanvaasi:k,vari:"brown"})
         seinaE.piirra();//Eteläseinä 
-    const seinaL=new Seina({koord:{x:kanvaasi.width-15,y:0},leveys:15,korkeus:kanvaasi.height,kanvaasi:k,vari:"green"})
+    const seinaL=new Seina({koord:{x:kanvaasi.width-15,y:0},leveys:15,korkeus:kanvaasi.height,kanvaasi:k,vari:"brown"})
         seinaL.piirra();//Länsiseinä
         seinat=[seinaE,seinaP,seinaL,seinaI];
 }
@@ -64,6 +63,7 @@ function teeSeinat(){
 function tarkistaTormaaminen(hahmo){
     //huoneiden seinät
         if(hahmo.menosuunta=="oikea"){
+            console.log("iwjho")
             if(hahmo.koord.x+hahmo.leveys>=seinat[2].koord.x){
                 hahmo.koord.x = seinat[2].koord.x-hahmo.leveys;        
             }
@@ -81,12 +81,12 @@ function tarkistaTormaaminen(hahmo){
             if(hahmo.koord.y-hahmo.korkeus+70<=seinat[1].koord.y){
                 hahmo.koord.y = seinat[1].koord.y+hahmo.korkeus-65;        }
         }
-    }
+}
 
 
 function moottori() {
     window.requestAnimationFrame(moottori);
-    k.fillStyle = "lightgrey"; //taustaväri
+    k.fillStyle = "whitesmoke"; //taustaväri
 
     k.fillRect(0, 0, kanvaasi.width, kanvaasi.height);
     if(pelaaja.elossa){ //päivittää pelaajaa jos tämä on elossa
@@ -95,8 +95,7 @@ function moottori() {
     }
     if(vihollinen.elossa){
         vihollinen.paivita();
-        tarkistaTormaaminen(vihollinen);
-
+        tarkistaTormaaminen(vihollinen);        
     }
     teeSeinat();
 

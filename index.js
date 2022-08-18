@@ -32,7 +32,6 @@ exp.get("/testi",async (req,res)=>{
 });
 exp.get("/pelaaja",async (req,res)=>{
     try{
-        
         console.log(await varasto.testi());
         res.json(await varasto.testi());
     }
