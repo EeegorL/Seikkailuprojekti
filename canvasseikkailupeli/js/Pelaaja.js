@@ -20,12 +20,8 @@ class Pelaaja extends Hahmo{
         this.hyokkaamassa;
         this.elossa=elossa;
         this.menosuunta;
-        this.hp=hp;
-
-
-        
+        this.hp=hp;        
     }
-    
 };
 
 const liikenappaimet = {

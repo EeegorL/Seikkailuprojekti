@@ -62,7 +62,15 @@ function teeSeinat(){
 }
 
 function tarkistaTormaaminen(hahmo){
+    for(let seina of seinat){
+        if(hahmo.menosuunta=="oikea"){
+            if(hahmo.koord.x==seina.koord.x && hahmo.koord.y==seina.koord.y){
+                console.log("isrjhj")
+                hahmo.kiihtyvyys.x=0;
+        }
+        }
 
+    }
 }
 
 function moottori() {
