@@ -3,24 +3,48 @@
 
 class Pelaaja extends Hahmo{
     constructor(koord, kiihtyvyys, vari,vari2,elossa,hp){
-        super(koord, kiihtyvyys, vari,vari2,elossa,hp);
-
-        this.koord = koord;
-        this.kiihtyvyys = kiihtyvyys;
-        this.korkeus = 75;
-        this.leveys = 50;
-        this.viimeisin;
-        this.vari = vari;
-        this.vari2 = vari2;
-        this.ase = {
-            position: this.koord,
-            width: 150,
-            height: 10
-        }
-        this.hyokkaamassa;
-        this.elossa=elossa;
-        this.menosuunta;
-        this.hp=hp;        
+        super(koord, kiihtyvyys, vari,vari2,elossa,hp);//ottaa käyttöön parent-classin
+    }
+    siirra(ovi){
+        switch(this.menosuunta){
+            case "alas":
+            if(this.koord.x<=ovi[0].koord.x+ovi[0].leveys &&
+               this.koord.x+this.leveys>=ovi[0].koord.x &&
+               this.koord.y>=ovi[0].koord.y-ovi[0].korkeus+5){
+                    this.koord.x=490;
+                    this.koord.y=0;
+                }
+            break;
+            
+            case "ylos":
+                if(this.koord.x<=ovi[1].koord.x+ovi[1].leveys &&
+                    this.koord.x+this.leveys>=ovi[1].koord.x &&
+                    this.koord.y<=10){
+                         this.koord.x=490;
+                         this.koord.y=kanvaasi.height-20;
+                     }
+                break;
+        
+            case "vasen":
+                if(this.koord.x<=ovi[2].koord.x+30 &&
+                    this.koord.y>=ovi[2].koord.y-10 &&
+                    this.koord.y<=ovi[2].koord.y+ovi[2].korkeus
+                ){
+                         this.koord.x=1000;
+                         this.koord.y=kanvaasi.height/2-18;
+                     }
+            break;
+            
+            case "oikea":
+                if(this.koord.x>=ovi[3].koord.x-30 &&
+                    this.koord.y>=ovi[3].koord.y-10 &&
+                    this.koord.y<=ovi[3].koord.y+ovi[2].korkeus
+                ){
+                         this.koord.x=0;
+                         this.koord.y=kanvaasi.height/2-18;
+                     }
+            break;
+            }
     }
 };
 

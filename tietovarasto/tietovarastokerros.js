@@ -10,10 +10,10 @@ module.exports = class Tietovarasto{
         this.db = new Tietokanta(optiot);
     }
 
-    testi(){
+    vihollisenTiedot(id){
         return new Promise(async(resolve,reject)=>{
             try{
-                let tulos=this.db.suoritaKysely(sql.testi,[]);
+                let tulos=this.db.suoritaKysely(sql.vihollinen,[id]);
                 resolve(tulos);
             }
             catch(err){

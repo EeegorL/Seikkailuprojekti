@@ -4,6 +4,9 @@ html{
 body{
     background-color:darkkhaki;
 }
+p{
+    margin-bottom:-10px;
+}
 .canvas{
     border:5px solid brown;
     visibility:none;
@@ -17,9 +20,6 @@ body{
     float:right;
     margin-right:10em;
     font-size:65px;
-}
-.vihHp{
-    font-size:xx-large;
 }
 .pelitieto{
     text-align: right;

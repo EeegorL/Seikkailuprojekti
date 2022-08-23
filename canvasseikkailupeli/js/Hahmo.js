@@ -1,7 +1,7 @@
 "use strict";
 
 class Hahmo {
-    constructor({ koord, kiihtyvyys, vari,vari2,elossa,hp}) {
+    constructor({ koord, kiihtyvyys, vari,vari2,elossa,hp,nimi}) {
         this.koord = koord;
         this.kiihtyvyys = kiihtyvyys;
         this.korkeus = 75;
@@ -18,26 +18,22 @@ class Hahmo {
         this.elossa=elossa;
         this.menosuunta;
         this.hp=hp;
+        this.nimi=nimi;
     }
 
-    dmgIndicator(kohde){//testaamista varten & vahingon tunnistaminen
-        let indicator=document.getElementById("dmgIndicator");
-        let ogVarit=["red","cyan"];
+    dmgIndicator(kohde){//vahingon tunnistaminen
+        let ogVarit=["blue","cyan"];
 
         if(kohde.elossa==true){
             kohde.hp-=10;
-            document.getElementById("vihHp").innerHTML=kohde.hp;
-            indicator.style.color="red";
             kohde.vari="red";
             kohde.vari2="red";
 
             setTimeout(()=>{
-                indicator.style.color="black",700
                 kohde.vari=ogVarit[0];
                 kohde.vari2=ogVarit[1];
 
             },350);
-            console.log(kohde.hp);
         }
         if(kohde.hp<=0){
             kohde.elossa=false;
@@ -136,60 +132,25 @@ class Hahmo {
     }
 
     }
+     tarkistaTormaaminen(seinat){
+        //huoneiden seinät
+            if(this.menosuunta=="oikea"){
+                if(this.koord.x+this.leveys>=seinat[2].koord.x){
+                    this.koord.x = seinat[2].koord.x-this.leveys;        
+                }
+            }
+            if(this.menosuunta=="vasen"){
+                if(this.koord.x-10<=seinat[3].koord.x){
+                    this.koord.x = seinat[3].koord.x+this.leveys-35; 
+                }
+            }
+            if(this.menosuunta=="alas"){
+                if(this.koord.y+this.korkeus>=seinat[0].koord.y){
+                    this.koord.y = seinat[0].koord.y-this.korkeus;        }
+            }
+            if(this.menosuunta=="ylos"){
+                if(this.koord.y-this.korkeus+70<=seinat[1].koord.y){
+                    this.koord.y = seinat[1].koord.y+this.korkeus-65;        }
+            }
+    }
 }
-
-const liikenappaimet = {
-    a: {
-        pohjassa: false,
-    },
-    d: {
-        pohjassa: false
-    },
-    w: {
-        pohjassa: false
-    },
-    s:{
-        pohjassa:false
-    }
-};
-
-//nappikuuntelijat
-window.addEventListener("keydown", (event) => {
-    switch (event.key) {
-        case "d":
-            liikenappaimet.d.pohjassa = true;
-            pelaaja.viimeisin = "d";
-            break;
-        case "a":
-            liikenappaimet.a.pohjassa = true;
-            pelaaja.viimeisin = "a";
-            break;
-        case "w":
-            liikenappaimet.w.pohjassa = true;
-            pelaaja.viimeisin = "w";
-            break;
-        case "s":
-            liikenappaimet.s.pohjassa = true;
-            pelaaja.viimeisin = "s";
-            break;
-        case "Enter":
-            pelaaja.hyokkaa(vihollinen);
-            break;
-    }
-});
-window.addEventListener("keyup", (event) => {
-    switch (event.key) {
-        case "d":
-            liikenappaimet.d.pohjassa = false;
-            break;
-        case "a":
-            liikenappaimet.a.pohjassa = false;
-            break;
-        case "w":
-            liikenappaimet.w.pohjassa = false;
-            break;
-        case "s":
-            liikenappaimet.s.pohjassa = false;
-            break;
-    }
-});

@@ -22,9 +22,9 @@ exp.use(cors(corsOptions));
 
 exp.get("/"),(req,res)=>res.sendFile(__dirname,"index.html");
 
-exp.get("/testi",async (req,res)=>{
+exp.get("/vihollinen/:id",async (req,res)=>{
     try{
-        res.json(await varasto.testi());
+        res.json(await varasto.vihollisenTiedot(req.params.id));
     }
     catch(err){
         res.send(err);
@@ -32,7 +32,6 @@ exp.get("/testi",async (req,res)=>{
 });
 exp.get("/pelaaja",async (req,res)=>{
     try{
-        console.log(await varasto.testi());
         res.json(await varasto.testi());
     }
     catch(err){
