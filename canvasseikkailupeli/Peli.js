@@ -22,6 +22,7 @@ const pelaaja = new Pelaaja({
     elossa:true
 });
 const vihollinen = new Vihollinen({
+    id:1,
     koord: {
         x: 550,
         y: 200
@@ -33,10 +34,7 @@ const vihollinen = new Vihollinen({
     hp:100,
     vari: "blue",vari2:"cyan",
     elossa:true,
-    k:k,
-    id:1
 });
-
 
 
 function teeSeinatJaOvet(){
@@ -62,7 +60,7 @@ function teeSeinatJaOvet(){
         seinat=[seinaE,seinaP,seinaL,seinaI];
 }
 
-function moottori() {
+async function moottori() {
     window.requestAnimationFrame(moottori)
     
     k.fillStyle = "whitesmoke"; //taustaväri
@@ -74,15 +72,13 @@ function moottori() {
         pelaaja.siirra(ovet);
     }
     if(vihollinen.elossa){
-        vihollinen.paivitaVihollinen(k,1);
+        
+        vihollinen.paivitaVihollinen(vihollinen.id);
         vihollinen.tarkistaTormaaminen(seinat);    
 
    
     }
     teeSeinatJaOvet();
-    if(vihollinen.koord.x>=seinat[2].koord.x-50){
-        vihollinen.koord.x=seinat[2].koord.x-50
-    }
 
 }
 moottori();

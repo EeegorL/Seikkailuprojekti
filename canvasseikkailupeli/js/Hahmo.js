@@ -1,7 +1,7 @@
 "use strict";
 
 class Hahmo {
-    constructor({ koord, kiihtyvyys, vari,vari2,elossa,hp,nimi}) {
+    constructor({ koord, kiihtyvyys, vari,vari2,elossa,hp,id}) {
         this.koord = koord;
         this.kiihtyvyys = kiihtyvyys;
         this.korkeus = 75;
@@ -18,7 +18,7 @@ class Hahmo {
         this.elossa=elossa;
         this.menosuunta;
         this.hp=hp;
-        this.nimi=nimi;
+        this.id=id;
     }
 
     dmgIndicator(kohde){//vahingon tunnistaminen

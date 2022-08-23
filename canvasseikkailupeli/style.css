@@ -24,3 +24,8 @@ p{
 .pelitieto{
     text-align: right;
 }
+.huonetiedot{
+    float:right;
+    margin-right:25em;
+    font-size: x-large;
+}

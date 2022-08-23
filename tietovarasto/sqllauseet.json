@@ -1,3 +1,4 @@
 {
-    "vihollinen":"select * from vihollinen where id=?"
+    "vihollinen":"select * from vihollinen where id=?",
+    "huone":"select * from huone where id=?"
 }
