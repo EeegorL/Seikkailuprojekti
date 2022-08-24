@@ -11,7 +11,7 @@ class Seina{
 
     piirra(){
         this.kanvaasi.save();
-        this.kanvaasi.fillStyle = this.vari;
+        k.fillStyle = "brown";
         this.kanvaasi.fillRect(this.koord.x, this.koord.y, this.leveys, this.korkeus);
     }
 

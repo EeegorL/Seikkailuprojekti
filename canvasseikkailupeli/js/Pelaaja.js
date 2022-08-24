@@ -5,44 +5,76 @@ class Pelaaja extends Hahmo{
     constructor(koord, kiihtyvyys, vari,vari2,elossa,hp){
         super(koord, kiihtyvyys, vari,vari2,elossa,hp);//ottaa käyttöön parent-classin
     }
-    siirra(ovi){
+    siirry(ovet){
+        let e=null;
+        let p=null;
+        let i=null;
+        let l=null;
+        for(let ovi of ovet){
+            if(ovi.ilmansuunta=="etela"){
+                e=ovi;
+            }
+            else if(ovi.ilmansuunta=="pohjoinen"){
+                p=ovi;
+            }
+            else if(ovi.ilmansuunta=="lansi"){
+                l=ovi;
+            }
+            else if(ovi.ilmansuunta=="ita"){
+                i=ovi;
+            }
+
+        }
         switch(this.menosuunta){
             case "alas":
-            if(this.koord.x<=ovi[0].koord.x+ovi[0].leveys &&
-               this.koord.x+this.leveys>=ovi[0].koord.x &&
-               this.koord.y>=ovi[0].koord.y-ovi[0].korkeus+5){
-                    this.koord.x=490;
-                    this.koord.y=0;
-                }
+            if(e){
+                if(this.koord.x<=e.koord.x+e.leveys &&
+                    this.koord.x+this.leveys>=e.koord.x &&
+                    this.koord.y>=e.koord.y-e.korkeus+5){
+                         this.koord.x=490;
+                         this.koord.y=0;
+                     }
+            }
+
             break;
             
             case "ylos":
-                if(this.koord.x<=ovi[1].koord.x+ovi[1].leveys &&
-                    this.koord.x+this.leveys>=ovi[1].koord.x &&
-                    this.koord.y<=10){
-                         this.koord.x=490;
-                         this.koord.y=kanvaasi.height-20;
-                     }
+                if(p){
+                    if(this.koord.x<=p.koord.x+p.leveys &&
+                        this.koord.x+this.leveys>=p.koord.x &&
+                        this.koord.y<=10){
+                             this.koord.x=490;
+                             this.koord.y=kanvaasi.height-20;
+                         }
+                }
+
                 break;
         
             case "vasen":
-                if(this.koord.x<=ovi[2].koord.x+30 &&
-                    this.koord.y>=ovi[2].koord.y-10 &&
-                    this.koord.y<=ovi[2].koord.y+ovi[2].korkeus
-                ){
-                         this.koord.x=1000;
-                         this.koord.y=kanvaasi.height/2-18;
-                     }
+                if(l){
+                    if(this.koord.x<=l.koord.x+30 &&
+                        this.koord.y>=l.koord.y-10 &&
+                        this.koord.y<=l.koord.y+l.korkeus
+                    ){
+                             this.koord.x=1000;
+                             this.koord.y=kanvaasi.height/2-18;
+                         }
+                }
+
             break;
             
             case "oikea":
-                if(this.koord.x>=ovi[3].koord.x-30 &&
-                    this.koord.y>=ovi[3].koord.y-10 &&
-                    this.koord.y<=ovi[3].koord.y+ovi[2].korkeus
-                ){
-                         this.koord.x=0;
-                         this.koord.y=kanvaasi.height/2-18;
-                     }
+                if(i){
+                    if(this.koord.x>=i.koord.x-30 &&
+                        this.koord.y>=i.koord.y-10 &&
+                        this.koord.y<=i.koord.y+i.korkeus
+                    ){
+                             this.koord.x=0;
+                             this.koord.y=kanvaasi.height/2-18;
+                         }
+                }
+
+
             break;
             }
     }
@@ -65,7 +97,7 @@ const liikenappaimet = {
 
 //nappikuuntelijat
 window.addEventListener("keydown", (event) => {
-    switch (event.key) {
+    switch (event.key.toLowerCase()) {
         case "d":
             liikenappaimet.d.pohjassa = true;
             pelaaja.viimeisin = "d";
@@ -82,13 +114,13 @@ window.addEventListener("keydown", (event) => {
             liikenappaimet.s.pohjassa = true;
             pelaaja.viimeisin = "s";
             break;
-        case "Enter":
+        case "enter":
             pelaaja.hyokkaa(vihollinen);
             break;
     }
 });
 window.addEventListener("keyup", (event) => {
-    switch (event.key) {
+    switch (event.key.toLowerCase()) {
         case "d":
             liikenappaimet.d.pohjassa = false;
             break;

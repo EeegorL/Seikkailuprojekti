@@ -82,6 +82,7 @@ class Hahmo {
     paivita() { //paivittaa jokaisen framen
         this.liikehdinta(); //liikuttaa hahmoa ja hoitaa piirtämisen
         k.font = "Bold 40px Brush Script MT";
+        k.strokeStyle=this.vari2;
         k.strokeText(this.hp, this.koord.x+3.5,this.koord.y);
         this.koord.y += this.kiihtyvyys.y;
         this.koord.x += this.kiihtyvyys.x;

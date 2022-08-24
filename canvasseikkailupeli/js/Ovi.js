@@ -42,16 +42,4 @@ class Ovi{
             break;
         }
     }
-    siirra(ovet){
-        switch(this.ilmansuunta){
-            case "etela":
-            console.log("odjtih")
-            if(this.pelaaja.menosuunta=="alas" &&
-               this.pelaaja.koord.x<=this.koord.x+this.leveys &&
-               this.pelaaja.koord.x+this.pelaaja.leveys>=this.koord.x){
-                console.log("eohro")
-               }
-            break;
-        }
-    }
 }
