@@ -7,6 +7,7 @@ class Pelaaja extends Hahmo{
         super(koord, kiihtyvyys, vari,vari2,elossa,hp);//ottaa käyttöön parent-classin
         this.a = new Image(this.leveys,this.korkeus);
         this.a.src="../kuvat/sprite.jpg";
+        this.huonenro;
     }
     siirry(ovet){
         let e=null;
@@ -34,8 +35,8 @@ class Pelaaja extends Hahmo{
                 if(this.koord.x<=e.koord.x+e.leveys &&
                     this.koord.x+this.leveys>=e.koord.x &&
                     this.koord.y>=e.koord.y-e.korkeus+5){
-                         this.koord.x=490;
-                         this.koord.y=0;
+                         this.koord.x=kanvaasi.width/2-15;
+                         this.koord.y=10;
                      }
             }
 
@@ -46,8 +47,8 @@ class Pelaaja extends Hahmo{
                     if(this.koord.x<=p.koord.x+p.leveys &&
                         this.koord.x+this.leveys>=p.koord.x &&
                         this.koord.y<=10){
-                             this.koord.x=490;
-                             this.koord.y=kanvaasi.height-20;
+                            this.koord.x=kanvaasi.width/2-15;
+                            this.koord.y=kanvaasi.height-85;
                          }
                 }
 
@@ -59,7 +60,7 @@ class Pelaaja extends Hahmo{
                         this.koord.y>=l.koord.y-10 &&
                         this.koord.y<=l.koord.y+l.korkeus
                     ){
-                             this.koord.x=1000;
+                             this.koord.x=kanvaasi.width-(kanvaasi.width*0.05);
                              this.koord.y=kanvaasi.height/2-18;
                          }
                 }

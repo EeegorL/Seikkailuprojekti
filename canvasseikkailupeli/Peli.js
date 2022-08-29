@@ -2,8 +2,8 @@
 
 const kanvaasi = document.querySelector("canvas");
 const k = kanvaasi.getContext("2d");
-kanvaasi.width = 1014;
-kanvaasi.height = 576;
+kanvaasi.width = 1000;
+kanvaasi.height = 750;
 
 let seinat=[];
 let ovet=[];
@@ -41,24 +41,24 @@ let rng3=Math.round(Math.random())==1?true:false;
 let rng4=Math.round(Math.random())==1?true:false;
 
 
-function teeSeinatJaOvet(e,p,l,i){
+function teeSeinatJaOvet(p,e,l,i){
     if(e){
-        const OviE=new Ovi("etela",pelaaja)
+        const OviE=new Ovi("etela")
         OviE.piirra();
         ovet.push(OviE);
     }
     if(p){
-        const OviP=new Ovi("pohjoinen",pelaaja)
+        const OviP=new Ovi("pohjoinen")
         OviP.piirra();
         ovet.push(OviP);
     }
     if(l){
-        const OviL=new Ovi("lansi",pelaaja)
+        const OviL=new Ovi("lansi")
         OviL.piirra();
         ovet.push(OviL);
     }
     if(i){
-        const OviI=new Ovi("ita",pelaaja)
+        const OviI=new Ovi("ita")
         OviI.piirra();
         ovet.push(OviI);
     }
@@ -79,7 +79,7 @@ function teeSeinatJaOvet(e,p,l,i){
 async function moottori() {
     window.requestAnimationFrame(moottori)
     
-    k.fillStyle = "#181818"; //taustaväri
+    k.fillStyle = "#222222"; //taustaväri
 
     k.fillRect(0, 0, kanvaasi.width, kanvaasi.height);
     if(pelaaja.elossa){ //päivittää pelaajaa jos tämä on elossa
@@ -89,7 +89,6 @@ async function moottori() {
     }
     if(vihollinen.elossa){
         vihollinen.paivitaVihollinen(vihollinen.id);
-        vihollinen.tarkistaTormaaminen(seinat);    
 
    
     }

@@ -3,7 +3,6 @@
 class Ovi{
     constructor(ilmansuunta,pelaaja){
         this.ilmansuunta=ilmansuunta;
-        this.pelaaja=pelaaja;
         this.koord={x:0,y:0};
         this.leveys=0;
         this.korkeus;
