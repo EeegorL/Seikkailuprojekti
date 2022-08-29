@@ -2,8 +2,11 @@
 
 
 class Pelaaja extends Hahmo{
+    
     constructor(koord, kiihtyvyys, vari,vari2,elossa,hp){
         super(koord, kiihtyvyys, vari,vari2,elossa,hp);//ottaa käyttöön parent-classin
+        this.a = new Image(this.leveys,this.korkeus);
+        this.a.src="../kuvat/sprite.jpg";
     }
     siirry(ovet){
         let e=null;
@@ -78,7 +81,46 @@ class Pelaaja extends Hahmo{
             break;
             }
     }
+    
+    liikehdinta() { //liikkuminen
+
+    k.drawImage(this.a,this.koord.x,this.koord.y);
+
+        k.fillStyle = this.vari2;
+        pelaaja.kiihtyvyys.x = 0;//asettaa liikehdinnän nollaan ennen jokaista liikettä
+
+        //tarkistaa viimeisimpänä painetun napin ja toimii sen mukaan
+        if (liikenappaimet.a.pohjassa && pelaaja.viimeisin === "a") {
+            pelaaja.kiihtyvyys.x = -5;
+            pelaaja.menosuunta="vasen";
+        }else if (liikenappaimet.d.pohjassa && pelaaja.viimeisin === "d") {
+            pelaaja.kiihtyvyys.x = 5;
+            pelaaja.menosuunta="oikea";
+        }else if (liikenappaimet.w.pohjassa && pelaaja.viimeisin === "w") {
+            pelaaja.kiihtyvyys.y = -5;
+            pelaaja.menosuunta="ylos";
+        }else if (liikenappaimet.s.pohjassa && pelaaja.viimeisin === "s") {
+            pelaaja.kiihtyvyys.y = 5;
+            pelaaja.menosuunta="alas";
+        }       
+        //aseen osoitussuunta riippuen liikesuunnasta
+        if(this.menosuunta=="vasen"){
+            k.fillRect(this.ase.position.x-100, this.ase.position.y+30, this.ase.width=150, this.ase.height=10);
+        }
+        else if(this.menosuunta=="oikea"){
+            k.fillRect(this.ase.position.x, this.ase.position.y+30, this.ase.width=150, this.ase.height=10);
+        }
+        else if(this.menosuunta=="ylos"){
+            k.fillRect(this.ase.position.x+20, this.ase.position.y-75, this.ase.width=10, this.ase.height=150);
+        }
+        else if(this.menosuunta=="alas"){
+            k.fillRect(this.ase.position.x+20, this.ase.position.y, this.ase.width=10, this.ase.height=150);
+        }
+        
+    }
 };
+
+
 
 const liikenappaimet = {
     a: {

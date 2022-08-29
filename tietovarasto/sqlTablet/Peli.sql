@@ -3,3 +3,4 @@ create table Peli(
     pelaaja varchar(100) unique not null
     
 );
+//tarvitaanko?
