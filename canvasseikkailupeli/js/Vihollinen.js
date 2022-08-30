@@ -31,6 +31,7 @@ class Vihollinen extends Hahmo{
         }
         liikehdinta() { //liikkuminen
             this.checkColl();
+            k.beginPath();
             k.fillStyle = this.vari;
             k.fillRect(this.koord.x, this.koord.y, this.leveys, this.korkeus);
 

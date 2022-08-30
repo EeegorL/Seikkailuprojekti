@@ -2,8 +2,8 @@
 
 const kanvaasi = document.querySelector("canvas");
 const k = kanvaasi.getContext("2d");
-kanvaasi.width = 1000;
-kanvaasi.height = 750;
+kanvaasi.width = 800;
+kanvaasi.height = 650;
 
 let seinat=[];
 let ovet=[];
@@ -78,7 +78,7 @@ function teeSeinatJaOvet(p,e,l,i){
 
 async function moottori() {
     window.requestAnimationFrame(moottori)
-    
+
     k.fillStyle = "#222222"; //taustaväri
 
     k.fillRect(0, 0, kanvaasi.width, kanvaasi.height);
@@ -95,6 +95,19 @@ async function moottori() {
     teeSeinatJaOvet(rng1,rng2,rng3,rng4);
 
 }
+// (()=>{ //matikkaa varten, voi poistaa
+// let nrot=[];
+// let tulosNrot=[];
+// let alaraja=0;
+// let ylaraja=100;
+//     for(let nro of nrot){
+//     if(nro >= alaraja && nro <=ylaraja){
+//         tulosNrot.push(nro);
+//     }
+//     }
+//     console.log(tulosNrot);
+// })();
+cancelAnimationFrame(requestAnimationFrame(moottori));
 moottori();
 
 

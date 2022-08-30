@@ -1,7 +1,7 @@
 "use strict";
 
 class Ovi{
-    constructor(ilmansuunta,pelaaja){
+    constructor(ilmansuunta){
         this.ilmansuunta=ilmansuunta;
         this.koord={x:0,y:0};
         this.leveys=0;
@@ -10,8 +10,10 @@ class Ovi{
     piirra(){
         k.save();
         k.fillStyle = "black";
-   
+        k.beginPath();
+
         switch(this.ilmansuunta){
+            
             case "etela":
                 this.koord={x:kanvaasi.width/2-57,y:kanvaasi.height-50};
                 this.leveys=125;

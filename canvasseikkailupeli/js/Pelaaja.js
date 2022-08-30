@@ -86,7 +86,6 @@ class Pelaaja extends Hahmo{
     liikehdinta() { //liikkuminen
 
     k.drawImage(this.a,this.koord.x,this.koord.y);
-
         k.fillStyle = this.vari2;
         pelaaja.kiihtyvyys.x = 0;//asettaa liikehdinnän nollaan ennen jokaista liikettä
 
