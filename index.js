@@ -20,7 +20,7 @@ const corsOptions ={
 
 exp.use(cors(corsOptions));
 
-exp.get("/"),(req,res)=>res.sendFile(__dirname,"index.html");
+exp.get("/"),(req,res)=>res.render(__dirname,"index.html");
 
 exp.get("/vihollinen/:id",async (req,res)=>{
     try{

@@ -85,7 +85,7 @@ async function moottori() {
     if(pelaaja.elossa){ //päivittää pelaajaa jos tämä on elossa
         pelaaja.paivita();
         pelaaja.tarkistaTormaaminen(seinat);
-        pelaaja.siirry(ovet);
+        pelaaja.avaaOvi(ovet);
     }
     if(vihollinen.elossa){
         vihollinen.paivitaVihollinen(vihollinen.id);

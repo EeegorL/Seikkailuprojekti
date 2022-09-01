@@ -19,6 +19,10 @@ class Hahmo {
         this.menosuunta;
         this.hp=hp;
         this.id=id;
+        this.xMin=this.koord.x;
+        this.xMax=this.koord.x+this.leveys;
+        this.yMin=this.koord.y;
+        this.yMax=this.koord.y+this.koord;
     }
 
     dmgIndicator(kohde){//vahingon tunnistaminen
@@ -100,25 +104,5 @@ class Hahmo {
     }
 
     }
-     tarkistaTormaaminen(seinat){
-        //huoneiden seinät
-            if(this.menosuunta=="oikea"){
-                if(this.koord.x+this.leveys>=seinat[2].koord.x){
-                    this.koord.x = seinat[2].koord.x-this.leveys;        
-                }
-            }
-            if(this.menosuunta=="vasen"){
-                if(this.koord.x-10<=seinat[3].koord.x){
-                    this.koord.x = seinat[3].koord.x+this.leveys-35; 
-                }
-            }
-            if(this.menosuunta=="alas"){
-                if(this.koord.y+this.korkeus>=seinat[0].koord.y){
-                    this.koord.y = seinat[0].koord.y-this.korkeus;        }
-            }
-            if(this.menosuunta=="ylos"){
-                if(this.koord.y-this.korkeus+70<=seinat[1].koord.y){
-                    this.koord.y = seinat[1].koord.y+this.korkeus-65;        }
-            }
-    }
+    
 }

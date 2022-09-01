@@ -30,23 +30,23 @@ class Vihollinen extends Hahmo{
 
         }
         liikehdinta() { //liikkuminen
-            this.checkColl();
+            this.tarkistaTormaaminen();
             k.beginPath();
             k.fillStyle = this.vari;
             k.fillRect(this.koord.x, this.koord.y, this.leveys, this.korkeus);
 
         }
-        checkColl(){
+        tarkistaTormaaminen(){
             if(this.koord.y>=seinat[0]?.koord.y-90){//lattia
                 this.koord.y=kanvaasi.height-90;
             }
-            if(this.koord.y<=seinat[1]?.koord.y+30){//kattos
+            if(this.koord.y<=seinat[1]?.koord.y+30){//katto
                 this.koord.y=30;
             }
             if(this.koord.x>=seinat[2]?.koord.x-60){//oikea seinä
                 this.koord.x=kanvaasi.width-75;
             }
-            if(this.koord.x<=seinat[3]?.koord.x+15){//oikea seinä
+            if(this.koord.x<=seinat[3]?.koord.x+15){//oikea vasen
                 this.koord.x=15;
             }
         }

@@ -9,7 +9,7 @@ class Pelaaja extends Hahmo{
         this.a.src="../kuvat/sprite.jpg";
         this.huonenro;
     }
-    siirry(ovet){
+    avaaOvi(ovet){
         let e=null;
         let p=null;
         let i=null;
@@ -35,8 +35,7 @@ class Pelaaja extends Hahmo{
                 if(this.koord.x<=e.koord.x+e.leveys &&
                     this.koord.x+this.leveys>=e.koord.x &&
                     this.koord.y>=e.koord.y-e.korkeus+5){
-                         this.koord.x=kanvaasi.width/2-15;
-                         this.koord.y=10;
+                        e.siirra(e.ilmansuunta);
                      }
             }
 
@@ -47,8 +46,7 @@ class Pelaaja extends Hahmo{
                     if(this.koord.x<=p.koord.x+p.leveys &&
                         this.koord.x+this.leveys>=p.koord.x &&
                         this.koord.y<=10){
-                            this.koord.x=kanvaasi.width/2-15;
-                            this.koord.y=kanvaasi.height-85;
+                            p.siirra(p.ilmansuunta);
                          }
                 }
 
@@ -60,8 +58,7 @@ class Pelaaja extends Hahmo{
                         this.koord.y>=l.koord.y-10 &&
                         this.koord.y<=l.koord.y+l.korkeus
                     ){
-                             this.koord.x=kanvaasi.width-(kanvaasi.width*0.05);
-                             this.koord.y=kanvaasi.height/2-18;
+                        l.siirra(l.ilmansuunta);
                          }
                 }
 
@@ -73,12 +70,9 @@ class Pelaaja extends Hahmo{
                         this.koord.y>=i.koord.y-10 &&
                         this.koord.y<=i.koord.y+i.korkeus
                     ){
-                             this.koord.x=0;
-                             this.koord.y=kanvaasi.height/2-18;
+                        i.siirra(i.ilmansuunta);
                          }
                 }
-
-
             break;
             }
     }
@@ -86,6 +80,7 @@ class Pelaaja extends Hahmo{
     liikehdinta() { //liikkuminen
 
     k.drawImage(this.a,this.koord.x,this.koord.y);
+
         k.fillStyle = this.vari2;
         pelaaja.kiihtyvyys.x = 0;//asettaa liikehdinnän nollaan ennen jokaista liikettä
 
@@ -117,6 +112,27 @@ class Pelaaja extends Hahmo{
             k.fillRect(this.ase.position.x+20, this.ase.position.y, this.ase.width=10, this.ase.height=150);
         }
         
+    }
+    tarkistaTormaaminen(seinat){
+        //huoneiden seinät
+            if(this.menosuunta=="oikea"){
+                if(this.koord.x+this.leveys>=seinat[2].koord.x){
+                    this.koord.x = seinat[2].koord.x-this.leveys;        
+                }
+            }
+            if(this.menosuunta=="vasen"){
+                if(this.koord.x-10<=seinat[3].koord.x){
+                    this.koord.x = seinat[3].koord.x+this.leveys-35; 
+                }
+            }
+            if(this.menosuunta=="alas"){
+                if(this.koord.y+this.korkeus>=seinat[0].koord.y){
+                    this.koord.y = seinat[0].koord.y-this.korkeus;        }
+            }
+            if(this.menosuunta=="ylos"){
+                if(this.koord.y-this.korkeus+70<=seinat[1].koord.y){
+                    this.koord.y = seinat[1].koord.y+this.korkeus-65;        }
+            }
     }
 };
 
