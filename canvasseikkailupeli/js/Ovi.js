@@ -43,11 +43,17 @@ class Ovi {
         }
     }
     siirra(ilmansuunta) {
+        console.log(`Pelaaja siirretty: `+ilmansuunta);
+        // uuden huoneen tiedot hakeva query()
+        //huoneen tietojen perusteella vihollisten spawnaaminen
+        //huoneen tietojen perusteella ovien spawnaaminen
+        // huoneen tietojen perusteella esineiden spawnaaminen
+        //yms....
         switch (ilmansuunta) {
             case "etela":
                 pelaaja.koord.x = kanvaasi.width / 2 - 15;
                 pelaaja.koord.y = 10;
-
+                
                 break;
 
             case "pohjoinen":
