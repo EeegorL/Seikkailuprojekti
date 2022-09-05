@@ -31,7 +31,7 @@ module.exports = class Tietokanta {
                 reject('SQL-virhe' + virhe);
             }
             finally {
-                if (conn) { conn.end(); }
+                if(conn){conn.end();};
             }
 
         });

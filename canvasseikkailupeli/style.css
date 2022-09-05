@@ -9,8 +9,6 @@ p{
 }
 .canvas{
     border:5px solid brown;
-    visibility:none;
-
 }
 .peliContainer{
     float:right;
@@ -28,4 +26,26 @@ p{
     float:right;
     margin-right:20em;
     font-size: large;
+}
+.verho{
+    z-index: 900;
+    margin-top: 20px;
+    margin-left:20px;
+    width:770px;
+    height:620px;
+    background-color: black;
+    position:absolute;
+}
+.dialogiboksi{
+position: absolute;
+margin-left:840px;
+background-color: brown;
+border:3px solid burlywood;
+padding:8px;
+color:whitesmoke;
+font-weight: bold;
+font-size: xx-large;
+}
+.hiddenClass{
+    visibility: hidden;
 }

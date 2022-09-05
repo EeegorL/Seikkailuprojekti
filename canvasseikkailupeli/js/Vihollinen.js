@@ -26,25 +26,29 @@ class Vihollinen extends Hahmo{
         //         document.getElementById("vihDmg").innerHTML="Vihollisen vahinko per lyönti: "+tulos[0].dmg;
         //         document.getElementById("vihHuone").innerHTML="Vihollisen huone: "+tulos[0].huone;
         // k.fillText(200,200,200,200);
-
-
         }
+
         liikehdinta() { //liikkuminen
             this.tarkistaTormaaminen();
             k.beginPath();
             k.fillStyle = this.vari;
             k.fillRect(this.koord.x, this.koord.y, this.leveys, this.korkeus);
+            this.kiihtyvyys.y=0;
+            this.kiihtyvyys.x=0;
+
+            //tähän funkti, joka pistää vihollisen liikkumaan
+            //joko seuraamaan pelaajaa tai liikkumaan satunnaisesti kuten monessa dungeon crawlerissa
 
         }
         tarkistaTormaaminen(){
-            if(this.koord.y>=seinat[0]?.koord.y-90){//lattia
+            if(this.koord.y>=seinat[0]?.koord.y-75){//lattia
                 this.koord.y=kanvaasi.height-90;
             }
-            if(this.koord.y<=seinat[1]?.koord.y+30){//katto
-                this.koord.y=30;
+            if(this.koord.y<=seinat[1]?.koord.y+35){//katto
+                this.koord.y=20;
             }
             if(this.koord.x>=seinat[2]?.koord.x-60){//oikea seinä
-                this.koord.x=kanvaasi.width-75;
+                this.koord.x=kanvaasi.width-68;
             }
             if(this.koord.x<=seinat[3]?.koord.x+15){//oikea vasen
                 this.koord.x=15;

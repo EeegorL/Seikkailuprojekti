@@ -37,6 +37,7 @@ const v1 = new Vihollinen({
     vari: "blue",vari2:"cyan",
     elossa:true,
 });
+
 let rng1=Math.round(Math.random())==1?true:false;
 let rng2=Math.round(Math.random())==1?true:false;
 let rng3=Math.round(Math.random())==1?true:false;
@@ -92,7 +93,7 @@ async function moottori() {
     for(let vihollinen of viholliset){
         if(vihollinen.elossa){
             vihollinen.paivitaVihollinen(vihollinen.id);
-    }
+        }
 
 
    

@@ -1,10 +1,11 @@
 "use strict";
 
 class Ovi {
-    constructor(ilmansuunta) {
+    constructor(ilmansuunta,huoneid) {
         this.ilmansuunta = ilmansuunta;
         this.koord = { x: 0, y: 0 };
         this.leveys = 0;
+        this.huoneid=huoneid;
         this.korkeus;
     }
     piirra() {
@@ -43,8 +44,9 @@ class Ovi {
         }
     }
     siirra(ilmansuunta) {
-        console.log(`Pelaaja siirretty: `+ilmansuunta);
-        // uuden huoneen tiedot hakeva query()
+        console.log("Pelaaja siirretty: "+ilmansuunta);
+
+        // uuden huoneen tiedot hakeva query
         //huoneen tietojen perusteella vihollisten spawnaaminen
         //huoneen tietojen perusteella ovien spawnaaminen
         // huoneen tietojen perusteella esineiden spawnaaminen
