@@ -7,6 +7,8 @@ kanvaasi.height = 650;
 
 let seinat=[];
 let ovet=[];
+let viholliset=[];
+
 
 const pelaaja = new Pelaaja({
     koord: {
@@ -21,7 +23,7 @@ const pelaaja = new Pelaaja({
     vari: "green",vari2:"brown",
     elossa:true
 });
-const vihollinen = new Vihollinen({
+const v1 = new Vihollinen({
     id:1,
     koord: {
         x: 550,
@@ -39,7 +41,7 @@ let rng1=Math.round(Math.random())==1?true:false;
 let rng2=Math.round(Math.random())==1?true:false;
 let rng3=Math.round(Math.random())==1?true:false;
 let rng4=Math.round(Math.random())==1?true:false;
-
+viholliset.push(v1);
 
 function teeSeinatJaOvet(p,e,l,i){
     if(e){
@@ -87,8 +89,11 @@ async function moottori() {
         pelaaja.tarkistaTormaaminen(seinat);
         pelaaja.avaaOvi(ovet);
     }
-    if(vihollinen.elossa){
-        vihollinen.paivitaVihollinen(vihollinen.id);
+    for(let vihollinen of viholliset){
+        if(vihollinen.elossa){
+            vihollinen.paivitaVihollinen(vihollinen.id);
+    }
+
 
    
     }

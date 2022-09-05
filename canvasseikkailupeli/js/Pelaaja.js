@@ -173,7 +173,8 @@ window.addEventListener("keydown", (event) => {
             pelaaja.viimeisin = "s";
             break;
         case "enter":
-            pelaaja.hyokkaa(vihollinen);
+            //johonki tähän loop joka käy läpi ja katsoo, että ketkä viholliset ovat aseen kohdalla ja ottavat turpaan
+            pelaaja.hyokkaa(viholliset[0]);
             break;
     }
 });
