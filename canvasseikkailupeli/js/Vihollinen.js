@@ -10,22 +10,6 @@ class Vihollinen extends Hahmo{
     
     async paivitaVihollinen(id) {
         super.paivita();
-
-        // const optiot={
-        //     method:'GET',
-        //     headers:{'Content-Type':'application/json'},
-        // };
-
-        //     let tulos
-        //         = await fetch(`http://localhost:3000/vihollinen/${id}`,optiot)
-        //         .then(tulos => tulos.json()); //saattaa aiheuttaa ylikuormitusvirheitä ja hidastaa
-
-        //         document.getElementById("vihNimi").innerHTML="Vihollisen nimi: "+tulos[0].nimi;
-        //         document.getElementById("vihId").innerHTML="Vihollisen id: "+tulos[0].id;
-        //         document.getElementById("vihHp").innerHTML="Vihollisen hp (ei toimi): "+tulos[0].hp;
-        //         document.getElementById("vihDmg").innerHTML="Vihollisen vahinko per lyönti: "+tulos[0].dmg;
-        //         document.getElementById("vihHuone").innerHTML="Vihollisen huone: "+tulos[0].huone;
-        // k.fillText(200,200,200,200);
         }
 
         liikehdinta() { //liikkuminen
@@ -34,9 +18,11 @@ class Vihollinen extends Hahmo{
             k.fillStyle = this.vari;
             k.fillRect(this.koord.x, this.koord.y, this.leveys, this.korkeus);
             this.kiihtyvyys.y=0;
-            this.kiihtyvyys.x=0;
-
-            //tähän funkti, joka pistää vihollisen liikkumaan
+            this.kiihtyvyys.x=0; 
+                //tähän jonkinlainen timeout, jotta vihollinen ehtii kävellä enemmän kuin 0,5mm ennen kuin rng-arvo muuttuu
+                this.kiihtyvyys.x=Math.round(Math.random())==1?1:-1;
+                this.kiihtyvyys.y=Math.round(Math.random())==1?1:-1;
+            //tähän funktio, joka pistää vihollisen liikkumaan
             //joko seuraamaan pelaajaa tai liikkumaan satunnaisesti kuten monessa dungeon crawlerissa
 
         }

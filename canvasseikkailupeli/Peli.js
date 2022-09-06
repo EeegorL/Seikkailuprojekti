@@ -8,7 +8,11 @@ kanvaasi.height = 650;
 let seinat=[];
 let ovet=[];
 let viholliset=[];
-
+let v1Tiedot;
+async function haeVihollisenTiedotTesti(){//tähän tyyliin voi hakea vihollisen tietoja
+    v1Tiedot=await fetch("/vihollinen/1",[]).then(tulos=>tulos.json());
+    console.log(v1Tiedot[0])
+}haeVihollisenTiedotTesti();
 
 const pelaaja = new Pelaaja({
     koord: {
@@ -94,27 +98,12 @@ async function moottori() {
         if(vihollinen.elossa){
             vihollinen.paivitaVihollinen(vihollinen.id);
         }
-
-
-   
     }
     teeSeinatJaOvet(rng1,rng2,rng3,rng4);
 
 }
-// (()=>{ //matikkaa varten, voi poistaa
-// let nrot=[];
-// let tulosNrot=[];
-// let alaraja=0;
-// let ylaraja=100;
-//     for(let nro of nrot){
-//     if(nro >= alaraja && nro <=ylaraja){
-//         tulosNrot.push(nro);
-//     }
-//     }
-//     console.log(tulosNrot);
-// })();
 cancelAnimationFrame(requestAnimationFrame(moottori));
-moottori();
+    moottori();
 
 
 
