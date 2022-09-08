@@ -45,20 +45,6 @@ const pelaaja = new Pelaaja({
     elossa:true
 });
 
-// const v1 = new Vihollinen({
-//     id:1,
-//     koord: {
-//         x: 550,
-//         y: 200
-//     },
-//     kiihtyvyys: {
-//         x: 0,
-//         y: 0
-//     },
-//     hp:100,
-//     vari: "blue",vari2:"cyan",
-//     elossa:true,
-// });
 let rng1=Math.round(Math.random())==1?true:false;
 let rng2=Math.round(Math.random())==1?true:false;
 let rng3=Math.round(Math.random())==1?true:false;
@@ -114,6 +100,7 @@ async function moottori() { //päivittää jokaisen framen
     for(let vihollinen of viholliset){// päivittää kaikki elossa olevan viholliset
         if(vihollinen.elossa){
             vihollinen.paivitaVihollinen(vihollinen.id);
+            vihollinen.kiihtyvyys.x=100;
         }
     }
     teeSeinatJaOvet(rng1,rng2,rng3,rng4); //tekee seinät ja ovet riippuen rng-muuttujista

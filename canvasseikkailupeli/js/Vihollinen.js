@@ -22,11 +22,32 @@ class Vihollinen extends Hahmo{
             k.fillRect(this.koord.x, this.koord.y, this.leveys, this.korkeus);
             this.kiihtyvyys.y=0;
             this.kiihtyvyys.x=0; 
-                //tähän jonkinlainen timeout, jotta vihollinen ehtii kävellä enemmän kuin 0,5mm ennen kuin rng-arvo muuttuu
-
+            //vaihtoehto 1: vihollinen seuraa pelaajaa
+            //Math.abs:illa voi halutessaan asettaa vihollisille etäisyyden, jonka jälkeen ne alkaa seuraa
+                if(Math.round(pelaaja.koord.x)>Math.round(this.koord.x)){
+                        this.koord.x+=2;
+                    
+                }
+                else if(Math.round(pelaaja.koord.x)<Math.round(this.koord.x)){
+                        this.koord.x-=2;
+                }
+            
+                if(Math.round(pelaaja.koord.y)>=this.koord.y){
+                    this.koord.y+=2;
+                }
+                if(Math.round(pelaaja.koord.y)<=this.koord.y){
+                    this.koord.y-=2;
+                }
+                
+                //tärinäefekti jos vihollisella on vieroitusoireita?
                 // this.kiihtyvyys.x=Math.round(Math.random())==0?1:-1;
                 // this.kiihtyvyys.y=Math.round(Math.random())==0?1:-1;
-            //tähän funktio, joka pistää vihollisen liikkumaan
+
+                //vaihtoehto 2: vihollinen liikkuu satunnaisiin suuntiin (to do)
+                //tähän toimiva timeout niin periaatteessa toimisi
+                // this.kiihtyvyys.x=Math.round(Math.random())==0?1:-1;
+                // this.kiihtyvyys.y=Math.round(Math.random())==0?1:-1;
+
             //joko seuraamaan pelaajaa tai liikkumaan satunnaisesti kuten monessa dungeon crawlerissa
 
         }
