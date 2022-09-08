@@ -1,7 +1,7 @@
 "use strict";
 
 class Hahmo { //pohjaluokka kaikille spriteille
-    constructor({ koord, kiihtyvyys, vari,vari2,elossa,hp,id}) {
+    constructor({ koord, kiihtyvyys, vari,vari2,elossa,hp,id,nimi}) {
         this.koord = koord;
         this.kiihtyvyys = kiihtyvyys;
         this.korkeus = 75;
@@ -19,10 +19,7 @@ class Hahmo { //pohjaluokka kaikille spriteille
         this.menosuunta;
         this.hp=hp;
         this.id=id;
-        this.xMin=this.koord.x;
-        this.xMax=this.koord.x+this.leveys;
-        this.yMin=this.koord.y;
-        this.yMax=this.koord.y+this.koord;
+        this.nimi=nimi;
     }
 
     dmgIndicator(kohde){//vahingon tunnistaminen
@@ -55,6 +52,9 @@ class Hahmo { //pohjaluokka kaikille spriteille
         k.font = "Bold 40px Brush Script MT";
         k.strokeStyle=this.vari2;
         k.strokeText(Math.round(this.hp), this.koord.x+3.5,this.koord.y);
+        k.font = "20px Monospace";
+        k.strokeStyle=this.vari2;
+        k.strokeText(this.nimi||"", this.koord.x-this.nimi?.length*3,this.koord.y-33);
         this.koord.y += this.kiihtyvyys.y;
         this.koord.x += this.kiihtyvyys.x;
         this.kiihtyvyys.y=0;
@@ -62,6 +62,7 @@ class Hahmo { //pohjaluokka kaikille spriteille
     hyokkaa(kohde) { //hyokkaa viholliseen. toimii nyt vasta yhdellä vihollisella
         this.hyokkaamassa = true;
         //tarkistaa, osuuko pelaajan ase viholliseen, ja näin ollen kutsuu dmgIndicatoria, joka tekee vahinkoa
+        //tähän esim for loop, tyyliin for(kohde in kohteet){...
         if (this.menosuunta=="oikea" &&
         this.ase.position.x + this.ase.width >= kohde.koord.x &&
         this.ase.position.x <= kohde.koord.x + kohde.leveys &&

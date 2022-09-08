@@ -2,16 +2,18 @@
 
 
 class Vihollinen extends Hahmo{
-    constructor(koord, kiihtyvyys, vari,vari2,elossa,hp,id){
-        super(koord, kiihtyvyys, vari,vari2,elossa,hp,id);//ottaa käyttöön parent-classin
-    this.nimi;
+    constructor(koord, kiihtyvyys, vari,vari2,elossa,hp,id,dmg,nimi){
+        super(koord, kiihtyvyys, vari,vari2,elossa,hp,id,nimi);//ottaa käyttöön parent-classin
     }
     
     
     async paivitaVihollinen(id) {
         super.paivita();
+
+        
         //tähän tulee varmaankin muutoksia ja eroavaisuuksia super-classin paivityksesta, joten siksi on oma funktio
         }
+
 
         liikehdinta() { //liikkuminen ja sitä vastaava piirtäminen
             this.tarkistaTormaaminen();
@@ -22,7 +24,8 @@ class Vihollinen extends Hahmo{
             this.kiihtyvyys.x=0; 
                 //tähän jonkinlainen timeout, jotta vihollinen ehtii kävellä enemmän kuin 0,5mm ennen kuin rng-arvo muuttuu
 
-                
+                // this.kiihtyvyys.x=Math.round(Math.random())==0?1:-1;
+                // this.kiihtyvyys.y=Math.round(Math.random())==0?1:-1;
             //tähän funktio, joka pistää vihollisen liikkumaan
             //joko seuraamaan pelaajaa tai liikkumaan satunnaisesti kuten monessa dungeon crawlerissa
 

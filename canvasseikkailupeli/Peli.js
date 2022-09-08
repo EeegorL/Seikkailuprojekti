@@ -8,12 +8,28 @@ kanvaasi.height = 650;
 let seinat=[];
 let ovet=[];
 let viholliset=[];
-let v1Tiedot;
-//fetch-testi, joka hakee vihollisen, jonka id on 1, tiedot
-async function haeVihollisenTiedotTesti(){//tähän tyyliin voi hakea vihollisen tietoja
-    v1Tiedot=await fetch("/vihollinen/1",[]).then(tulos=>tulos.json());
-    console.log(v1Tiedot[0])
-}haeVihollisenTiedotTesti();
+
+(async()=>{//alustaa huoneen
+    let huoneenViholliset=await fetch("/vihollinen/1").then(tulos=>tulos.json());
+    //tähän voi for-loopilla käydä fetch läpi ja tehdä luoda jokainen vihollinen
+    let vihNimi=huoneenViholliset[0].nimi;
+    viholliset.push(new Vihollinen({
+        id:huoneenViholliset[0].id,
+        koord:{
+            x:huoneenViholliset[0].x,
+            y:huoneenViholliset[0].y
+        },
+        kiihtyvyys:{
+            x:0,
+            y:0
+        },
+        hp:huoneenViholliset[0].hp,
+        vari:"blue",vari2:"cyan",
+        elossa:true,
+        nimi:huoneenViholliset[0].nimi
+    }))
+})();
+
 
 const pelaaja = new Pelaaja({
     koord: {
@@ -28,25 +44,25 @@ const pelaaja = new Pelaaja({
     vari: "green",vari2:"brown",
     elossa:true
 });
-const v1 = new Vihollinen({
-    id:1,
-    koord: {
-        x: 550,
-        y: 200
-    },
-    kiihtyvyys: {
-        x: 0,
-        y: 0
-    },
-    hp:100,
-    vari: "blue",vari2:"cyan",
-    elossa:true,
-});
+
+// const v1 = new Vihollinen({
+//     id:1,
+//     koord: {
+//         x: 550,
+//         y: 200
+//     },
+//     kiihtyvyys: {
+//         x: 0,
+//         y: 0
+//     },
+//     hp:100,
+//     vari: "blue",vari2:"cyan",
+//     elossa:true,
+// });
 let rng1=Math.round(Math.random())==1?true:false;
 let rng2=Math.round(Math.random())==1?true:false;
 let rng3=Math.round(Math.random())==1?true:false;
 let rng4=Math.round(Math.random())==1?true:false;
-viholliset.push(v1);
 
 function teeSeinatJaOvet(p,e,l,i){ // tekee pelin seinät ja ovet
     //lisää ovia riippuen rng-muuttujista
