@@ -9,12 +9,12 @@ class Pelaaja extends Hahmo{
         this.a.src="../kuvat/sprite.jpg";
         this.huonenro;
     }
-    avaaOvi(ovet){
+    avaaOvi(ovet){ //pelaajan ovien kautta liikkuminen
         let e=null;
         let p=null;
         let i=null;
         let l=null;
-        for(let ovi of ovet){
+        for(let ovi of ovet){//katsoo, mitkä huoneet ovat olemassa huoneessa
             if(ovi.ilmansuunta=="etela"){
                 e=ovi;
             }
@@ -29,6 +29,7 @@ class Pelaaja extends Hahmo{
             }
 
         }
+        //itse siirtäminen riippuen ilmansuunnasta
         switch(this.menosuunta){
             case "alas":
             if(e){
@@ -38,7 +39,6 @@ class Pelaaja extends Hahmo{
                         e.siirra(e.ilmansuunta);
                      }
             }
-
             break;
             
             case "ylos":
@@ -78,7 +78,10 @@ class Pelaaja extends Hahmo{
     }
     
     liikehdinta() { //liikkuminen
-
+        if(this.hp<=0){ //pelaajan kuoleman tarkistaminen. jos pelaaja kuolee, peli peittyy mustalla verholla
+            this.elossa=false;
+            document.getElementById("verho").classList.remove("hiddenClass");
+        }
     k.drawImage(this.a,this.koord.x,this.koord.y);
 
         k.fillStyle = this.vari2;
@@ -113,7 +116,7 @@ class Pelaaja extends Hahmo{
         }
         
     }
-    tarkistaTormaaminen(seinat){
+    tarkistaTormaaminen(seinat){ //nimensä mukaan tarkistaa seinät ja estää niiden läpi kulkemisen
         //huoneiden seinät
             if(this.menosuunta=="oikea"){
                 if(this.koord.x+this.leveys>=seinat[2].koord.x){

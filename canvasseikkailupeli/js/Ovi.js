@@ -12,7 +12,7 @@ class Ovi {
         k.save();
         k.fillStyle = "black";
         k.beginPath();
-
+        //piirtää oven yhteen neljästä kohdasta riippuen ilmansuunta-parametrista
         switch (this.ilmansuunta) {
             case "etela":
                 this.koord = { x: kanvaasi.width / 2 - 57, y: kanvaasi.height - 50 };
@@ -43,7 +43,7 @@ class Ovi {
                 break;
         }
     }
-    siirra(ilmansuunta) {
+    siirra(ilmansuunta) { //pelaajan teleporttaaminen
         console.log("Pelaaja siirretty: "+ilmansuunta);
 
         // uuden huoneen tiedot hakeva query
@@ -51,6 +51,8 @@ class Ovi {
         //huoneen tietojen perusteella ovien spawnaaminen
         // huoneen tietojen perusteella esineiden spawnaaminen
         //yms....
+
+        //siirtää pelaajan yhteen neljästä kohdasta riippuen vastaavasta ilmansuunnastas
         switch (ilmansuunta) {
             case "etela":
                 pelaaja.koord.x = kanvaasi.width / 2 - 15;

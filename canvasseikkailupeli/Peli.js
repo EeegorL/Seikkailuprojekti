@@ -1,5 +1,5 @@
 "use strict";
-
+//alustaa kanvaasin
 const kanvaasi = document.querySelector("canvas");
 const k = kanvaasi.getContext("2d");
 kanvaasi.width = 800;
@@ -9,6 +9,7 @@ let seinat=[];
 let ovet=[];
 let viholliset=[];
 let v1Tiedot;
+//fetch-testi, joka hakee vihollisen, jonka id on 1, tiedot
 async function haeVihollisenTiedotTesti(){//tähän tyyliin voi hakea vihollisen tietoja
     v1Tiedot=await fetch("/vihollinen/1",[]).then(tulos=>tulos.json());
     console.log(v1Tiedot[0])
@@ -41,14 +42,14 @@ const v1 = new Vihollinen({
     vari: "blue",vari2:"cyan",
     elossa:true,
 });
-
 let rng1=Math.round(Math.random())==1?true:false;
 let rng2=Math.round(Math.random())==1?true:false;
 let rng3=Math.round(Math.random())==1?true:false;
 let rng4=Math.round(Math.random())==1?true:false;
 viholliset.push(v1);
 
-function teeSeinatJaOvet(p,e,l,i){
+function teeSeinatJaOvet(p,e,l,i){ // tekee pelin seinät ja ovet
+    //lisää ovia riippuen rng-muuttujista
     if(e){
         const OviE=new Ovi("etela")
         OviE.piirra();
@@ -70,7 +71,7 @@ function teeSeinatJaOvet(p,e,l,i){
         ovet.push(OviI);
     }
 
-
+    //tekee seinät
     const seinaP=new Seina({koord:{x:0,y:0},leveys:kanvaasi.width,korkeus:15,kanvaasi:k,vari:"brown"})
         seinaP.piirra();//Pohjoisseinä
     const seinaI=new Seina({koord:{x:0,y:0},leveys:15,korkeus:kanvaasi.height,kanvaasi:k,vari:"brown"})
@@ -83,8 +84,8 @@ function teeSeinatJaOvet(p,e,l,i){
         seinat=[seinaE,seinaP,seinaL,seinaI];
 }
 
-async function moottori() {
-    window.requestAnimationFrame(moottori)
+async function moottori() { //päivittää jokaisen framen
+    window.requestAnimationFrame(moottori);
 
     k.fillStyle = "#222222"; //taustaväri
 
@@ -94,20 +95,19 @@ async function moottori() {
         pelaaja.tarkistaTormaaminen(seinat);
         pelaaja.avaaOvi(ovet);
     }
-    for(let vihollinen of viholliset){
+    for(let vihollinen of viholliset){// päivittää kaikki elossa olevan viholliset
         if(vihollinen.elossa){
             vihollinen.paivitaVihollinen(vihollinen.id);
         }
     }
-    teeSeinatJaOvet(rng1,rng2,rng3,rng4);
-
+    teeSeinatJaOvet(rng1,rng2,rng3,rng4); //tekee seinät ja ovet riippuen rng-muuttujista
+    window.cancelAnimationFrame(requestAnimationFrame(moottori));// peruuttaa äskeisen framen jottei ohjelma ylikuormitu
 }
-cancelAnimationFrame(requestAnimationFrame(moottori));
     moottori();
 
 
 
 
-async function siirry(){
+async function siirry(){ //tähän huoneiden päivitys
 
 };

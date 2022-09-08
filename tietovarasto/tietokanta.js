@@ -12,7 +12,7 @@ module.exports = class Tietokanta {
             let conn;
             try {
 
-                conn = await mariadb.createConnection(this.optiot);
+                conn = await mariadb.createConnection(this.optiot); //ottaa yhteyden palvelimeen
                 let kyselynTulos = await conn.query(sql, parametrit);
 
                 if (typeof kyselynTulos === 'undefined') {

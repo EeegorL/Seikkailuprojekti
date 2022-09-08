@@ -9,7 +9,7 @@ module.exports = class Tietovarasto{
     constructor(){
         this.db = new Tietokanta(optiot);
     }
-
+//hakee vihollisen tiedot
     vihollisenTiedot(id){
         return new Promise(async(resolve,reject)=>{
             try{

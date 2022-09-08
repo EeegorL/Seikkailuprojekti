@@ -1,6 +1,6 @@
 "use strict";
 
-class Hahmo {
+class Hahmo { //pohjaluokka kaikille spriteille
     constructor({ koord, kiihtyvyys, vari,vari2,elossa,hp,id}) {
         this.koord = koord;
         this.kiihtyvyys = kiihtyvyys;
@@ -28,7 +28,7 @@ class Hahmo {
     dmgIndicator(kohde){//vahingon tunnistaminen
         let ogVarit=["blue","cyan"];
 
-        if(kohde.elossa==true){
+        if(kohde.elossa==true){ //värin muuttaminen vahingon merkitsemiseksi
             kohde.hp-=10;
             kohde.vari="red";
             kohde.vari2="red";
@@ -54,14 +54,14 @@ class Hahmo {
         this.liikehdinta(); //liikuttaa hahmoa ja hoitaa piirtämisen
         k.font = "Bold 40px Brush Script MT";
         k.strokeStyle=this.vari2;
-        k.strokeText(this.hp, this.koord.x+3.5,this.koord.y);
+        k.strokeText(Math.round(this.hp), this.koord.x+3.5,this.koord.y);
         this.koord.y += this.kiihtyvyys.y;
         this.koord.x += this.kiihtyvyys.x;
         this.kiihtyvyys.y=0;
     }
-    hyokkaa(kohde) {
+    hyokkaa(kohde) { //hyokkaa viholliseen. toimii nyt vasta yhdellä vihollisella
         this.hyokkaamassa = true;
-
+        //tarkistaa, osuuko pelaajan ase viholliseen, ja näin ollen kutsuu dmgIndicatoria, joka tekee vahinkoa
         if (this.menosuunta=="oikea" &&
         this.ase.position.x + this.ase.width >= kohde.koord.x &&
         this.ase.position.x <= kohde.koord.x + kohde.leveys &&

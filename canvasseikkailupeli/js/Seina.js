@@ -8,7 +8,7 @@ class Seina{
         this.kanvaasi=kanvaasi;
         this.vari=vari;
     }
-
+//yksinkertaisesti piirtää seinän
     piirra(){
         k.beginPath();
         this.kanvaasi.save();
