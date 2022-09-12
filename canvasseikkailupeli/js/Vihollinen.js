@@ -22,33 +22,34 @@ class Vihollinen extends Hahmo{
             k.fillRect(this.koord.x, this.koord.y, this.leveys, this.korkeus);
             this.kiihtyvyys.y=0;
             this.kiihtyvyys.x=0; 
+
             //vaihtoehto 1: vihollinen seuraa pelaajaa
-            //Math.abs:illa voi halutessaan asettaa vihollisille etäisyyden, jonka jälkeen ne alkaa seuraa
-                if(Math.round(pelaaja.koord.x)>Math.round(this.koord.x)){
-                        this.koord.x+=2;
-                    
+            //Math.abs:illa voi myös halutessaan asettaa vihollisille etäisyyden, jonka jälkeen ne alkaa seuraa
+                if(Math.round(pelaaja.koord.x)>Math.round(this.koord.x)&&Math.abs(Math.round(pelaaja.koord.x)-Math.round(this.koord.x))>5){
+                    this.koord.x+=2;
                 }
-                else if(Math.round(pelaaja.koord.x)<Math.round(this.koord.x)){
-                        this.koord.x-=2;
+                else if(Math.round(pelaaja.koord.x)<Math.round(this.koord.x)&&Math.abs(Math.round(pelaaja.koord.x)-Math.round(this.koord.x))>5){
+                    this.koord.x-=2;
                 }
-            
-                if(Math.round(pelaaja.koord.y)>=this.koord.y){
+                if(Math.round(pelaaja.koord.y)>=Math.round(this.koord.y)&&Math.abs(Math.round(pelaaja.koord.y)-Math.round(this.koord.y))>5){
                     this.koord.y+=2;
                 }
-                if(Math.round(pelaaja.koord.y)<=this.koord.y){
+                else if(Math.round(pelaaja.koord.y)<=Math.round(this.koord.y)&&Math.abs(Math.round(pelaaja.koord.y)-Math.round(this.koord.y))>5){
                     this.koord.y-=2;
                 }
-                
+                if(Math.abs(Math.round(pelaaja.koord.x)-Math.round(this.koord.x))<7 &&
+                   Math.abs(Math.round(pelaaja.koord.y)-Math.round(this.koord.y))<7){
+                    pelaaja.hp-=0.5;
+                }
                 //tärinäefekti jos vihollisella on vieroitusoireita?
                 // this.kiihtyvyys.x=Math.round(Math.random())==0?1:-1;
                 // this.kiihtyvyys.y=Math.round(Math.random())==0?1:-1;
 
                 //vaihtoehto 2: vihollinen liikkuu satunnaisiin suuntiin (to do)
-                //tähän toimiva timeout niin periaatteessa toimisi
+                //tähän toimiva timeout niin periaatteessa toimisi; ilman, ei
                 // this.kiihtyvyys.x=Math.round(Math.random())==0?1:-1;
                 // this.kiihtyvyys.y=Math.round(Math.random())==0?1:-1;
 
-            //joko seuraamaan pelaajaa tai liikkumaan satunnaisesti kuten monessa dungeon crawlerissa
 
         }
         tarkistaTormaaminen(){ //tarkistaa vihollis-spriten törmäämisen ja estää seinien läpi menemisen

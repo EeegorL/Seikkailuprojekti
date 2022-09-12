@@ -11,8 +11,7 @@ let viholliset=[];
 
 (async()=>{//alustaa huoneen
     let huoneenViholliset=await fetch("/vihollinen/1").then(tulos=>tulos.json());
-    //tähän voi for-loopilla käydä fetch läpi ja tehdä luoda jokainen vihollinen
-    let vihNimi=huoneenViholliset[0].nimi;
+    //tähän voi for-loopilla käydä fetch läpi ja luoda jokainen vihollinen
     viholliset.push(new Vihollinen({
         id:huoneenViholliset[0].id,
         koord:{
@@ -29,6 +28,8 @@ let viholliset=[];
         nimi:huoneenViholliset[0].nimi
     }))
 })();
+var diff = Math.abs(100-120);
+    console.log(diff);
 
 
 const pelaaja = new Pelaaja({
