@@ -19,9 +19,18 @@ module.exports = class Tietovarasto{
             catch(err){
                 reject(err);
             }
-
         })
-
+    }
+    huoneenViholliset(huoneId){
+        return new Promise(async(resolve,reject)=>{
+            try{
+                let tulos=this.db.suoritaKysely(sql.huoneenViholliset,[huoneId]);
+                resolve(tulos);
+            }
+            catch(err){
+                reject(err);
+            }
+        })
     }
 
     

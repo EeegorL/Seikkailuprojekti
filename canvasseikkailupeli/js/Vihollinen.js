@@ -2,8 +2,10 @@
 
 
 class Vihollinen extends Hahmo{
-    constructor(koord, kiihtyvyys, vari,vari2,elossa,hp,id,dmg,nimi){
-        super(koord, kiihtyvyys, vari,vari2,elossa,hp,id,nimi);//ottaa käyttöön parent-classin
+    constructor(koord, kiihtyvyys, vari1,vari2,elossa,hp,id,dmg,nimi,nopeus){
+        super(koord, kiihtyvyys, vari1,vari2,elossa,hp,id,nimi,nopeus);//ottaa käyttöön parent-classin
+        this.dmg=dmg;
+        this.nopeus=nopeus;
     }
     
     
@@ -18,27 +20,36 @@ class Vihollinen extends Hahmo{
         liikehdinta() { //liikkuminen ja sitä vastaava piirtäminen
             this.tarkistaTormaaminen();
             k.beginPath();
-            k.fillStyle = this.vari;
+            k.fillStyle = this.vari1;
             k.fillRect(this.koord.x, this.koord.y, this.leveys, this.korkeus);
             this.kiihtyvyys.y=0;
             this.kiihtyvyys.x=0; 
+            if(this.hp<=0){
+                this.elossa=false;
+                setTimeout(()=>{//respawn koska miks ei
+                    this.elossa=true;
+                    this.hp=100;
+                    this.koord={x:500,y:500}
+                },1500);
+            }
 
             //vaihtoehto 1: vihollinen seuraa pelaajaa
-            //Math.abs:illa voi myös halutessaan asettaa vihollisille etäisyyden, jonka jälkeen ne alkaa seuraa
+            //Math.abs:illa voi myös halutessaan asettaa vihollisille etäisyyden, jonka jälkeen ne alkaa seuraa, eli voisi tehdä näkökenttämekaniikan
+            let nopeus=2;
                 if(Math.round(pelaaja.koord.x)>Math.round(this.koord.x)&&Math.abs(Math.round(pelaaja.koord.x)-Math.round(this.koord.x))>5){
-                    this.koord.x+=2;
+                    this.koord.x+=nopeus;
                 }
                 else if(Math.round(pelaaja.koord.x)<Math.round(this.koord.x)&&Math.abs(Math.round(pelaaja.koord.x)-Math.round(this.koord.x))>5){
-                    this.koord.x-=2;
+                    this.koord.x-=nopeus;
                 }
                 if(Math.round(pelaaja.koord.y)>=Math.round(this.koord.y)&&Math.abs(Math.round(pelaaja.koord.y)-Math.round(this.koord.y))>5){
-                    this.koord.y+=2;
+                    this.koord.y+=nopeus;
                 }
                 else if(Math.round(pelaaja.koord.y)<=Math.round(this.koord.y)&&Math.abs(Math.round(pelaaja.koord.y)-Math.round(this.koord.y))>5){
-                    this.koord.y-=2;
+                    this.koord.y-=nopeus;
                 }
-                if(Math.abs(Math.round(pelaaja.koord.x)-Math.round(this.koord.x))<7 &&
-                   Math.abs(Math.round(pelaaja.koord.y)-Math.round(this.koord.y))<7){
+                if(Math.abs(Math.round(pelaaja.koord.x)-Math.round(this.koord.x))<52 &&
+                   Math.abs(Math.round(pelaaja.koord.y)-Math.round(this.koord.y))<90){
                     pelaaja.hp-=0.5;
                 }
                 //tärinäefekti jos vihollisella on vieroitusoireita?

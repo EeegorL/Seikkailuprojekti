@@ -1,51 +1,61 @@
-html{
-    zoom:75%;
+html {
+    zoom: 75%;
 }
-body{
-    background-color:darkkhaki;
+
+body {
+    background-color: darkkhaki;
 }
-p{
-    margin-bottom:-10px;
+
+p {
+    margin-bottom: -10px;
 }
-.canvas{
-    border:5px solid brown;
+
+.canvas {
+    border: 5px solid brown;
 }
-.peliContainer{
-    float:right;
+
+.peliContainer {
+    float: right;
 
 }
-.dmgIndicator{
-    float:right;
-    margin-right:10em;
-    font-size:65px;
+
+.dmgIndicator {
+    float: right;
+    margin-right: 10em;
+    font-size: 65px;
 }
-.pelitieto{
+
+.pelitieto {
     text-align: right;
 }
-.huonetiedot{
-    float:right;
-    margin-right:20em;
+
+.huonetiedot {
+    float: right;
+    margin-right: 20em;
     font-size: large;
 }
-.verho{
+
+.verho {
     z-index: 900;
     margin-top: 20px;
-    margin-left:20px;
-    width:770px;
-    height:620px;
+    margin-left: 20px;
+    width: 770px;
+    height: 620px;
     background-color: black;
-    position:absolute;
+    position: absolute;
 }
-.dialogiboksi{
-position: absolute;
-margin-left:840px;
-background-color: brown;
-border:3px solid burlywood;
-padding:8px;
-color:whitesmoke;
-font-weight: bold;
-font-size: xx-large;
+
+.dialogiboksi {
+    position: absolute;
+    margin-left: 840px;
+    background-color: brown;
+    border: 3px solid burlywood;
+    padding: 8px;
+    color: whitesmoke;
+    font-weight: bold;
+    font-size: xx-large;
 }
-.hiddenClass{
+
+.hiddenClass {
     visibility: hidden;
 }

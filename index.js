@@ -30,6 +30,15 @@ exp.get("/vihollinen/:id",async (req,res)=>{
         res.send(err);
     }
 });
+//hakee huoneen viholliset
+exp.get("/huoneenViholliset/:huoneId",async (req,res)=>{
+    try{
+        res.json(await varasto.huoneenViholliset(req.params.huoneId));
+    }
+    catch(err){
+        res.send(err);
+    }
+});
 //hakee pelaajan tiedot
 exp.get("/pelaaja",async (req,res)=>{
     try{

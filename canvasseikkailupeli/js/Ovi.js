@@ -3,7 +3,7 @@
 class Ovi {
     constructor(ilmansuunta,huoneid) {
         this.ilmansuunta = ilmansuunta;
-        this.koord = { x: 0, y: 0 };
+        this.koord;
         this.leveys = 0;
         this.huoneid=huoneid;
         this.korkeus;
@@ -75,5 +75,8 @@ class Ovi {
                 pelaaja.koord.y = kanvaasi.height / 2 - 18;
                 break;
         }
+    }
+    tp(huoneId){
+        alusta(huoneId);
     }
 }

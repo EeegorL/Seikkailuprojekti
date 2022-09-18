@@ -9,27 +9,37 @@ let seinat=[];
 let ovet=[];
 let viholliset=[];
 
-(async()=>{//alustaa huoneen
-    let huoneenViholliset=await fetch("/vihollinen/1").then(tulos=>tulos.json());
+async function alusta(){//alustaa huoneen
+    let huoneenViholliset=await fetch("/huoneenViholliset/1").then(tulos=>tulos.json());
     //tähän voi for-loopilla käydä fetch läpi ja luoda jokainen vihollinen
-    viholliset.push(new Vihollinen({
-        id:huoneenViholliset[0].id,
-        koord:{
-            x:huoneenViholliset[0].x,
-            y:huoneenViholliset[0].y
-        },
-        kiihtyvyys:{
-            x:0,
-            y:0
-        },
-        hp:huoneenViholliset[0].hp,
-        vari:"blue",vari2:"cyan",
-        elossa:true,
-        nimi:huoneenViholliset[0].nimi
-    }))
-})();
-var diff = Math.abs(100-120);
-    console.log(diff);
+
+    for(let vihollinen of huoneenViholliset){
+        viholliset.push(new Vihollinen({
+            id:vihollinen.id,
+            koord:{
+                x:vihollinen.x,
+                y:vihollinen.y
+            },
+            kiihtyvyys:{
+                x:0,
+                y:0
+            },
+            leveys:vihollinen.leveys,
+            korkeus:vihollinen.korkeus,
+            nopeus:vihollinen.nopeus,
+            hp:vihollinen.hp,
+            vari:vihollinen.vari1,
+            vari2:vihollinen.vari2,
+            elossa:true,
+            nimi:vihollinen.nimi,
+            dmg:vihollinen.dmg
+        }))
+
+    }
+};
+
+    alusta();
+console.log(viholliset)
 
 
 const pelaaja = new Pelaaja({
@@ -46,6 +56,7 @@ const pelaaja = new Pelaaja({
     elossa:true
 });
 
+//ovi-rng:t testaukseen, spawnaa aina satunnaiset määrän ovia, 0-4
 let rng1=Math.round(Math.random())==1?true:false;
 let rng2=Math.round(Math.random())==1?true:false;
 let rng3=Math.round(Math.random())==1?true:false;
@@ -99,9 +110,8 @@ async function moottori() { //päivittää jokaisen framen
         pelaaja.avaaOvi(ovet);
     }
     for(let vihollinen of viholliset){// päivittää kaikki elossa olevan viholliset
-        if(vihollinen.elossa){
-            vihollinen.paivitaVihollinen(vihollinen.id);
-            vihollinen.kiihtyvyys.x=100;
+        if(vihollinen?.elossa){
+            vihollinen.paivitaVihollinen();
         }
     }
     teeSeinatJaOvet(rng1,rng2,rng3,rng4); //tekee seinät ja ovet riippuen rng-muuttujista
@@ -112,6 +122,6 @@ async function moottori() { //päivittää jokaisen framen
 
 
 
-async function siirry(){ //tähän huoneiden päivitys
+async function siirry(huoneId){ //tähän huoneiden päivitys
 
 };
