@@ -2,17 +2,14 @@
 
 
 class Vihollinen extends Hahmo{
-    constructor(koord, kiihtyvyys, vari1,vari2,elossa,hp,id,dmg,nimi,nopeus){
-        super(koord, kiihtyvyys, vari1,vari2,elossa,hp,id,nimi,nopeus);//ottaa käyttöön parent-classin
+    constructor(koord, kiihtyvyys, vari1,vari2,tajuissaan,hp,id,dmg,nimi,nopeus){
+        super(koord, kiihtyvyys, vari1,vari2,tajuissaan,hp,id,nimi,nopeus);//ottaa käyttöön parent-classin
         this.dmg=dmg;
-        this.nopeus=nopeus;
     }
     
     
-    async paivitaVihollinen(id) {
+    async paivitaVihollinen() {
         super.paivita();
-
-        
         //tähän tulee varmaankin muutoksia ja eroavaisuuksia super-classin paivityksesta, joten siksi on oma funktio
         }
 
@@ -25,9 +22,9 @@ class Vihollinen extends Hahmo{
             this.kiihtyvyys.y=0;
             this.kiihtyvyys.x=0; 
             if(this.hp<=0){
-                this.elossa=false;
+                this.tajuissaan=false;
                 setTimeout(()=>{//respawn koska miks ei
-                    this.elossa=true;
+                    this.tajuissaan=true;
                     this.hp=100;
                     this.koord={x:500,y:500}
                 },1500);
@@ -50,7 +47,7 @@ class Vihollinen extends Hahmo{
                 }
                 if(Math.abs(Math.round(pelaaja.koord.x)-Math.round(this.koord.x))<52 &&
                    Math.abs(Math.round(pelaaja.koord.y)-Math.round(this.koord.y))<90){
-                    pelaaja.hp-=0.5;
+                    pelaaja.hp-=(0.5-pelaaja.dmgRed);
                 }
                 //tärinäefekti jos vihollisella on vieroitusoireita?
                 // this.kiihtyvyys.x=Math.round(Math.random())==0?1:-1;

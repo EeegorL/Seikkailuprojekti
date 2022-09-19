@@ -3,11 +3,13 @@
 
 class Pelaaja extends Hahmo{
     
-    constructor(koord, kiihtyvyys, vari,vari2,elossa,hp){
-        super(koord, kiihtyvyys, vari,vari2,elossa,hp);//ottaa käyttöön parent-classin
+    constructor(koord, kiihtyvyys, vari,vari2,tajuissaan,hp,dmgRed){
+        super(koord, kiihtyvyys, vari,vari2,tajuissaan,hp);//ottaa käyttöön parent-classin
         this.a = new Image(this.leveys,this.korkeus);
         this.a.src="../kuvat/sprite.jpg";
         this.huonenro;
+        this.dmgRed=dmgRed;
+        this.dmgRed=0;
     }
     avaaOvi(ovet){ //pelaajan ovien kautta liikkuminen
         let e=null;
@@ -126,7 +128,7 @@ class Pelaaja extends Hahmo{
     dmgIndicator(kohde){//vahingon tunnistaminen
         let ogVarit=[kohde.vari1,kohde.vari2];
 
-        if(kohde.elossa==true){ //värin muuttaminen vahingon merkitsemiseksi
+        if(kohde.tajuissaan==true){ //värin muuttaminen vahingon merkitsemiseksi
             kohde.hp-=10;
             kohde.vari="red";
             kohde.vari2="red";
@@ -142,7 +144,9 @@ class Pelaaja extends Hahmo{
     }
     liikehdinta() { //liikkuminen
         if(this.hp<=0){ //pelaajan kuoleman tarkistaminen. jos pelaaja kuolee, peli peittyy mustalla verholla
-            this.elossa=false;
+            this.tajuissaan=false;
+            kaynnissa=false;
+            console.log("Peli loppui");
             document.getElementById("verho").classList.remove("hiddenClass");
         }
     k.drawImage(this.a,this.koord.x,this.koord.y);
@@ -200,6 +204,17 @@ class Pelaaja extends Hahmo{
                     this.koord.y = seinat[1].koord.y+this.korkeus-65;        }
             }
     }
+    pause(){
+        if(pauseVar==false){
+            pauseVar=true;
+            kaynnissa=false;
+        }
+        else if(pauseVar==true){
+            pauseVar=false;
+            kaynnissa=true;
+            moottori();
+        }
+    }
 };
 
 
@@ -244,6 +259,9 @@ window.addEventListener("keydown", (event) => {
                 pelaaja.hyokkaa(vihollinen);
             }
             break;
+        case "escape":
+            pelaaja.pause();
+        break;
     }
 });
 window.addEventListener("keyup", (event) => {

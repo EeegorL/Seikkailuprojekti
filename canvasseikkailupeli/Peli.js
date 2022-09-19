@@ -4,15 +4,16 @@ const kanvaasi = document.querySelector("canvas");
 const k = kanvaasi.getContext("2d");
 kanvaasi.width = 800;
 kanvaasi.height = 650;
-
+let kaynnissa=true;
+let huone=1;
 let seinat=[];
 let ovet=[];
 let viholliset=[];
+let pauseVar=false;
 
 async function alusta(){//alustaa huoneen
-    let huoneenViholliset=await fetch("/huoneenViholliset/1").then(tulos=>tulos.json());
-    //tähän voi for-loopilla käydä fetch läpi ja luoda jokainen vihollinen
-
+    let huoneenViholliset=await fetch(`huoneenViholliset/${huone}`).then(tulos=>tulos.json());
+//käy läpi huoneen viholliset ja luo ne
     for(let vihollinen of huoneenViholliset){
         viholliset.push(new Vihollinen({
             id:vihollinen.id,
@@ -30,7 +31,7 @@ async function alusta(){//alustaa huoneen
             hp:vihollinen.hp,
             vari:vihollinen.vari1,
             vari2:vihollinen.vari2,
-            elossa:true,
+            tajuissaan:true,
             nimi:vihollinen.nimi,
             dmg:vihollinen.dmg
         }))
@@ -39,8 +40,6 @@ async function alusta(){//alustaa huoneen
 };
 
     alusta();
-console.log(viholliset)
-
 
 const pelaaja = new Pelaaja({
     koord: {
@@ -53,10 +52,10 @@ const pelaaja = new Pelaaja({
     },
     hp:100,
     vari: "green",vari2:"brown",
-    elossa:true
+    tajuissaan:true
 });
 
-//ovi-rng:t testaukseen, spawnaa aina satunnaiset määrän ovia, 0-4
+//ovi-rng:t testaukseen, spawnaa aina satunnaisen määrän ovia, 0-4
 let rng1=Math.round(Math.random())==1?true:false;
 let rng2=Math.round(Math.random())==1?true:false;
 let rng3=Math.round(Math.random())==1?true:false;
@@ -99,25 +98,26 @@ function teeSeinatJaOvet(p,e,l,i){ // tekee pelin seinät ja ovet
 }
 
 async function moottori() { //päivittää jokaisen framen
-    window.requestAnimationFrame(moottori);
+    if(kaynnissa==true){ //muuttuja, jolla voi lopettaa pelin tyyliin kaynnissa=false
+        window.requestAnimationFrame(moottori);
 
-    k.fillStyle = "#222222"; //taustaväri
-
-    k.fillRect(0, 0, kanvaasi.width, kanvaasi.height);
-    if(pelaaja.elossa){ //päivittää pelaajaa jos tämä on elossa
-        pelaaja.paivita();
-        pelaaja.tarkistaTormaaminen(seinat);
-        pelaaja.avaaOvi(ovet);
-    }
-    for(let vihollinen of viholliset){// päivittää kaikki elossa olevan viholliset
-        if(vihollinen?.elossa){
-            vihollinen.paivitaVihollinen();
+        k.fillStyle = "#222222"; //taustaväri
+    
+        k.fillRect(0, 0, kanvaasi.width, kanvaasi.height);
+        if(pelaaja.tajuissaan){ //päivittää pelaajaa jos tämä on tajuissaam
+            pelaaja.paivita();
+            pelaaja.tarkistaTormaaminen(seinat);
+            pelaaja.avaaOvi(ovet);
         }
+        for(let vihollinen of viholliset){// päivittää kaikki tajuissaan olevat viholliset
+            if(vihollinen?.tajuissaan){
+                vihollinen.paivitaVihollinen();
+            }
+        }
+        teeSeinatJaOvet(rng1,rng2,rng3,rng4); //tekee seinät ja ovet riippuen rng-muuttujista
+        window.cancelAnimationFrame(requestAnimationFrame(moottori));// peruuttaa äskeisen framen jottei ohjelma ylikuormitu
     }
-    teeSeinatJaOvet(rng1,rng2,rng3,rng4); //tekee seinät ja ovet riippuen rng-muuttujista
-    window.cancelAnimationFrame(requestAnimationFrame(moottori));// peruuttaa äskeisen framen jottei ohjelma ylikuormitu
-}
-    moottori();
+}moottori();
 
 
 
@@ -125,3 +125,4 @@ async function moottori() { //päivittää jokaisen framen
 async function siirry(huoneId){ //tähän huoneiden päivitys
 
 };
+

@@ -17,3 +17,4 @@ class Huone{
         return this.ovet;
     }
 }
+//katsotaan tarviiko koko luokkaa

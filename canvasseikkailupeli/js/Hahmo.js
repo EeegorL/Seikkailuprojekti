@@ -1,7 +1,7 @@
 "use strict";
 
 class Hahmo { //pohjaluokka kaikille spriteille
-    constructor({ koord, kiihtyvyys, vari,vari2,elossa,hp,id,nimi}) {
+    constructor({ koord, kiihtyvyys, vari,vari2,tajuissaan,hp,id,nimi}) {
         this.koord = koord;
         this.kiihtyvyys = kiihtyvyys;
         this.korkeus = 75;
@@ -15,7 +15,7 @@ class Hahmo { //pohjaluokka kaikille spriteille
             height: 10
         }
         this.hyokkaamassa;
-        this.elossa=elossa;
+        this.tajuissaan=tajuissaan;
         this.menosuunta;
         this.hp=hp;
         this.id=id;
