@@ -5,15 +5,15 @@ const k = kanvaasi.getContext("2d");
 kanvaasi.width = 800;
 kanvaasi.height = 650;
 let kaynnissa=true;
-let huone=1;
+let huoneNro=1;
 let seinat=[];
 let ovet=[];
 let viholliset=[];
 let pauseVar=false;
     
 
-async function alusta(){//alustaa huoneen
-    let huoneenViholliset=await fetch(`huoneenViholliset/${huone}`).then(tulos=>tulos.json());
+async function alusta(huoneNro){//alustaa huoneen
+    let huoneenViholliset=await fetch(`huoneenViholliset/${huoneNro}`).then(tulos=>tulos.json());
 //käy läpi huoneen viholliset ja luo ne
     for(let vihollinen of huoneenViholliset){
         viholliset.push(new Vihollinen({
@@ -40,7 +40,7 @@ async function alusta(){//alustaa huoneen
     }
 };
 
-    alusta();
+    alusta(huoneNro);
 
 const pelaaja = new Pelaaja({
     koord: {

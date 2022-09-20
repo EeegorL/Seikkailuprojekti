@@ -7,13 +7,13 @@ const optiot =require('./yhteysoptiot.json');
 
 module.exports = class Tietovarasto{
     constructor(){
-        this.db = new Tietokanta(optiot);
+        this.Omakanta = new Tietokanta(optiot);
     }
 //hakee vihollisen tiedot
     vihollisenTiedot(id){
         return new Promise(async(resolve,reject)=>{
             try{
-                let tulos=this.db.suoritaKysely(sql.vihollinen,[id]);
+                let tulos=this.Omakanta.suoritaKysely(sql.vihollinen,[id]);
                 resolve(tulos);
             }
             catch(err){
@@ -24,7 +24,7 @@ module.exports = class Tietovarasto{
     huoneenViholliset(huoneId){
         return new Promise(async(resolve,reject)=>{
             try{
-                let tulos=this.db.suoritaKysely(sql.huoneenViholliset,[huoneId]);
+                let tulos=this.Omakanta.suoritaKysely(sql.huoneenViholliset,[huoneId]);
                 resolve(tulos);
             }
             catch(err){

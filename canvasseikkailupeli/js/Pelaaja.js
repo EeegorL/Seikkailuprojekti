@@ -171,6 +171,8 @@ class Pelaaja extends Hahmo{
             pelaaja.menosuunta="alas";
         }       
         //aseen osoitussuunta riippuen liikesuunnasta
+        // konteksti.globalAlpha asettaa elementin läpinäkyväksi, niin hahmon ase ei vaikuta valtavalta nuijalta
+        k.globalAlpha=0.2;
         if(this.menosuunta=="vasen"){
             k.fillRect(this.ase.position.x-100, this.ase.position.y+30, this.ase.width=150, this.ase.height=10);
         }
@@ -183,6 +185,8 @@ class Pelaaja extends Hahmo{
         else if(this.menosuunta=="alas"){
             k.fillRect(this.ase.position.x+20, this.ase.position.y, this.ase.width=10, this.ase.height=150);
         }
+        k.globalAlpha=1;
+//jos tän ottaa pois, nii jää kiva humalaefekti jota vois käyttää
         
     }
     tarkistaTormaaminen(seinat){ //nimensä mukaan tarkistaa seinät ja estää niiden läpi kulkemisen
