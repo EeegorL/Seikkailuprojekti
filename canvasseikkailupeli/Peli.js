@@ -10,6 +10,7 @@ let seinat=[];
 let ovet=[];
 let viholliset=[];
 let pauseVar=false;
+    
 
 async function alusta(){//alustaa huoneen
     let huoneenViholliset=await fetch(`huoneenViholliset/${huone}`).then(tulos=>tulos.json());

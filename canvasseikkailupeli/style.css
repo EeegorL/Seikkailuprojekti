@@ -44,6 +44,21 @@ p {
     background-color: black;
     position: absolute;
 }
+.menu{
+    z-index: 900;
+    margin-top: 20px;
+    margin-left: 20px;
+    width: 770px;
+    height: 620px;
+    background-color: black;
+    position: absolute;
+    opacity:0.5;
+}
+.menu > p,h1{
+    color:white;
+    text-align: center;
+    opacity:1.0;
+}
 
 .dialogiboksi {
     position: absolute;

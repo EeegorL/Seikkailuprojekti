@@ -148,6 +148,8 @@ class Pelaaja extends Hahmo{
             kaynnissa=false;
             console.log("Peli loppui");
             document.getElementById("verho").classList.remove("hiddenClass");
+            document.getElementById("menu").classList.remove("hiddenClass");
+
         }
     k.drawImage(this.a,this.koord.x,this.koord.y);
 
@@ -208,10 +210,14 @@ class Pelaaja extends Hahmo{
         if(pauseVar==false){
             pauseVar=true;
             kaynnissa=false;
+            document.getElementById("menu").classList.remove("hiddenClass");
+
         }
         else if(pauseVar==true){
             pauseVar=false;
             kaynnissa=true;
+            document.getElementById("menu").classList.add("hiddenClass");
+
             moottori();
         }
     }
