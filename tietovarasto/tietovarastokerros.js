@@ -20,7 +20,7 @@ module.exports = class Tietovarasto{
                 reject(err);
             }
         })
-    }
+    };
     huoneenViholliset(huoneId){
         return new Promise(async(resolve,reject)=>{
             try{
@@ -28,6 +28,16 @@ module.exports = class Tietovarasto{
                 resolve(tulos);
             }
             catch(err){
+                reject(err);
+            }
+        })
+    };
+    huoneenOvet(huoneId){
+        return new Promise(async(resolve,reject)=>{
+            try{
+                let tulos=this.Omakanta.suoritaKysely(sql.huoneenOvet,[huoneId]);
+                resolve(tulos);
+            }catch(err){
                 reject(err);
             }
         })

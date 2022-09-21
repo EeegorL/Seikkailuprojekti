@@ -57,7 +57,6 @@ class Ovi {
             case "etela":
                 pelaaja.koord.x = kanvaasi.width / 2 - 15;
                 pelaaja.koord.y = 10;
-                
                 break;
 
             case "pohjoinen":

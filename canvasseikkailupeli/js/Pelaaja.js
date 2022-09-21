@@ -39,6 +39,7 @@ class Pelaaja extends Hahmo{
                     this.koord.x+this.leveys>=e.koord.x &&
                     this.koord.y>=e.koord.y-e.korkeus+5){
                         e.siirra(e.ilmansuunta);
+                        alusta(23);
                      }
             }
             break;
@@ -49,6 +50,7 @@ class Pelaaja extends Hahmo{
                         this.koord.x+this.leveys>=p.koord.x &&
                         this.koord.y<=10){
                             p.siirra(p.ilmansuunta);
+                            alusta(2);
                          }
                 }
 
@@ -61,6 +63,7 @@ class Pelaaja extends Hahmo{
                         this.koord.y<=l.koord.y+l.korkeus
                     ){
                         l.siirra(l.ilmansuunta);
+                        alusta(2);
                          }
                 }
 
@@ -73,6 +76,7 @@ class Pelaaja extends Hahmo{
                         this.koord.y<=i.koord.y+i.korkeus
                     ){
                         i.siirra(i.ilmansuunta);
+                        alusta(2);
                          }
                 }
             break;

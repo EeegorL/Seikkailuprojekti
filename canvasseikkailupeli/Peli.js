@@ -5,15 +5,24 @@ const k = kanvaasi.getContext("2d");
 kanvaasi.width = 800;
 kanvaasi.height = 650;
 let kaynnissa=true;
-let huoneNro=1;
+let huoneNro=11;
 let seinat=[];
 let ovet=[];
 let viholliset=[];
 let pauseVar=false;
+let huoneenOvet;
     
 
 async function alusta(huoneNro){//alustaa huoneen
+    viholliset.length=0;
+    ovet.length;
     let huoneenViholliset=await fetch(`huoneenViholliset/${huoneNro}`).then(tulos=>tulos.json());
+    huoneenOvet=await fetch(`huoneenOvet/${huoneNro}`).then(tulos=>tulos.json());
+    huoneNro=huoneenOvet.id;
+    console.log(huoneenOvet);
+    console.log(huoneenViholliset);
+    document.getElementById("huoneenNimi").innerHTML=`${huoneenOvet[0]?.nimi || ""} ${huoneenOvet[0]?.id || ""}`
+
 //käy läpi huoneen viholliset ja luo ne
     for(let vihollinen of huoneenViholliset){
         viholliset.push(new Vihollinen({
@@ -38,6 +47,9 @@ async function alusta(huoneNro){//alustaa huoneen
         }))
 
     }
+
+    //ovien ja seinien luominen
+
 };
 
     alusta(huoneNro);
@@ -57,33 +69,26 @@ const pelaaja = new Pelaaja({
 });
 
 //ovi-rng:t testaukseen, spawnaa aina satunnaisen määrän ovia, 0-4
-let rng1=Math.round(Math.random())==1?true:false;
-let rng2=Math.round(Math.random())==1?true:false;
-let rng3=Math.round(Math.random())==1?true:false;
-let rng4=Math.round(Math.random())==1?true:false;
 
-function teeSeinatJaOvet(p,e,l,i){ // tekee pelin seinät ja ovet
+
+async function teeSeinatJaOvet(p,e,l,i){ // tekee pelin seinät ja ovet
     //lisää ovia riippuen rng-muuttujista
-    if(e){
         const OviE=new Ovi("etela")
         OviE.piirra();
         ovet.push(OviE);
-    }
-    if(p){
+    
         const OviP=new Ovi("pohjoinen")
         OviP.piirra();
         ovet.push(OviP);
-    }
-    if(l){
+
         const OviL=new Ovi("lansi")
         OviL.piirra();
         ovet.push(OviL);
-    }
-    if(i){
+
         const OviI=new Ovi("ita")
         OviI.piirra();
         ovet.push(OviI);
-    }
+    
 
     //tekee seinät
     const seinaP=new Seina({koord:{x:0,y:0},leveys:kanvaasi.width,korkeus:15,kanvaasi:k,vari:"brown"})
@@ -115,15 +120,9 @@ async function moottori() { //päivittää jokaisen framen
                 vihollinen.paivitaVihollinen();
             }
         }
-        teeSeinatJaOvet(rng1,rng2,rng3,rng4); //tekee seinät ja ovet riippuen rng-muuttujista
+        await teeSeinatJaOvet(); //tekee seinät ja ovet riippuen rng-muuttujista
         window.cancelAnimationFrame(requestAnimationFrame(moottori));// peruuttaa äskeisen framen jottei ohjelma ylikuormitu
     }
 }moottori();
 
-
-
-
-async function siirry(huoneId){ //tähän huoneiden päivitys
-
-};
 
