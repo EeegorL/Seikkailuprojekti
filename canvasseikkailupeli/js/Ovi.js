@@ -75,7 +75,5 @@ class Ovi {
                 break;
         }
     }
-    tp(huoneId){
-        alusta(huoneId);
-    }
+
 }
