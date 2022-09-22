@@ -148,7 +148,6 @@ class Pelaaja extends Hahmo{
             kaynnissa=false;
             console.log("Peli loppui");
             document.getElementById("verho").classList.remove("hiddenClass");
-            document.getElementById("menu").classList.remove("hiddenClass");
 
         }
     k.drawImage(this.a,this.koord.x,this.koord.y);

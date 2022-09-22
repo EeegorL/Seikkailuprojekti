@@ -5,13 +5,13 @@ const k = kanvaasi.getContext("2d");
 kanvaasi.width = 800;
 kanvaasi.height = 650;
 let kaynnissa=true;
-let huoneNro=11;
+let huoneNro="4-1";
 let seinat=[];
 let ovet=[];
 let viholliset=[];
 let pauseVar=false;
 let huoneenOvet;
-    
+
 
 async function alusta(huoneNro){//alustaa huoneen
     viholliset.length=0;
