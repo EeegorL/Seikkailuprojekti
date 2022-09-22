@@ -2,9 +2,13 @@
 
 
 class Vihollinen extends Hahmo{
-    constructor(koord, kiihtyvyys, vari1,vari2,tajuissaan,hp,id,dmg,nimi,nopeus){
-        super(koord, kiihtyvyys, vari1,vari2,tajuissaan,hp,id,nimi,nopeus);//ottaa käyttöön parent-classin
+    constructor(koord, kiihtyvyys, vari1,vari2,tajuissaan,hp,id,dmg,nimi,nopeus,kuvasrc){
+        super(koord, kiihtyvyys, vari1,vari2,tajuissaan,hp,id,nimi);//ottaa käyttöön parent-classin
         this.dmg=dmg;
+        this.nopeus=nopeus;
+        this.kuva = new Image(40,70);
+        this.kuva.src="../kuvat/hamsteri.png";
+
     }
     
     
@@ -18,7 +22,8 @@ class Vihollinen extends Hahmo{
             this.tarkistaTormaaminen();
             k.beginPath();
             k.fillStyle = this.vari1;
-            k.fillRect(this.koord.x, this.koord.y, this.leveys, this.korkeus);
+            k.drawImage(this.kuva,this.koord.x,this.koord.y);
+
             this.kiihtyvyys.y=0;
             this.kiihtyvyys.x=0; 
             if(this.hp<=0){
@@ -32,18 +37,18 @@ class Vihollinen extends Hahmo{
 
             //vaihtoehto 1: vihollinen seuraa pelaajaa
             //Math.abs:illa voi myös halutessaan asettaa vihollisille etäisyyden, jonka jälkeen ne alkaa seuraa, eli voisi tehdä näkökenttämekaniikan
-            let nopeus=2;
+            this.nopeus=1;
                 if(Math.round(pelaaja.koord.x)>Math.round(this.koord.x)&&Math.abs(Math.round(pelaaja.koord.x)-Math.round(this.koord.x))>5){
-                    this.koord.x+=nopeus;
+                    this.koord.x+=this.nopeus;
                 }
                 else if(Math.round(pelaaja.koord.x)<Math.round(this.koord.x)&&Math.abs(Math.round(pelaaja.koord.x)-Math.round(this.koord.x))>5){
-                    this.koord.x-=nopeus;
+                    this.koord.x-=this.nopeus;
                 }
                 if(Math.round(pelaaja.koord.y)>=Math.round(this.koord.y)&&Math.abs(Math.round(pelaaja.koord.y)-Math.round(this.koord.y))>5){
-                    this.koord.y+=nopeus;
+                    this.koord.y+=this.nopeus;
                 }
                 else if(Math.round(pelaaja.koord.y)<=Math.round(this.koord.y)&&Math.abs(Math.round(pelaaja.koord.y)-Math.round(this.koord.y))>5){
-                    this.koord.y-=nopeus;
+                    this.koord.y-=this.nopeus;
                 }
                 if(Math.abs(Math.round(pelaaja.koord.x)-Math.round(this.koord.x))<52 &&
                    Math.abs(Math.round(pelaaja.koord.y)-Math.round(this.koord.y))<90){

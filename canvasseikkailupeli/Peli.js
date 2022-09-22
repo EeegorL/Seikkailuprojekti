@@ -19,8 +19,7 @@ async function alusta(huoneNro){//alustaa huoneen
     let huoneenViholliset=await fetch(`huoneenViholliset/${huoneNro}`).then(tulos=>tulos.json());
     huoneenOvet=await fetch(`huoneenOvet/${huoneNro}`).then(tulos=>tulos.json());
     huoneNro=huoneenOvet.id;
-    console.log(huoneenOvet);
-    console.log(huoneenViholliset);
+
     document.getElementById("huoneenNimi").innerHTML=`${huoneenOvet[0]?.nimi || ""}`
 
 //käy läpi huoneen viholliset ja luo ne
@@ -43,30 +42,17 @@ async function alusta(huoneNro){//alustaa huoneen
             vari2:vihollinen.vari2,
             tajuissaan:true,
             nimi:vihollinen.nimi,
-            dmg:vihollinen.dmg
-        }))
-
+            dmg:vihollinen.dmg,
+            kuvasrc:vihollinen.kuva
+        }));
+        console.log(await viholliset[0])
     }
 
-    //ovien ja seinien luominen
 
 };
 
-    alusta(huoneNro);
 
-const pelaaja = new Pelaaja({
-    koord: {
-        x: 100,
-        y: 200
-    },
-    kiihtyvyys: {
-        x: 0,
-        y: 0
-    },
-    hp:100,
-    vari: "green",vari2:"brown",
-    tajuissaan:true
-});
+
 
 //ovi-rng:t testaukseen, spawnaa aina satunnaisen määrän ovia, 0-4
 
@@ -130,6 +116,22 @@ async function moottori() { //päivittää jokaisen framen
         await teeSeinatJaOvet(); //tekee seinät ja ovet riippuen rng-muuttujista
         window.cancelAnimationFrame(requestAnimationFrame(moottori));// peruuttaa äskeisen framen jottei ohjelma ylikuormitu
     }
-}moottori();
+}
+
+const pelaaja = new Pelaaja({
+    koord: {
+        x: 100,
+        y: 200
+    },
+    kiihtyvyys: {
+        x: 0,
+        y: 0
+    },
+    hp:100,
+    vari: "green",vari2:"brown",
+    tajuissaan:true
+});
+alusta(huoneNro);
+moottori();
 
 

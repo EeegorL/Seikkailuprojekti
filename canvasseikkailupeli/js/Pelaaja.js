@@ -6,7 +6,7 @@ class Pelaaja extends Hahmo{
     constructor(koord, kiihtyvyys, vari,vari2,tajuissaan,hp,dmgRed){
         super(koord, kiihtyvyys, vari,vari2,tajuissaan,hp);//ottaa käyttöön parent-classin
         this.a = new Image(this.leveys,this.korkeus);
-        this.a.src="../kuvat/sprite.jpg";
+        this.a.src="../kuvat/jari.png";
         this.huonenro;
         this.dmgRed=dmgRed;
         this.dmgRed=0;
