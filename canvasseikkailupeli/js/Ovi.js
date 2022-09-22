@@ -46,13 +46,7 @@ class Ovi {
     siirra(ilmansuunta) { //pelaajan teleporttaaminen
         console.log("Pelaaja siirretty: "+ilmansuunta);
 
-        // uuden huoneen tiedot hakeva query
-        //huoneen tietojen perusteella vihollisten spawnaaminen
-        //huoneen tietojen perusteella ovien spawnaaminen
-        // huoneen tietojen perusteella esineiden spawnaaminen
-        //yms....
-
-        //siirtää pelaajan yhteen neljästä kohdasta riippuen vastaavasta ilmansuunnastas
+        //siirtää pelaajan yhteen neljästä kohdasta riippuen vastaavasta ilmansuunnasta
         switch (ilmansuunta) {
             case "etela":
                 pelaaja.koord.x = kanvaasi.width / 2 - 15;
@@ -74,6 +68,8 @@ class Ovi {
                 pelaaja.koord.y = kanvaasi.height / 2 - 18;
                 break;
         }
+        alusta(this.huoneid);
+        console.log(this.huoneid);
     }
 
 }

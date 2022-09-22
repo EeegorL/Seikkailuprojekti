@@ -21,7 +21,7 @@ async function alusta(huoneNro){//alustaa huoneen
     huoneNro=huoneenOvet.id;
     console.log(huoneenOvet);
     console.log(huoneenViholliset);
-    document.getElementById("huoneenNimi").innerHTML=`${huoneenOvet[0]?.nimi || ""} ${huoneenOvet[0]?.id || ""}`
+    document.getElementById("huoneenNimi").innerHTML=`${huoneenOvet[0]?.nimi || ""}`
 
 //käy läpi huoneen viholliset ja luo ne
     for(let vihollinen of huoneenViholliset){
@@ -71,24 +71,31 @@ const pelaaja = new Pelaaja({
 //ovi-rng:t testaukseen, spawnaa aina satunnaisen määrän ovia, 0-4
 
 
-async function teeSeinatJaOvet(p,e,l,i){ // tekee pelin seinät ja ovet
+async function teeSeinatJaOvet(){ // tekee pelin seinät ja ovet
     //lisää ovia riippuen rng-muuttujista
-        const OviE=new Ovi("etela")
-        OviE.piirra();
-        ovet.push(OviE);
-    
-        const OviP=new Ovi("pohjoinen")
-        OviP.piirra();
-        ovet.push(OviP);
+    if(await huoneenOvet){
+        if(await huoneenOvet[0]?.etela!=null){
+            const OviE=new Ovi("etela",huoneenOvet[0].etela);
+            OviE.piirra();
+            ovet.push(OviE);
+        }
+        if(await huoneenOvet[0]?.pohjoinen!=null){
+            const OviP=new Ovi("pohjoinen",huoneenOvet[0].pohjoinen);
+            OviP.piirra();
+            ovet.push(OviP);
+        }
+        if(await huoneenOvet[0]?.lansi!=null){
+            const OviL=new Ovi("lansi",huoneenOvet[0].lansi);
+            OviL.piirra();
+            ovet.push(OviL);
+        }
+        if(await huoneenOvet[0]?.ita!=null){
+            const OviI=new Ovi("ita",huoneenOvet[0].ita);
+            OviI.piirra();
+            ovet.push(OviI);
+        }
+    }
 
-        const OviL=new Ovi("lansi")
-        OviL.piirra();
-        ovet.push(OviL);
-
-        const OviI=new Ovi("ita")
-        OviI.piirra();
-        ovet.push(OviI);
-    
 
     //tekee seinät
     const seinaP=new Seina({koord:{x:0,y:0},leveys:kanvaasi.width,korkeus:15,kanvaasi:k,vari:"brown"})
