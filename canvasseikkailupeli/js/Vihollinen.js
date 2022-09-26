@@ -37,7 +37,7 @@ class Vihollinen extends Hahmo{
 
             //vaihtoehto 1: vihollinen seuraa pelaajaa
             //Math.abs:illa voi myös halutessaan asettaa vihollisille etäisyyden, jonka jälkeen ne alkaa seuraa, eli voisi tehdä näkökenttämekaniikan
-            this.nopeus=1;
+            this.nopeus=2;
                 if(Math.round(pelaaja.koord.x)>Math.round(this.koord.x)&&Math.abs(Math.round(pelaaja.koord.x)-Math.round(this.koord.x))>5){
                     this.koord.x+=this.nopeus;
                 }
@@ -54,16 +54,6 @@ class Vihollinen extends Hahmo{
                    Math.abs(Math.round(pelaaja.koord.y)-Math.round(this.koord.y))<90){
                     pelaaja.hp-=(0.5-pelaaja.dmgRed);
                 }
-                //tärinäefekti jos vihollisella on vieroitusoireita?
-                // this.kiihtyvyys.x=Math.round(Math.random())==0?1:-1;
-                // this.kiihtyvyys.y=Math.round(Math.random())==0?1:-1;
-
-                //vaihtoehto 2: vihollinen liikkuu satunnaisiin suuntiin (to do)
-                //tähän toimiva timeout niin periaatteessa toimisi; ilman, ei
-                // this.kiihtyvyys.x=Math.round(Math.random())==0?1:-1;
-                // this.kiihtyvyys.y=Math.round(Math.random())==0?1:-1;
-
-
         }
         tarkistaTormaaminen(){ //tarkistaa vihollis-spriten törmäämisen ja estää seinien läpi menemisen
             if(this.koord.y>=seinat[0]?.koord.y-75){//lattia

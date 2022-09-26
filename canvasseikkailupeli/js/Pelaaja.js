@@ -3,20 +3,21 @@
 
 class Pelaaja extends Hahmo{
     
-    constructor(koord, kiihtyvyys, vari,vari2,tajuissaan,hp,dmgRed){
-        super(koord, kiihtyvyys, vari,vari2,tajuissaan,hp);//ottaa käyttöön parent-classin
+    constructor(koord, kiihtyvyys, vari,vari2,tajuissaan,hp,dmgRed,dmg){
+        super(koord, kiihtyvyys, vari,vari2,tajuissaan,hp,dmg);//ottaa käyttöön parent-classin
         this.a = new Image(this.leveys,this.korkeus);
         this.a.src="../kuvat/jari.png";
         this.huonenro;
         this.dmgRed=dmgRed;
         this.dmgRed=0;
+        this.dmg=dmg;
     }
     avaaOvi(ovet){ //pelaajan ovien kautta liikkuminen
         let e=null;
         let p=null;
         let i=null;
         let l=null;
-        for(let ovi of ovet){//katsoo, mitkä huoneet ovat olemassa huoneessa
+        for(let ovi of ovet){//katsoo, mitkä ovet ovat olemassa huoneessa
             if(ovi.ilmansuunta=="etela"){
                 e=ovi;
             }
@@ -79,10 +80,9 @@ class Pelaaja extends Hahmo{
             }
     }
     
-    hyokkaa(kohde) { //hyokkaa viholliseen. toimii nyt vasta yhdellä vihollisella
+    hyokkaa(kohde) {
         this.hyokkaamassa = true;
         //tarkistaa, osuuko pelaajan ase viholliseen, ja näin ollen kutsuu dmgIndicatoria, joka tekee vahinkoa
-        //tähän esim for loop, tyyliin for(kohde in kohteet){...
         if (this.menosuunta=="oikea" &&
         this.ase.position.x + this.ase.width >= kohde.koord.x &&
         this.ase.position.x <= kohde.koord.x + kohde.leveys &&
@@ -129,7 +129,7 @@ class Pelaaja extends Hahmo{
         let ogVarit=[kohde.vari1,kohde.vari2];
 
         if(kohde.tajuissaan==true){ //värin muuttaminen vahingon merkitsemiseksi
-            kohde.hp-=10;
+            kohde.hp-=5;
             kohde.vari="red";
             kohde.vari2="red";
 
@@ -142,7 +142,7 @@ class Pelaaja extends Hahmo{
 
 
     }
-    liikehdinta() { //liikkuminen
+    liikehdinta(nopeus) { //liikkuminen
         if(this.hp<=0){ //pelaajan kuoleman tarkistaminen. jos pelaaja kuolee, peli peittyy mustalla verholla
             this.tajuissaan=false;
             kaynnissa=false;
@@ -157,16 +157,16 @@ class Pelaaja extends Hahmo{
 
         //tarkistaa viimeisimpänä painetun napin ja toimii sen mukaan
         if (liikenappaimet.a.pohjassa && pelaaja.viimeisin === "a") {
-            pelaaja.kiihtyvyys.x = -5;
+            pelaaja.kiihtyvyys.x = -nopeus;
             pelaaja.menosuunta="vasen";
         }else if (liikenappaimet.d.pohjassa && pelaaja.viimeisin === "d") {
-            pelaaja.kiihtyvyys.x = 5;
+            pelaaja.kiihtyvyys.x = nopeus;
             pelaaja.menosuunta="oikea";
         }else if (liikenappaimet.w.pohjassa && pelaaja.viimeisin === "w") {
-            pelaaja.kiihtyvyys.y = -5;
+            pelaaja.kiihtyvyys.y = -nopeus;
             pelaaja.menosuunta="ylos";
         }else if (liikenappaimet.s.pohjassa && pelaaja.viimeisin === "s") {
-            pelaaja.kiihtyvyys.y = 5;
+            pelaaja.kiihtyvyys.y = nopeus;
             pelaaja.menosuunta="alas";
         }       
         //aseen osoitussuunta riippuen liikesuunnasta
@@ -263,7 +263,6 @@ window.addEventListener("keydown", (event) => {
             pelaaja.viimeisin = "s";
             break;
         case "enter":
-            //johonki tähän loop joka käy läpi ja katsoo, että ketkä viholliset ovat aseen kohdalla ja ottavat turpaan
             for(let vihollinen of viholliset){
                 pelaaja.hyokkaa(vihollinen);
             }

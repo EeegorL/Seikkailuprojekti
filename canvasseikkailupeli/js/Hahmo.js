@@ -26,7 +26,7 @@ class Hahmo { //pohjaluokka kaikille spriteille
     
     paivita() { //paivittaa jokaisen framen
         k.beginPath();
-        this.liikehdinta(); //liikuttaa hahmoa ja hoitaa piirtämisen
+        this.liikehdinta(10); //liikuttaa hahmoa ja hoitaa piirtämisen
         k.font = "Bold 40px Brush Script MT";
         k.strokeStyle=this.vari2;
         k.strokeText(Math.round(this.hp), this.koord.x+3.5,this.koord.y);

@@ -40,22 +40,15 @@ async function alusta(huoneNro){//alustaa huoneen
             hp:vihollinen.hp,
             vari:vihollinen.vari1,
             vari2:vihollinen.vari2,
-            tajuissaan:true,
+            tajuissaan:vihollinen.elossa,
             nimi:vihollinen.nimi,
             dmg:vihollinen.dmg,
             kuvasrc:vihollinen.kuva
         }));
-        console.log(await viholliset[0])
     }
 
 
 };
-
-
-
-
-//ovi-rng:t testaukseen, spawnaa aina satunnaisen määrän ovia, 0-4
-
 
 async function teeSeinatJaOvet(){ // tekee pelin seinät ja ovet
     //lisää ovia riippuen rng-muuttujista

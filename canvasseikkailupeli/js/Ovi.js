@@ -44,8 +44,6 @@ class Ovi {
         }
     }
     siirra(ilmansuunta) { //pelaajan teleporttaaminen
-        console.log("Pelaaja siirretty: "+ilmansuunta);
-
         //siirtää pelaajan yhteen neljästä kohdasta riippuen vastaavasta ilmansuunnasta
         switch (ilmansuunta) {
             case "etela":
