@@ -9,6 +9,7 @@ let huoneNro="4-1";
 let seinat=[];
 let ovet=[];
 let viholliset=[];
+let huonekalut=[];
 let pauseVar=false;
 let huoneenOvet;
 
@@ -43,15 +44,18 @@ async function alusta(huoneNro){//alustaa huoneen
             tajuissaan:vihollinen.elossa,
             nimi:vihollinen.nimi,
             dmg:vihollinen.dmg,
-            kuvasrc:vihollinen.kuva
+            kuvasrc:vihollinen.kuva,
         }));
     }
 
 
 };
 
-async function teeSeinatJaOvet(){ // tekee pelin seinät ja ovet
+async function teeEsteetJaOvet(){ // tekee pelin seinät ja ovet
     //lisää ovia riippuen rng-muuttujista
+    const kaappi = new Huonekalu("kaappi",{x:100,y:400},{leveys:400,korkeus:50},"darkbrown",false);
+    kaappi.piirra();
+    huonekalut.push(kaappi);
     if(await huoneenOvet){
         if(await huoneenOvet[0]?.etela!=null){
             const OviE=new Ovi("etela",huoneenOvet[0].etela);
@@ -98,15 +102,16 @@ async function moottori() { //päivittää jokaisen framen
         k.fillRect(0, 0, kanvaasi.width, kanvaasi.height);
         if(pelaaja.tajuissaan){ //päivittää pelaajaa jos tämä on tajuissaam
             pelaaja.paivita();
-            pelaaja.tarkistaTormaaminen(seinat);
+            pelaaja.tarkistaTormaaminen(seinat,huonekalut);
             pelaaja.avaaOvi(ovet);
         }
         for(let vihollinen of viholliset){// päivittää kaikki tajuissaan olevat viholliset
             if(vihollinen?.tajuissaan){
                 vihollinen.paivitaVihollinen();
+                vihollinen.tarkistaTormaaminen(seinat,huonekalut);
             }
         }
-        await teeSeinatJaOvet(); //tekee seinät ja ovet riippuen rng-muuttujista
+        await teeEsteetJaOvet(); //tekee seinät ja ovet riippuen rng-muuttujista
         window.cancelAnimationFrame(requestAnimationFrame(moottori));// peruuttaa äskeisen framen jottei ohjelma ylikuormitu
     }
 }

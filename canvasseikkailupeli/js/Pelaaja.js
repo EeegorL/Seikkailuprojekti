@@ -6,7 +6,7 @@ class Pelaaja extends Hahmo{
     constructor(koord, kiihtyvyys, vari,vari2,tajuissaan,hp,dmgRed,dmg){
         super(koord, kiihtyvyys, vari,vari2,tajuissaan,hp,dmg);//ottaa käyttöön parent-classin
         this.a = new Image(this.leveys,this.korkeus);
-        this.a.src="../kuvat/jari.png";
+        this.a.src="../kuvat/hahmot/jari.png";
         this.huonenro;
         this.dmgRed=dmgRed;
         this.dmgRed=0;
@@ -150,6 +150,7 @@ class Pelaaja extends Hahmo{
             document.getElementById("verho").classList.remove("hiddenClass");
 
         }
+        
     k.drawImage(this.a,this.koord.x,this.koord.y);
 
         k.fillStyle = this.vari2;
@@ -188,7 +189,7 @@ class Pelaaja extends Hahmo{
 //jos tän ottaa pois, nii jää kiva humalaefekti jota vois käyttää
         
     }
-    tarkistaTormaaminen(seinat){ //nimensä mukaan tarkistaa seinät ja estää niiden läpi kulkemisen
+    tarkistaTormaaminen(seinat,huonekalut){ //nimensä mukaan tarkistaa seinät sekä huonekalut ja estää niiden läpi kulkemisen
         //huoneiden seinät
             if(this.menosuunta=="oikea"){
                 if(this.koord.x+this.leveys>=seinat[2].koord.x){
@@ -207,6 +208,34 @@ class Pelaaja extends Hahmo{
             if(this.menosuunta=="ylos"){
                 if(this.koord.y-this.korkeus+70<=seinat[1].koord.y){
                     this.koord.y = seinat[1].koord.y+this.korkeus-65;        }
+            }
+            for(let huonekalu of huonekalut){
+                if(!huonekalu.koriste){
+
+                            if(this.koord.x + this.leveys > huonekalu.koord.x &&
+                               this.koord.x<huonekalu.koord.x+huonekalu.koko.leveys &&
+                               this.koord.y+this.korkeus > huonekalu.koord.y &&
+                               this.koord.y < huonekalu.koord.y + huonekalu.koko.korkeus){
+                               
+                                switch(this.menosuunta){
+                                case "ylos":
+                                    this.koord.y+=1;
+                                    break;
+                                case "alas":
+                                    this.koord.y-=1;
+                                    break;
+                                case "oikea":
+                                    this.koord.x-=1;
+                                    break;
+                                case "vasen":
+                                    this.koord.x+=1;
+                                    break;
+                               }
+                               
+                               }
+
+                    
+                }
             }
     }
     pause(){

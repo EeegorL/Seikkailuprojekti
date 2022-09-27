@@ -26,7 +26,9 @@ class Hahmo { //pohjaluokka kaikille spriteille
     
     paivita() { //paivittaa jokaisen framen
         k.beginPath();
+        
         this.liikehdinta(10); //liikuttaa hahmoa ja hoitaa piirtämisen
+
         k.font = "Bold 40px Brush Script MT";
         k.strokeStyle=this.vari2;
         k.strokeText(Math.round(this.hp), this.koord.x+3.5,this.koord.y);
@@ -36,6 +38,7 @@ class Hahmo { //pohjaluokka kaikille spriteille
         this.koord.y += this.kiihtyvyys.y;
         this.koord.x += this.kiihtyvyys.x;
         this.kiihtyvyys.y=0;
+
     }
     
     
