@@ -139,8 +139,6 @@ class Pelaaja extends Hahmo{
 
             },350);
         }
-
-
     }
     liikehdinta(nopeus) { //liikkuminen
         if(this.hp<=0){ //pelaajan kuoleman tarkistaminen. jos pelaaja kuolee, peli peittyy mustalla verholla

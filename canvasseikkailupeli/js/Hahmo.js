@@ -38,6 +38,8 @@ class Hahmo { //pohjaluokka kaikille spriteille
         this.koord.y += this.kiihtyvyys.y;
         this.koord.x += this.kiihtyvyys.x;
         this.kiihtyvyys.y=0;
+        this.kiihtyvyys.x=0;
+
 
     }
     
