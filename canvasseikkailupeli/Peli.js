@@ -114,7 +114,6 @@ async function moottori() { //päivittää jokaisen framen
                 vihollinen.tarkistaTormaaminen(seinat,huonekalut);
             }
         }
-        await teeEsteetJaOvet();
         window.cancelAnimationFrame(requestAnimationFrame(moottori));// peruuttaa äskeisen framen jottei ohjelma ylikuormitu
     }
 }
