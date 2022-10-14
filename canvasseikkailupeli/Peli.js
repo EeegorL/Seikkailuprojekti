@@ -5,7 +5,7 @@ const k = kanvaasi.getContext("2d");
 kanvaasi.width = 800;
 kanvaasi.height = 650;
 let kaynnissa=true;
-let huoneNro="4-1";
+let huonenumero="4-1";
 let seinat=[];
 let ovet=[];
 let viholliset=[];
@@ -15,12 +15,13 @@ let huoneenOvet;
 
 
 async function alusta(huoneNro){//alustaa huoneen
-    viholliset.length=0;
-    ovet.length;
+    viholliset=[];
+    ovet=[];
     let huoneenViholliset=await fetch(`huoneenViholliset/${huoneNro}`).then(tulos=>tulos.json());
     huoneenOvet=await fetch(`huoneenOvet/${huoneNro}`).then(tulos=>tulos.json());
-    huoneNro=huoneenOvet.id;
+    huonenumero=huoneenOvet.id;
 
+    await teeEsteetJaOvet();
     document.getElementById("huoneenNimi").innerHTML=`${huoneenOvet[0]?.nimi || ""}`
 
 //käy läpi huoneen viholliset ja luo ne
@@ -56,6 +57,8 @@ async function teeEsteetJaOvet(){ // tekee pelin seinät ja ovet
     const kaappi = new Huonekalu("kaappi",{x:100,y:400},{leveys:400,korkeus:50},"darkbrown",false);
     kaappi.piirra();
     huonekalut.push(kaappi);
+    ovet=[];
+
     if(await huoneenOvet){
         if(await huoneenOvet[0]?.etela!=null){
             const OviE=new Ovi("etela",huoneenOvet[0].etela);
@@ -111,7 +114,7 @@ async function moottori() { //päivittää jokaisen framen
                 vihollinen.tarkistaTormaaminen(seinat,huonekalut);
             }
         }
-        await teeEsteetJaOvet(); //tekee seinät ja ovet riippuen rng-muuttujista
+        await teeEsteetJaOvet();
         window.cancelAnimationFrame(requestAnimationFrame(moottori));// peruuttaa äskeisen framen jottei ohjelma ylikuormitu
     }
 }
@@ -129,7 +132,8 @@ const pelaaja = new Pelaaja({
     vari: "green",vari2:"brown",
     tajuissaan:true
 });
-alusta(huoneNro);
+
+alusta(huonenumero);
 moottori();
 
 

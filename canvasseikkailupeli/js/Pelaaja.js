@@ -32,10 +32,12 @@ class Pelaaja extends Hahmo{
             }
 
         }
+
         //itse siirtäminen riippuen ilmansuunnasta
         switch(this.menosuunta){
             case "alas":
-            if(e){
+            
+            if(e!=null){
                 if(this.koord.x<=e.koord.x+e.leveys &&
                     this.koord.x+this.leveys>=e.koord.x &&
                     this.koord.y>=e.koord.y-e.korkeus+5){
@@ -45,7 +47,7 @@ class Pelaaja extends Hahmo{
             break;
             
             case "ylos":
-                if(p){
+                if(p!=null){
                     if(this.koord.x<=p.koord.x+p.leveys &&
                         this.koord.x+this.leveys>=p.koord.x &&
                         this.koord.y<=10){
@@ -56,7 +58,7 @@ class Pelaaja extends Hahmo{
                 break;
         
             case "vasen":
-                if(l){
+                if(l!=null){
                     if(this.koord.x<=l.koord.x+30 &&
                         this.koord.y>=l.koord.y-10 &&
                         this.koord.y<=l.koord.y+l.korkeus
@@ -68,7 +70,7 @@ class Pelaaja extends Hahmo{
             break;
             
             case "oikea":
-                if(i){
+                if(i!=null){
                     if(this.koord.x>=i.koord.x-30 &&
                         this.koord.y>=i.koord.y-10 &&
                         this.koord.y<=i.koord.y+i.korkeus
