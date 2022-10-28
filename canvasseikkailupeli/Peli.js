@@ -20,8 +20,8 @@ async function alusta(huoneNro){//alustaa huoneen
     let huoneenViholliset=await fetch(`huoneenViholliset/${huoneNro}`).then(tulos=>tulos.json());
     huoneenOvet=await fetch(`huoneenOvet/${huoneNro}`).then(tulos=>tulos.json());
     huonenumero=huoneenOvet.id;
-
     await teeEsteetJaOvet();
+
     document.getElementById("huoneenNimi").innerHTML=`${huoneenOvet[0]?.nimi || ""}`
 
 //käy läpi huoneen viholliset ja luo ne
@@ -103,17 +103,21 @@ async function moottori() { //päivittää jokaisen framen
         k.fillStyle = "#222222"; //taustaväri
     
         k.fillRect(0, 0, kanvaasi.width, kanvaasi.height);
+        
         if(pelaaja.tajuissaan){ //päivittää pelaajaa jos tämä on tajuissaam
             pelaaja.paivita();
             pelaaja.tarkistaTormaaminen(seinat,huonekalut);
             pelaaja.avaaOvi(ovet);
+            
         }
+
         for(let vihollinen of viholliset){// päivittää kaikki tajuissaan olevat viholliset
             if(vihollinen?.tajuissaan){
                 vihollinen.paivitaVihollinen();
                 vihollinen.tarkistaTormaaminen(seinat,huonekalut);
             }
         }
+        await teeEsteetJaOvet();
         window.cancelAnimationFrame(requestAnimationFrame(moottori));// peruuttaa äskeisen framen jottei ohjelma ylikuormitu
     }
 }
