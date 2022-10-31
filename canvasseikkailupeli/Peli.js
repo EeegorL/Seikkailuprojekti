@@ -17,7 +17,6 @@ let huoneenOvet;
 async function alusta(huoneNro){//alustaa huoneen
     viholliset=[];
     let huoneenViholliset=await fetch(`huoneenViholliset/${huoneNro}`).then(tulos=>tulos.json());
-    ovet=[];
     huoneenOvet=await fetch(`huoneenOvet/${huoneNro}`).then(tulos=>tulos.json());
     huonenumero=huoneenOvet.id;
      teeEsteetJaOvet();
@@ -51,6 +50,7 @@ async function alusta(huoneNro){//alustaa huoneen
 
 async function teeEsteetJaOvet(){
     // tekee pelin seinät ja ovet
+    ovet=[];
     const kaappi = new Huonekalu("kaappi",{x:100,y:400},{leveys:400,korkeus:50},"darkbrown",false);
     kaappi.piirra();
     huonekalut.push(kaappi);

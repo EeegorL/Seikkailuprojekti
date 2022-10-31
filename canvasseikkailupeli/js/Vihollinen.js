@@ -96,8 +96,8 @@ class Vihollinen extends Hahmo {
             for (let huonekalu of huonekalut) {
                 if (!huonekalu.koriste) {
 
-                    if (this.koord.x + this.leveys > huonekalu.koord.x &&
-                        this.koord.x < huonekalu.koord.x + huonekalu.koko.leveys &&
+                    if (this.koord.x + this.leveys > huonekalu.koord.x+10 &&
+                        this.koord.x < huonekalu.koord.x + huonekalu.koko.leveys-10 &&
                         this.koord.y + this.korkeus > huonekalu.koord.y &&
                         this.koord.y < huonekalu.koord.y + huonekalu.koko.korkeus) {
                         switch (this.menosuunta) {
