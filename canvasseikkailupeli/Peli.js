@@ -24,30 +24,30 @@ async function alusta(huoneNro){//alustaa huoneen
 
     document.getElementById("huoneenNimi").innerHTML=`${huoneenOvet[0]?.nimi || ""}`
 
-//käy läpi huoneen viholliset ja luo ne
-    // for(let vihollinen of huoneenViholliset){
-    //     viholliset.push(new Vihollinen({
-    //         id:vihollinen.id,
-    //         koord:{
-    //             x:vihollinen.x,
-    //             y:vihollinen.y
-    //         },
-    //         kiihtyvyys:{
-    //             x:0,
-    //             y:0
-    //         },
-    //         leveys:vihollinen.leveys,
-    //         korkeus:vihollinen.korkeus,
-    //         nopeus:vihollinen.nopeus,
-    //         hp:vihollinen.hp,
-    //         vari:vihollinen.vari1,
-    //         vari2:vihollinen.vari2,
-    //         tajuissaan:vihollinen.elossa,
-    //         nimi:vihollinen.nimi,
-    //         dmg:vihollinen.dmg,
-    //         kuvasrc:vihollinen.kuva,
-    //     }));
-    // }
+// käy läpi huoneen viholliset ja luo ne
+    for(let vihollinen of huoneenViholliset){
+        viholliset.push(new Vihollinen({
+            id:vihollinen.id,
+            koord:{
+                x:vihollinen.x,
+                y:vihollinen.y
+            },
+            kiihtyvyys:{
+                x:0,
+                y:0
+            },
+            leveys:vihollinen.leveys,
+            korkeus:vihollinen.korkeus,
+            nopeus:vihollinen.nopeus,
+            hp:vihollinen.hp,
+            vari:vihollinen.vari1,
+            vari2:vihollinen.vari2,
+            tajuissaan:vihollinen.elossa,
+            nimi:vihollinen.nimi,
+            dmg:vihollinen.dmg,
+            kuvasrc:vihollinen.kuva,
+        }));
+    }
 };
 
 async function teeEsteetJaOvet(){
@@ -114,7 +114,7 @@ async function moottori() { //päivittää jokaisen framen
         for(let vihollinen of viholliset){// päivittää kaikki tajuissaan olevat viholliset
             if(vihollinen?.tajuissaan){
                 vihollinen.paivitaVihollinen();
-                // vihollinen.tarkistaTormaaminen(seinat,huonekalut);
+                vihollinen.tarkistaTormaaminen(seinat,huonekalut);
                 
             }
         }
