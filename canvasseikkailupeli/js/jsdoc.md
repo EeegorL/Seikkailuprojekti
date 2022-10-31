@@ -35,18 +35,18 @@
     }
 ```
 jossa
-- koord: Spriten koordinaatit, ja syötettävä koord on ne koordinaatit, johon vihollinen spawnaa. Muotoa {x: int, y: int}
-- kiihtyvyys: Spriten kiihtyvyys neljään ilmansuuntaan. muotoa {x: int, y: int}, jossa vasemmalle tai ylös liikkuminen hoituu muuttamalla arvo negatiiviseksi
-- korkeus sekä leveys: hahmon koko (ei toimi, käytetään oletuskokoa 50px*70px)
-- viimeisin: muuttuja, johon säilötään pelaajan viimeisin painettu näppäin. mahdollistaa sulavan liikkumisen, ettei hahmo jää paikalleen jos yrittää mennä esim. samaa aikaa vasemmalle ja oikealle
-- vari1 & vari2: Spriten värit, jossa vari1 on pääväri ja vari2 toissijainen väri. Esimerkiksi keho on väriltään vari1 ja ase-indikaattori vari2
-- ase: Spriten, tässä tilanteessa vain pelaajan, asemuoto. Oletuksellisesti muotoa {position: this.koord, width: 150, height: 10}, mutta vaihtelee aina riippuen pelaajan kulkusuunnasta
-- hyokkaamassa: muuttuja joka kertoo, onko Sprite (käytössä vain pelaajalla) sillä hetkellä hyökkäämässä. muotoa boolean
-- tajuissaan: kertoo, onko sprite tajuissaan (ennen nimellä elossa). muotoa boolean
-- menosuunta: muuttuja, joka kertoo mihin suuntaan Sprite on liikkumassa. muotoa string
-- hp: Spriten elämäpisteet. muotoa int. oletuksellisesti 100, ja laskiessa nollaan (0), kyseinen Sprite menee tajuttomaksi (tai kuolee, ihan miten haluaa sanoa)
-- id: Spriten id. muotoa int
-- nimi: Spriten nimi. muotoa string, mutta voi olla null
+- **koord**: Spriten koordinaatit, ja syötettävä koord on ne koordinaatit, johon vihollinen spawnaa. Muotoa {x: int, y: int}
+- **kiihtyvyys**: Spriten kiihtyvyys neljään ilmansuuntaan. muotoa {x: int, y: int}, jossa vasemmalle tai ylös liikkuminen hoituu muuttamalla arvo negatiiviseksi
+- **korkeus** sekä leveys: hahmon koko (ei toimi, käytetään oletuskokoa 50px*70px)
+- **viimeisin**: muuttuja, johon säilötään pelaajan viimeisin painettu näppäin. mahdollistaa sulavan liikkumisen, ettei hahmo jää paikalleen jos yrittää mennä esim. samaa aikaa vasemmalle ja oikealle
+- **vari1 & vari2**: Spriten värit, jossa vari1 on pääväri ja vari2 toissijainen väri. Esimerkiksi keho on väriltään vari1 ja ase-indikaattori vari2
+- **ase**: Spriten, tässä tilanteessa vain pelaajan, asemuoto. Oletuksellisesti muotoa {position: this.koord, width: 150, height: 10}, mutta vaihtelee aina riippuen pelaajan kulkusuunnasta
+- **hyokkaamassa**: muuttuja joka kertoo, onko Sprite (käytössä vain pelaajalla) sillä hetkellä hyökkäämässä. muotoa boolean
+- **tajuissaan**: kertoo, onko sprite tajuissaan (ennen nimellä elossa). muotoa boolean
+- **menosuunta**: muuttuja, joka kertoo mihin suuntaan Sprite on liikkumassa. muotoa string
+- **hp**: Spriten elämäpisteet. muotoa int. oletuksellisesti 100, ja laskiessa nollaan (0), kyseinen Sprite menee tajuttomaksi (tai kuolee, ihan miten haluaa sanoa)
+- **id**: Spriten id. muotoa int
+- **nimi**: Spriten nimi. muotoa string, mutta voi olla null
 
 
 ### Metodit:
@@ -446,6 +446,24 @@ window.addEventListener("keyup", (event) => { // kuuntelee liikenäppäinten irt
 
 
 # Vihollinen
+### <a name="vihollinen"></a> Vihollinen on vihollisten spriteä käsittelevä luokka, sekä Hahmo-luokan "lapsiluokka"
+Siinä on constructorina
+```js
+    constructor(koord, kiihtyvyys, vari1, vari2, tajuissaan, hp, id, dmg, nimi, nopeus, kuvasrc) {
+        super(koord, kiihtyvyys, vari1, vari2, tajuissaan, hp, id, nimi);//ottaa käyttöön parent-classin
+        this.dmg = dmg;
+        this.nopeus = nopeus;
+        this.kuva = new Image(40, 70);
+        this.kuva.src = kuvasrc || "../kuvat/hahmot/hamsteri.png";
+        this.menosuunta;
+    }
+```
+jossa:
+- **super** ottaa käyttöön Hahmo-luokan funktiot
+- **dmg** asettaa vihollisen tekemän vahingon
+- **nopeus** asettaa vihollisen liikkumisnopeuden
+- **kuva ja kuva.src** on vihollisen spriten kuva, eli miltä vihollinen näyttää
+- **menosuunta** näyttää, mihin suuntaan vihollinen liikkuu/oli äsken liikkunut
 
 # Seina
 

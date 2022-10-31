@@ -150,9 +150,9 @@ class Pelaaja extends Hahmo{
             document.getElementById("verho").classList.remove("hiddenClass");
 
         }
-        
+        k.beginPath();
     k.drawImage(this.a,this.koord.x,this.koord.y);
-
+        k.closePath();
         k.fillStyle = this.vari2;
         pelaaja.kiihtyvyys.x = 0;//asettaa liikehdinnän nollaan ennen jokaista liikettä
 

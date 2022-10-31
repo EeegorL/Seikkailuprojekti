@@ -9,7 +9,6 @@ class Ovi {
         this.korkeus;
     }
     piirra() {
-        k.save();
         k.fillStyle = "black";
         k.beginPath();
         //piirtää oven yhteen neljästä kohdasta riippuen ilmansuunta-parametrista
@@ -42,6 +41,7 @@ class Ovi {
                 k.fillRect(this.koord.x, this.koord.y, this.leveys, this.korkeus);
                 break;
         }
+        k.closePath();
     }
     siirra(ilmansuunta) { //pelaajan teleporttaaminen
         //siirtää pelaajan yhteen neljästä kohdasta riippuen vastaavasta ilmansuunnasta

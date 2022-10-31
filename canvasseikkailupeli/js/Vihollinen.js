@@ -9,7 +9,6 @@ class Vihollinen extends Hahmo {
         this.kuva = new Image(40, 70);
         this.kuva.src = kuvasrc || "../kuvat/hahmot/hamsteri.png";
         this.menosuunta;
-
     }
 
 
@@ -24,7 +23,7 @@ class Vihollinen extends Hahmo {
         k.beginPath();
         k.fillStyle = this.vari1;
         k.drawImage(this.kuva, this.koord.x, this.koord.y);
-
+        k.closePath();
         this.kiihtyvyys.y = 0;
         this.kiihtyvyys.x = 0;
         if (this.hp <= 0) {

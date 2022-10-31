@@ -20,44 +20,42 @@ async function alusta(huoneNro){//alustaa huoneen
     let huoneenViholliset=await fetch(`huoneenViholliset/${huoneNro}`).then(tulos=>tulos.json());
     huoneenOvet=await fetch(`huoneenOvet/${huoneNro}`).then(tulos=>tulos.json());
     huonenumero=huoneenOvet.id;
-    await teeEsteetJaOvet();
+     teeEsteetJaOvet();
 
     document.getElementById("huoneenNimi").innerHTML=`${huoneenOvet[0]?.nimi || ""}`
 
 //käy läpi huoneen viholliset ja luo ne
-    for(let vihollinen of huoneenViholliset){
-        viholliset.push(new Vihollinen({
-            id:vihollinen.id,
-            koord:{
-                x:vihollinen.x,
-                y:vihollinen.y
-            },
-            kiihtyvyys:{
-                x:0,
-                y:0
-            },
-            leveys:vihollinen.leveys,
-            korkeus:vihollinen.korkeus,
-            nopeus:vihollinen.nopeus,
-            hp:vihollinen.hp,
-            vari:vihollinen.vari1,
-            vari2:vihollinen.vari2,
-            tajuissaan:vihollinen.elossa,
-            nimi:vihollinen.nimi,
-            dmg:vihollinen.dmg,
-            kuvasrc:vihollinen.kuva,
-        }));
-    }
-
-
+    // for(let vihollinen of huoneenViholliset){
+    //     viholliset.push(new Vihollinen({
+    //         id:vihollinen.id,
+    //         koord:{
+    //             x:vihollinen.x,
+    //             y:vihollinen.y
+    //         },
+    //         kiihtyvyys:{
+    //             x:0,
+    //             y:0
+    //         },
+    //         leveys:vihollinen.leveys,
+    //         korkeus:vihollinen.korkeus,
+    //         nopeus:vihollinen.nopeus,
+    //         hp:vihollinen.hp,
+    //         vari:vihollinen.vari1,
+    //         vari2:vihollinen.vari2,
+    //         tajuissaan:vihollinen.elossa,
+    //         nimi:vihollinen.nimi,
+    //         dmg:vihollinen.dmg,
+    //         kuvasrc:vihollinen.kuva,
+    //     }));
+    // }
 };
 
-async function teeEsteetJaOvet(){ // tekee pelin seinät ja ovet
-    //lisää ovia riippuen rng-muuttujista
+async function teeEsteetJaOvet(){
+    console.log("Esteet ja ovet tehty!");
+    // tekee pelin seinät ja ovet
     const kaappi = new Huonekalu("kaappi",{x:100,y:400},{leveys:400,korkeus:50},"darkbrown",false);
     kaappi.piirra();
     huonekalut.push(kaappi);
-    ovet=[];
 
     if(await huoneenOvet){
         if(await huoneenOvet[0]?.etela!=null){
@@ -83,7 +81,8 @@ async function teeEsteetJaOvet(){ // tekee pelin seinät ja ovet
     }
 
 
-    //tekee seinät
+    // tekee seinät
+    
     const seinaP=new Seina({koord:{x:0,y:0},leveys:kanvaasi.width,korkeus:15,kanvaasi:k,vari:"brown"})
         seinaP.piirra();//Pohjoisseinä
     const seinaI=new Seina({koord:{x:0,y:0},leveys:15,korkeus:kanvaasi.height,kanvaasi:k,vari:"brown"})
@@ -94,16 +93,17 @@ async function teeEsteetJaOvet(){ // tekee pelin seinät ja ovet
         seinaL.piirra();//Länsiseinä
 
         seinat=[seinaE,seinaP,seinaL,seinaI];
+        
 }
 
 async function moottori() { //päivittää jokaisen framen
-    if(kaynnissa==true){ //muuttuja, jolla voi lopettaa pelin tyyliin kaynnissa=false
+
+    if(kaynnissa){ //muuttuja, jolla voi lopettaa pelin tyyliin kaynnissa=false
+        k.clearRect(0,0,kanvaasi.width,kanvaasi.height);
         window.requestAnimationFrame(moottori);
 
         k.fillStyle = "#222222"; //taustaväri
-    
         k.fillRect(0, 0, kanvaasi.width, kanvaasi.height);
-        
         if(pelaaja.tajuissaan){ //päivittää pelaajaa jos tämä on tajuissaam
             pelaaja.paivita();
             pelaaja.tarkistaTormaaminen(seinat,huonekalut);
@@ -114,10 +114,11 @@ async function moottori() { //päivittää jokaisen framen
         for(let vihollinen of viholliset){// päivittää kaikki tajuissaan olevat viholliset
             if(vihollinen?.tajuissaan){
                 vihollinen.paivitaVihollinen();
-                vihollinen.tarkistaTormaaminen(seinat,huonekalut);
+                // vihollinen.tarkistaTormaaminen(seinat,huonekalut);
+                
             }
         }
-        await teeEsteetJaOvet();
+        teeEsteetJaOvet();
         window.cancelAnimationFrame(requestAnimationFrame(moottori));// peruuttaa äskeisen framen jottei ohjelma ylikuormitu
     }
 }

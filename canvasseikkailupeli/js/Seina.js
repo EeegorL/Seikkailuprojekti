@@ -11,9 +11,9 @@ class Seina{
 //yksinkertaisesti piirtää seinän
     piirra(){
         k.beginPath();
-        this.kanvaasi.save();
         k.fillStyle = "brown";
         this.kanvaasi.fillRect(this.koord.x, this.koord.y, this.leveys, this.korkeus);
+        k.closePath();
     }
 
 
