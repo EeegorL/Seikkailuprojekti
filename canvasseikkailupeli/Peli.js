@@ -16,12 +16,12 @@ let huoneenOvet;
 
 async function alusta(huoneNro){//alustaa huoneen
     viholliset=[];
-    ovet=[];
     let huoneenViholliset=await fetch(`huoneenViholliset/${huoneNro}`).then(tulos=>tulos.json());
+    ovet=[];
     huoneenOvet=await fetch(`huoneenOvet/${huoneNro}`).then(tulos=>tulos.json());
     huonenumero=huoneenOvet.id;
      teeEsteetJaOvet();
-
+    console.log(ovet);
     document.getElementById("huoneenNimi").innerHTML=`${huoneenOvet[0]?.nimi || ""}`
 
 // käy läpi huoneen viholliset ja luo ne
