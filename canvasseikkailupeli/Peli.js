@@ -24,27 +24,24 @@ async function alusta(huoneNro){//alustaa huoneen
 
 // käy läpi huoneen viholliset ja luo ne
     for(let vihollinen of huoneenViholliset){
-        viholliset.push(new Vihollinen({
-            id:vihollinen.id,
-            koord:{
+        viholliset.push(new Vihollinen(
+            vihollinen.id,
+            {
                 x:vihollinen.x,
                 y:vihollinen.y
             },
-            kiihtyvyys:{
-                x:0,
-                y:0
-            },
-            leveys:vihollinen.leveys,
-            korkeus:vihollinen.korkeus,
-            nopeus:vihollinen.nopeus,
-            hp:vihollinen.hp,
-            vari:vihollinen.vari1,
-            vari2:vihollinen.vari2,
-            tajuissaan:vihollinen.elossa,
-            nimi:vihollinen.nimi,
-            dmg:vihollinen.dmg,
-            kuvasrc:vihollinen.kuva,
-        }));
+            vihollinen.hp,
+            vihollinen.vari1,
+            vihollinen.vari2,
+            vihollinen.elossa,
+            vihollinen.nimi,
+            vihollinen.dmg,
+            vihollinen.nopeus,
+            vihollinen.kuva,
+    ));
+    }
+    for(let vihollinen of viholliset){
+        console.log(vihollinen);
     }
 };
 
@@ -121,19 +118,22 @@ async function moottori() { //päivittää jokaisen framen
     }
 }
 
-const pelaaja = new Pelaaja({
-    koord: {
+const pelaaja = new Pelaaja(
+    1000,
+    {
         x: 100,
         y: 200
     },
-    kiihtyvyys: {
+    {
         x: 0,
         y: 0
     },
-    hp:100,
-    vari: "green",vari2:"brown",
-    tajuissaan:true
-});
+    100,
+    "green",
+    "brown",
+    true,null
+);
+console.log(pelaaja);
 
 alusta(huonenumero);
 moottori();

@@ -3,14 +3,15 @@
 
 class Pelaaja extends Hahmo{
     
-    constructor(koord, kiihtyvyys, vari,vari2,tajuissaan,hp,dmgRed,dmg){
-        super(koord, kiihtyvyys, vari,vari2,tajuissaan,hp,dmg);//ottaa käyttöön parent-classin
+    constructor(id,koord, kiihtyvyys, vari1,vari2,tajuissaan,hp,dmg,nimi){
+        super(koord, vari1,vari2, tajuissaan, hp,id,nimi);//ottaa käyttöön parent-classin
         this.a = new Image(this.leveys,this.korkeus);
         this.a.src="../kuvat/hahmot/jari.png";
         this.huonenro;
-        this.dmgRed=dmgRed;
+        this.dmgRed=0;
         this.dmgRed=0;
         this.dmg=dmg;
+        this.kiihtyvyys=kiihtyvyys;
     }
     avaaOvi(ovet){ //pelaajan ovien kautta liikkuminen
         let e=null;
@@ -128,17 +129,13 @@ class Pelaaja extends Hahmo{
 
     }
     dmgIndicator(kohde){//vahingon tunnistaminen
-        let ogVarit=[kohde.vari1,kohde.vari2];
-
-        if(kohde.tajuissaan==true){ //värin muuttaminen vahingon merkitsemiseksi
+        if(kohde.tajuissaan){ //värin muuttaminen vahingon merkitsemiseksi
             kohde.hp-=5;
-            kohde.vari="red";
+            kohde.vari1="red";
             kohde.vari2="red";
-
             setTimeout(()=>{
-                kohde.vari=ogVarit[0];
-                kohde.vari2=ogVarit[1];
-
+                kohde.vari1=kohde.alkPerVarit[1];
+                kohde.vari2=kohde.alkPerVarit[0];
             },350);
         }
     }

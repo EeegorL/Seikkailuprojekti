@@ -2,26 +2,32 @@
 
 
 class Vihollinen extends Hahmo {
-    constructor(koord, kiihtyvyys, vari1, vari2, tajuissaan, hp, id, dmg, nimi, nopeus, kuvasrc) {
-        super(koord, kiihtyvyys, vari1, vari2, tajuissaan, hp, id, nimi);//ottaa käyttöön parent-classin
-        this.dmg = dmg;
+    constructor(id,koord, hp,vari1, vari2, tajuissaan, nimi, dmg, nopeus, kuvasrc) {
+        super(koord, vari1, vari2, tajuissaan, hp, id, nimi);//ottaa käyttöön parent-classin
+        this.dmg=dmg;
         this.nopeus = nopeus;
         this.kuva = new Image(40, 70);
-        this.kuva.src = kuvasrc || "../kuvat/hahmot/hamsteri.png";
+        this.kuva.src = "../kuvat/hahmot/aapeli.png" || "../kuvat/hahmot/"+kuvasrc ;
         this.menosuunta;
+        this.kiihtyvyys={x:0,y:0};
+        this.vari1=vari1;
+        this.vari2=vari2;
+        this.alkPerVarit=[vari1,vari2];
     }
 
 
     async paivitaVihollinen() {
         super.paivita();
-        //tähän tulee varmaankin muutoksia ja eroavaisuuksia super-classin paivityksesta, joten siksi on oma funktio
+        console.log(this.alkPerVarit)
+        
+
     }
 
 
     liikehdinta() { //liikkuminen ja sitä vastaava piirtäminen
         this.tarkistaTormaaminen();
         k.beginPath();
-        k.fillStyle = this.vari1;
+        k.fillStyle = "khaki";
         k.drawImage(this.kuva, this.koord.x, this.koord.y);
         k.closePath();
         this.kiihtyvyys.y = 0;
@@ -39,7 +45,6 @@ class Vihollinen extends Hahmo {
         //vaihtoehto 1: vihollinen seuraa pelaajaa
         //Math.abs:illa voi myös halutessaan asettaa vihollisille etäisyyden, jonka jälkeen ne alkaa seuraa, eli voisi tehdä näkökenttämekaniikan
         //oletusnopeus
-        this.nopeus = 2;
         /*
         katsoo vihollisen sijainnin suhteessa pelaajaan, ja sen liikkuu sen perusteella
         Math.round pyöristää pelaajan koordinaatit, jottei vihollisen tarvitsisi tavoitella täydellistä osumaa
@@ -64,7 +69,7 @@ class Vihollinen extends Hahmo {
         }
         if (Math.abs(Math.round(pelaaja.koord.x) - Math.round(this.koord.x)) < 52 &&
             Math.abs(Math.round(pelaaja.koord.y) - Math.round(this.koord.y)) < 90) {
-            pelaaja.hp -= (0.5 - pelaaja.dmgRed);
+            pelaaja.hp -= (this.dmg - pelaaja.dmgRed);
         }
     }
     async tarkistaTormaaminen(seinat, huonekalut) { //nimensä mukaan tarkistaa seinät sekä huonekalut ja estää niiden läpi kulkemisen
@@ -123,3 +128,4 @@ class Vihollinen extends Hahmo {
     }
 
 };
+
