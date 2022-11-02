@@ -6,8 +6,8 @@ class Vihollinen extends Hahmo {
         super(koord, vari1, vari2, tajuissaan, hp, id, nimi);//ottaa käyttöön parent-classin
         this.dmg=dmg;
         this.nopeus = nopeus;
-        this.kuva = new Image(40, 70);
-        this.kuva.src = "../kuvat/hahmot/aapeli.png" || "../kuvat/hahmot/"+kuvasrc ;
+        this.kuva = new Image();
+        this.kuva.src = "../kuvat/hahmot/"+kuvasrc ;
         this.menosuunta;
         this.kiihtyvyys={x:0,y:0};
         this.vari1=vari1;
@@ -18,9 +18,6 @@ class Vihollinen extends Hahmo {
 
     async paivitaVihollinen() {
         super.paivita();
-        console.log(this.alkPerVarit)
-        
-
     }
 
 
@@ -28,7 +25,7 @@ class Vihollinen extends Hahmo {
         this.tarkistaTormaaminen();
         k.beginPath();
         k.fillStyle = "khaki";
-        k.drawImage(this.kuva, this.koord.x, this.koord.y);
+        k.drawImage(this.kuva, this.koord.x, this.koord.y,50,70);
         k.closePath();
         this.kiihtyvyys.y = 0;
         this.kiihtyvyys.x = 0;

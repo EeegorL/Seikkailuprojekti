@@ -30,7 +30,7 @@ class Hahmo { //pohjaluokka kaikille spriteille
         this.liikehdinta(10); //liikuttaa hahmoa ja hoitaa piirtämisen
 
         k.font = "Bold 40px Brush Script MT";
-        k.fillStyle=this.vari2;
+        k.fillStyle=this.vari1;
         k.fillText(Math.round(this.hp), this.koord.x+3.5,this.koord.y);
         k.font = "20px Monospace";
         k.fillStyle=this.vari2;
@@ -39,8 +39,6 @@ class Hahmo { //pohjaluokka kaikille spriteille
         this.koord.x += this.kiihtyvyys.x;
         this.kiihtyvyys.y=0;
         this.kiihtyvyys.x=0;
-
-
     }
     
     

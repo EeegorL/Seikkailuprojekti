@@ -49,8 +49,9 @@ async function teeEsteetJaOvet(){
     // tekee pelin seinät ja ovet
     ovet=[];
     const kaappi = new Huonekalu("kaappi",{x:100,y:400},{leveys:400,korkeus:50},"darkbrown",false);
-    kaappi.piirra();
     huonekalut.push(kaappi);
+    kaappi.piirra();
+
 
     if(await huoneenOvet){
         if(await huoneenOvet[0]?.etela!=null){
@@ -113,6 +114,7 @@ async function moottori() { //päivittää jokaisen framen
                 
             }
         }
+        k.fillStyle="brown"
         teeEsteetJaOvet();
         window.cancelAnimationFrame(requestAnimationFrame(moottori));// peruuttaa äskeisen framen jottei ohjelma ylikuormitu
     }
@@ -128,10 +130,9 @@ const pelaaja = new Pelaaja(
         x: 0,
         y: 0
     },
-    100,
     "green",
     "brown",
-    true,null
+    true,100,10,""
 );
 console.log(pelaaja);
 

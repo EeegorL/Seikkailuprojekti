@@ -5,8 +5,8 @@ class Pelaaja extends Hahmo{
     
     constructor(id,koord, kiihtyvyys, vari1,vari2,tajuissaan,hp,dmg,nimi){
         super(koord, vari1,vari2, tajuissaan, hp,id,nimi);//ottaa käyttöön parent-classin
-        this.a = new Image(this.leveys,this.korkeus);
-        this.a.src="../kuvat/hahmot/jari.png";
+        this.kuva = new Image(this.leveys,this.korkeus);
+        this.kuva.src="../kuvat/hahmot/jari.png";
         this.huonenro;
         this.dmgRed=0;
         this.dmgRed=0;
@@ -140,6 +140,7 @@ class Pelaaja extends Hahmo{
         }
     }
     liikehdinta(nopeus) { //liikkuminen
+        console.log(this.hp);
         if(this.hp<=0){ //pelaajan kuoleman tarkistaminen. jos pelaaja kuolee, peli peittyy mustalla verholla
             this.tajuissaan=false;
             kaynnissa=false;
@@ -148,7 +149,7 @@ class Pelaaja extends Hahmo{
 
         }
         k.beginPath();
-    k.drawImage(this.a,this.koord.x,this.koord.y);
+    k.drawImage(this.kuva,this.koord.x,this.koord.y);
         k.closePath();
         k.fillStyle = this.vari2;
         pelaaja.kiihtyvyys.x = 0;//asettaa liikehdinnän nollaan ennen jokaista liikettä

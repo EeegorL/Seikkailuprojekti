@@ -9,10 +9,12 @@ class Huonekalu{
         this.koriste=koriste;
     }
     piirra(){
-        k.fillStyle = this.vari;
+        k.save();
         if(this.koriste){
+            //asettaa huonekalun läpikuljettavaksi
         }
         k.beginPath();
+        k.fillStyle = this.vari;
 
         switch(this.tyyppi){
 
@@ -21,7 +23,6 @@ class Huonekalu{
             break;
         
             case "kaappi":
-                
                     k.fillRect(this.koord.x, this.koord.y, this.koko.leveys, this.koko.korkeus);
             break;
         }
