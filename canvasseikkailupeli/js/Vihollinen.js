@@ -2,7 +2,7 @@
 
 
 class Vihollinen extends Hahmo {
-    constructor(id,koord, hp,vari1, vari2, tajuissaan, nimi, dmg, nopeus, kuvasrc) {
+    constructor(id,koord,leveys,korkeus, hp,vari1, vari2, tajuissaan, nimi, dmg, nopeus, kuvasrc) {
         super(koord, vari1, vari2, tajuissaan, hp, id, nimi);//ottaa käyttöön parent-classin
         this.dmg=dmg;
         this.nopeus = nopeus;
@@ -13,6 +13,9 @@ class Vihollinen extends Hahmo {
         this.vari1=vari1;
         this.vari2=vari2;
         this.alkPerVarit=[vari1,vari2];
+        this.leveys=leveys;
+        this.korkeus=korkeus;
+        this.maxHp=hp;
     }
 
 
@@ -25,7 +28,7 @@ class Vihollinen extends Hahmo {
         this.tarkistaTormaaminen();
         k.beginPath();
         k.fillStyle = "khaki";
-        k.drawImage(this.kuva, this.koord.x, this.koord.y,50,70);
+        k.drawImage(this.kuva, this.koord.x, this.koord.y,this.leveys,this.korkeus);
         k.closePath();
         this.kiihtyvyys.y = 0;
         this.kiihtyvyys.x = 0;
@@ -34,7 +37,7 @@ class Vihollinen extends Hahmo {
 
             setTimeout(() => {//respawn koska miks ei
                 this.tajuissaan = true;
-                this.hp = 100;
+                this.hp = this.maxHp;
                 this.koord = { x: 500, y: 500 }
             }, 1500);
         }

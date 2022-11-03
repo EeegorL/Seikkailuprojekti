@@ -140,7 +140,6 @@ class Pelaaja extends Hahmo{
         }
     }
     liikehdinta(nopeus) { //liikkuminen
-        console.log(this.hp);
         if(this.hp<=0){ //pelaajan kuoleman tarkistaminen. jos pelaaja kuolee, peli peittyy mustalla verholla
             this.tajuissaan=false;
             kaynnissa=false;
@@ -148,6 +147,7 @@ class Pelaaja extends Hahmo{
             document.getElementById("verho").classList.remove("hiddenClass");
 
         }
+
         k.beginPath();
     k.drawImage(this.kuva,this.koord.x,this.koord.y);
         k.closePath();
@@ -214,7 +214,6 @@ class Pelaaja extends Hahmo{
                                this.koord.x<huonekalu.koord.x+huonekalu.koko.leveys &&
                                this.koord.y+this.korkeus > huonekalu.koord.y &&
                                this.koord.y < huonekalu.koord.y + huonekalu.koko.korkeus){
-                               
                                 switch(this.menosuunta){
                                 case "ylos":
                                     this.koord.y+=1;

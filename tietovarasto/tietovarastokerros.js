@@ -41,7 +41,17 @@ module.exports = class Tietovarasto{
                 reject(err);
             }
         })
-    }
+    };
+    huoneenHuonekalut(huoneId){
+        return new Promise(async(resolve,reject)=>{
+            try{
+                let tulos=this.Omakanta.suoritaKysely(sql.huoneenHuonekalut,[huoneId]);
+                resolve(tulos);
+            }catch(err){
+                reject(err);
+            }
+        })
+    };
 
     
 

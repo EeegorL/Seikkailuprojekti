@@ -54,6 +54,13 @@ exp.get("/huoneenOvet/:huoneId",async(req,res)=>{
     }catch(err){
 
     }
-})
+});
+exp.get("/huoneenHuonekalut/:huoneId",async(req,res)=>{
+    try{
+        res.json(await varasto.huoneenHuonekalut(req.params.huoneId));
+        
+    }catch(err){
 
+    }
+});
 exp.listen(port, host, () => console.log(`${host}:${port} kuuntelee korvat höröllä`));

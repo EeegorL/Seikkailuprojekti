@@ -12,17 +12,20 @@ let viholliset=[];
 let huonekalut=[];
 let pauseVar=false;
 let huoneenOvet;
+let huoneenHuonekalut;
 
 
 async function alusta(huoneNro){//alustaa huoneen
-    viholliset=[];
-    let huoneenViholliset=await fetch(`huoneenViholliset/${huoneNro}`).then(tulos=>tulos.json());
-    huoneenOvet=await fetch(`huoneenOvet/${huoneNro}`).then(tulos=>tulos.json());
-    huonenumero=huoneenOvet.id;
-     teeEsteetJaOvet();
-    document.getElementById("huoneenNimi").innerHTML=`${huoneenOvet[0]?.nimi || ""}`
 
-// käy läpi huoneen viholliset ja luo ne
+    huoneenOvet=await fetch(`huoneenOvet/${huoneNro}`).then(tulos=>tulos.json());
+    huoneenHuonekalut=await fetch(`huoneenHuonekalut/${huoneNro}`).then(tulos=>tulos.json());
+
+    huonenumero=huoneenOvet.id;
+    
+    document.getElementById("huoneenNimi").innerHTML=`${huoneenOvet[0]?.nimi || ""}`// käy läpi huoneen viholliset ja luo ne
+viholliset=[];
+
+let huoneenViholliset=await fetch(`huoneenViholliset/${huoneNro}`).then(tulos=>tulos.json());
     for(let vihollinen of huoneenViholliset){
         viholliset.push(new Vihollinen(
             vihollinen.id,
@@ -30,6 +33,8 @@ async function alusta(huoneNro){//alustaa huoneen
                 x:vihollinen.x,
                 y:vihollinen.y
             },
+            vihollinen.leveys,
+            vihollinen.korkeus,
             vihollinen.hp,
             vihollinen.vari1,
             vihollinen.vari2,
@@ -40,17 +45,38 @@ async function alusta(huoneNro){//alustaa huoneen
             vihollinen.kuva,
     ));
     }
-    for(let vihollinen of viholliset){
-        console.log(vihollinen);
-    }
+
+// käy läpi huoneen huonekalut ja luo ne
+
+
+
 };
 
 async function teeEsteetJaOvet(){
     // tekee pelin seinät ja ovet
-    ovet=[];
-    const kaappi = new Huonekalu("kaappi",{x:100,y:400},{leveys:400,korkeus:50},"darkbrown",false);
-    huonekalut.push(kaappi);
-    kaappi.piirra();
+    ovet.length=0;
+    k.fillStyle="red";
+
+    if(await huoneenHuonekalut){
+        for(let huonekalu of huoneenHuonekalut){
+            let kalu=new Huonekalu(
+                huonekalu.tyyppi,
+                {
+                    x:huonekalu.x,
+                    y:huonekalu.y
+                },
+                {
+                    leveys:huonekalu.leveys,
+                    korkeus:huonekalu.korkeus
+                },
+                huonekalu.vari,
+                huonekalu.koriste
+            )
+            huonekalut.push(kalu);
+            kalu.piirra();
+        };
+    }
+
 
 
     if(await huoneenOvet){
@@ -121,20 +147,22 @@ async function moottori() { //päivittää jokaisen framen
 }
 
 const pelaaja = new Pelaaja(
-    1000,
-    {
+    1000, //id
+    {// spawn-koordinaatit
         x: 100,
         y: 200
     },
-    {
+    {//kiihtyvyys (alustettuna)
         x: 0,
         y: 0
     },
-    "green",
+    "green",//värit
     "brown",
-    true,100,10,""
+    true, //elossa-boolean
+    100, //hp
+    10, //dmg
+    null//nimi, voi pistää tyhjäks tyyliin null tai ""
 );
-console.log(pelaaja);
 
 alusta(huonenumero);
 moottori();
