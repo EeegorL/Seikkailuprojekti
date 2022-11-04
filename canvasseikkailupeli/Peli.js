@@ -55,6 +55,7 @@ let huoneenViholliset=await fetch(`huoneenViholliset/${huoneNro}`).then(tulos=>t
 async function teeEsteetJaOvet(){
     // tekee pelin seinät ja ovet
     ovet.length=0;
+    huonekalut.length=0;
     k.fillStyle="red";
 
     if(await huoneenHuonekalut){

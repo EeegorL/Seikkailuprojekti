@@ -8,7 +8,8 @@ class Vihollinen extends Hahmo {
         this.nopeus = nopeus;
         this.kuva = new Image();
         this.kuva.src = "../kuvat/hahmot/"+kuvasrc ;
-        this.menosuunta;
+        this.menosuuntaX;
+        this.menosuuntaY;
         this.kiihtyvyys={x:0,y:0};
         this.vari1=vari1;
         this.vari2=vari2;
@@ -53,19 +54,19 @@ class Vihollinen extends Hahmo {
         */
         if (Math.round(pelaaja.koord.x) > Math.round(this.koord.x) && Math.abs(Math.round(pelaaja.koord.x) - Math.round(this.koord.x)) > 5) {
             this.koord.x += this.nopeus;
-            this.menosuunta = "oikea";
+            this.menosuuntaX = "oikea";
         }
         else if (Math.round(pelaaja.koord.x) < Math.round(this.koord.x) && Math.abs(Math.round(pelaaja.koord.x) - Math.round(this.koord.x)) > 5) {
             this.koord.x -= this.nopeus;
-            this.menosuunta = "vasen";
+            this.menosuuntaX = "vasen";
         }
         if (Math.round(pelaaja.koord.y) >= Math.round(this.koord.y) && Math.abs(Math.round(pelaaja.koord.y) - Math.round(this.koord.y)) > 5) {
             this.koord.y += this.nopeus;
-            this.menosuunta = "alas";
+            this.menosuuntaY = "alas";
         }
         else if (Math.round(pelaaja.koord.y) <= Math.round(this.koord.y) && Math.abs(Math.round(pelaaja.koord.y) - Math.round(this.koord.y)) > 5) {
             this.koord.y -= this.nopeus;
-            this.menosuunta = "ylos";
+            this.menosuuntaY = "ylos";
         }
         if (Math.abs(Math.round(pelaaja.koord.x) - Math.round(this.koord.x)) < 52 &&
             Math.abs(Math.round(pelaaja.koord.y) - Math.round(this.koord.y)) < 90) {
@@ -105,19 +106,37 @@ class Vihollinen extends Hahmo {
                         this.koord.x < huonekalu.koord.x + huonekalu.koko.leveys-10 &&
                         this.koord.y + this.korkeus > huonekalu.koord.y &&
                         this.koord.y < huonekalu.koord.y + huonekalu.koko.korkeus) {
-                        switch (this.menosuunta) {
+                        switch (this.menosuuntaY) {
                             case "ylos":
-                                this.koord.y += 1;
+                                this.koord.y += this.nopeus;
                                 break;
                             case "alas":
-                                this.koord.y -= 1;
+                                this.koord.y -= this.nopeus;
                                 break;
+                        }
+                        switch(this.menosuuntaX) {
                             case "oikea":
-                                this.koord.x -= 1;
+                                this.koord.x -= this.nopeus;
+                                
+                                // if(pelaaja.koord.y>this.koord.y){
+                                //     this.koord.y+=this.nopeus;
+                                // }
+                                // if(pelaaja.koord.y<this.koord.y){
+                                //     this.koord.y-=this.nopeus;
+                                // }
+                                this.menosuuntaX=null;
                                 break;
                             case "vasen":
-                                this.koord.x += 1;
+                                this.koord.x += this.nopeus;
+                                
+                                if(pelaaja.koord.y>this.koord.y){
+                                    this.koord.y+=this.nopeus;
+                                }
+                                if(pelaaja.koord.y<this.koord.y){
+                                    this.koord.y-=this.nopeus;
+                                }
                                 break;
+
                         }
 
                     }

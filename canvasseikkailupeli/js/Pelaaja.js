@@ -215,16 +215,16 @@ class Pelaaja extends Hahmo{
                                this.koord.y < huonekalu.koord.y + huonekalu.koko.korkeus){
                                 switch(this.menosuunta){
                                 case "ylos":
-                                    this.koord.y+=1;
+                                    this.koord.y+=10;
                                     break;
                                 case "alas":
-                                    this.koord.y-=1;
+                                    this.koord.y-=10;
                                     break;
                                 case "oikea":
-                                    this.koord.x-=1;
+                                    this.koord.x-=10;
                                     break;
                                 case "vasen":
-                                    this.koord.x+=1;
+                                    this.koord.x+=10;
                                     break;
                                }
                                
