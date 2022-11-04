@@ -209,7 +209,6 @@ class Pelaaja extends Hahmo{
             }
             for(let huonekalu of huonekalut){
                 if(!huonekalu.koriste){
-
                             if(this.koord.x + this.leveys > huonekalu.koord.x &&
                                this.koord.x<huonekalu.koord.x+huonekalu.koko.leveys &&
                                this.koord.y+this.korkeus > huonekalu.koord.y &&

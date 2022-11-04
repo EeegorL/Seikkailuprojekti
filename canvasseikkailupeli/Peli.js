@@ -75,7 +75,9 @@ async function teeEsteetJaOvet(){
             huonekalut.push(kalu);
             kalu.piirra();
         };
+        
     }
+    
 
 
 
