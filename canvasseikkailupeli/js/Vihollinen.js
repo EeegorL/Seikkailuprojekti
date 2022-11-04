@@ -103,9 +103,9 @@ class Vihollinen extends Hahmo {
                 if (!huonekalu.koriste) {
 
                     if (this.koord.x + this.leveys > huonekalu.koord.x+10 &&
-                        this.koord.x < huonekalu.koord.x + huonekalu.koko.leveys-10 &&
+                        this.koord.x < huonekalu.koord.x + huonekalu.koko.leveys+10 &&
                         this.koord.y + this.korkeus > huonekalu.koord.y &&
-                        this.koord.y < huonekalu.koord.y + huonekalu.koko.korkeus) {
+                        this.koord.y < huonekalu.koord.y + huonekalu.koko.korkeus+10) {
                         switch (this.menosuuntaY) {
                             case "ylos":
                                 this.koord.y += this.nopeus;
@@ -116,27 +116,14 @@ class Vihollinen extends Hahmo {
                         }
                         switch(this.menosuuntaX) {
                             case "oikea":
-                                this.koord.x -= this.nopeus;
-                                
-                                // if(pelaaja.koord.y>this.koord.y){
-                                //     this.koord.y+=this.nopeus;
-                                // }
-                                // if(pelaaja.koord.y<this.koord.y){
-                                //     this.koord.y-=this.nopeus;
-                                // }
-                                this.menosuuntaX=null;
+                                this.koord.x -= this.nopeus*2;
+
                                 break;
                             case "vasen":
-                                this.koord.x += this.nopeus;
-                                
-                                if(pelaaja.koord.y>this.koord.y){
-                                    this.koord.y+=this.nopeus;
-                                }
-                                if(pelaaja.koord.y<this.koord.y){
-                                    this.koord.y-=this.nopeus;
-                                }
-                                break;
+                                this.koord.x += this.nopeus*2;
 
+                                break;    
+                                                   
                         }
 
                     }
