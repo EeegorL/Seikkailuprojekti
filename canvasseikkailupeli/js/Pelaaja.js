@@ -130,7 +130,7 @@ class Pelaaja extends Hahmo{
     }
     dmgIndicator(kohde){//vahingon tunnistaminen
         if(kohde.tajuissaan){ //värin muuttaminen vahingon merkitsemiseksi
-            kohde.hp-=5;
+            kohde.hp-=this.dmg;
             kohde.vari1="red";
             kohde.vari2="red";
             setTimeout(()=>{

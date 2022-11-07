@@ -68,6 +68,9 @@ class Vihollinen extends Hahmo {
             this.koord.y -= this.nopeus;
             this.menosuuntaY = "ylos";
         }
+        // console.log(`MenosuuntaX: ${this.menosuuntaX}`);
+        // console.log(`MenosuuntaY: ${this.menosuuntaY}`);
+
         if (Math.abs(Math.round(pelaaja.koord.x) - Math.round(this.koord.x)) < 52 &&
             Math.abs(Math.round(pelaaja.koord.y) - Math.round(this.koord.y)) < 90) {
             pelaaja.hp -= (this.dmg - pelaaja.dmgRed);
@@ -101,32 +104,74 @@ class Vihollinen extends Hahmo {
         if (huonekalut) {
             for (let huonekalu of huonekalut) {
                 if (!huonekalu.koriste) {
+                // console.log(performance.now());
+                    // if (this.koord.x + this.leveys > huonekalu.koord.x-5 &&
+                    //     this.koord.x < huonekalu.koord.x + huonekalu.koko.leveys+5 &&
+                    //     this.koord.y + this.korkeus > huonekalu.koord.y-5 &&
+                    //     this.koord.y < huonekalu.koord.y + huonekalu.koko.korkeus+5) {
+                        // switch (this.menosuuntaY) {
+                        //     case "ylos":
+                        //         this.koord.y += this.nopeus;
+                        //         break;
+                        //     case "alas":
+                        //         this.koord.y -= this.nopeus;
+                        //         break;
+                        // }
+                        // switch(this.menosuuntaX) {
+                        //     case "oikea":
+                        //         this.koord.x -= this.nopeus;
+                        //         break;
+                        //     case "vasen":
+                        //         this.koord.x += this.nopeus;
+                        //         break;                       
+                        // }
+                        const onTormannyt=()=>{
+                            if (this.koord.x + this.leveys > huonekalu.koord.x-5 &&
+                                this.koord.x < huonekalu.koord.x + huonekalu.koko.leveys+5 &&
+                                this.koord.y + this.korkeus > huonekalu.koord.y-5 &&
+                                this.koord.y < huonekalu.koord.y + huonekalu.koko.korkeus+5) {
+                            return true
+                            }
+                            else return false;
+                        };
+                        const onTormannytX=()=>{
+                            if (this.koord.x + this.leveys > huonekalu.koord.x-5 &&
+                                this.koord.x < huonekalu.koord.x + huonekalu.koko.leveys+5) {
+                            return true
+                            }
+                            else return false;
+                        };
+                        const onTormannytY=()=>{
+                            if (this.koord.y + this.korkeus > huonekalu.koord.y-5 &&
+                                this.koord.y < huonekalu.koord.y + huonekalu.koko.korkeus+5) {
+                            return true
+                            }
+                            else return false;
+                        };
+                        
 
-                    if (this.koord.x + this.leveys > huonekalu.koord.x+10 &&
-                        this.koord.x < huonekalu.koord.x + huonekalu.koko.leveys+10 &&
-                        this.koord.y + this.korkeus > huonekalu.koord.y &&
-                        this.koord.y < huonekalu.koord.y + huonekalu.koko.korkeus+10) {
-                        switch (this.menosuuntaY) {
-                            case "ylos":
-                                this.koord.y += this.nopeus;
-                                break;
-                            case "alas":
-                                this.koord.y -= this.nopeus;
-                                break;
+                    if(this.menosuuntaX=="oikea"){
+                        if(onTormannyt() && onTormannytX()){
+                            this.koord.x-=this.nopeus;
                         }
-                        switch(this.menosuuntaX) {
-                            case "oikea":
-                                this.koord.x -= this.nopeus*2;
-
-                                break;
-                            case "vasen":
-                                this.koord.x += this.nopeus*2;
-
-                                break;    
-                                                   
-                        }
-
                     }
+                    else if(this.menosuuntaX=="vasen"){
+                        if(onTormannyt()&&onTormannytX()){
+                            this.koord.x+=this.nopeus;
+                        }
+                    }
+                    if(this.menosuuntaY=="ylos"){
+                        if(onTormannyt()&&onTormannytY()){
+                            this.koord.y+=this.nopeus+3;
+                        }
+                    }
+                    else if(this.menosuuntaY=="alas"){
+                        if(onTormannyt()&&onTormannytY()){
+                            this.koord.y-=this.nopeus+3;
+                            
+                        }
+                    }
+                    
                 }
             }
         }
