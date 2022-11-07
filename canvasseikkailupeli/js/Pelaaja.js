@@ -12,6 +12,7 @@ class Pelaaja extends Hahmo{
         this.dmgRed=0;
         this.dmg=dmg;
         this.kiihtyvyys=kiihtyvyys;
+        this.raha=0;
     }
     avaaOvi(ovet){ //pelaajan ovien kautta liikkuminen
         let e=null;
@@ -82,7 +83,6 @@ class Pelaaja extends Hahmo{
             break;
             }
     }
-    
     hyokkaa(kohde) {
         this.hyokkaamassa = true;
         //tarkistaa, osuuko pelaajan ase viholliseen, ja näin ollen kutsuu dmgIndicatoria, joka tekee vahinkoa
@@ -133,6 +133,7 @@ class Pelaaja extends Hahmo{
             kohde.hp-=this.dmg;
             kohde.vari1="red";
             kohde.vari2="red";
+            console.log(this.raha);
             setTimeout(()=>{
                 kohde.vari1=kohde.alkPerVarit[1];
                 kohde.vari2=kohde.alkPerVarit[0];
