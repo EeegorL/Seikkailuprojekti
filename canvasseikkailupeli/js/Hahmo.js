@@ -11,7 +11,7 @@ class Hahmo { //pohjaluokka kaikille spriteille
         this.vari2 = vari2;
         this.ase = {
             position: this.koord,
-            width: 150,
+            width: 70,
             height: 10
         }
         this.hyokkaamassa;

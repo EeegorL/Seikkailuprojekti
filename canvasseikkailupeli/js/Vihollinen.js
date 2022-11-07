@@ -162,13 +162,26 @@ class Vihollinen extends Hahmo {
                     }
                     if(this.menosuuntaY=="ylos"){
                         if(onTormannyt()&&onTormannytY()){
-                            this.koord.y+=this.nopeus+3;
+                            this.koord.y+=this.nopeus+1;
+                            if(this.menosuuntaX=="oikea"){
+                                this.koord.x+=this.nopeus;
+                            }
+                            else {
+                                this.menosuuntaX="vasen";
+                                this.koord.x-=this.nopeus;
+                            }
                         }
                     }
                     else if(this.menosuuntaY=="alas"){
                         if(onTormannyt()&&onTormannytY()){
-                            this.koord.y-=this.nopeus+3;
-                            
+                            this.koord.y-=this.nopeus+1;
+                            if(this.menosuuntaX=="oikea"){
+                                this.koord.x+=this.nopeus;
+                            }
+                            else {
+                                this.menosuuntaX="vasen";
+                                this.koord.x-=this.nopeus;
+                            }
                         }
                     }
                     

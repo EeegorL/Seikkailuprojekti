@@ -98,7 +98,7 @@ class Pelaaja extends Hahmo{
     }
     else if(this.menosuunta=="vasen"&&
         this.ase.position.x - this.ase.width <= kohde.koord.x &&
-        this.ase.position.x >= kohde.koord.x - kohde.leveys &&
+        this.ase.position.x >= kohde.koord.x + kohde.leveys &&
         this.ase.position.y+this.korkeus*0.4 + this.ase.height >= kohde.koord.y &&
         this.ase.position.y+this.korkeus*0.4 <= kohde.koord.y + kohde.korkeus &&
         this.hyokkaamassa
@@ -172,16 +172,16 @@ class Pelaaja extends Hahmo{
         // konteksti.globalAlpha asettaa elementin läpinäkyväksi, niin hahmon ase ei vaikuta valtavalta nuijalta
         k.globalAlpha=0.2;
         if(this.menosuunta=="vasen"){
-            k.fillRect(this.ase.position.x-100, this.ase.position.y+30, this.ase.width=150, this.ase.height=10);
+            k.fillRect(this.ase.position.x-50, this.ase.position.y+30, this.ase.width=100, this.ase.height=10);
         }
         else if(this.menosuunta=="oikea"){
-            k.fillRect(this.ase.position.x, this.ase.position.y+30, this.ase.width=150, this.ase.height=10);
+            k.fillRect(this.ase.position.x, this.ase.position.y+30, this.ase.width=100, this.ase.height=10);
         }
         else if(this.menosuunta=="ylos"){
-            k.fillRect(this.ase.position.x+20, this.ase.position.y-75, this.ase.width=10, this.ase.height=150);
+            k.fillRect(this.ase.position.x+20, this.ase.position.y-75, this.ase.width=10, this.ase.height=100);
         }
         else if(this.menosuunta=="alas"){
-            k.fillRect(this.ase.position.x+20, this.ase.position.y, this.ase.width=10, this.ase.height=150);
+            k.fillRect(this.ase.position.x+20, this.ase.position.y, this.ase.width=10, this.ase.height=100);
         }
         k.globalAlpha=1;
 //jos tän ottaa pois, nii jää kiva humalaefekti jota vois käyttää
