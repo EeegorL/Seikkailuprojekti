@@ -35,7 +35,7 @@ class Vihollinen extends Hahmo {
         this.kiihtyvyys.x = 0;
         if (this.hp <= 0) {
             this.tajuissaan = false;
-            pelaaja.raha+=Math.round(Math.random())==1?0:Math.round(Math.random()*9+1);
+            pelaaja.lisaaRahaa();
             setTimeout(() => {//respawn koska miks ei
                 this.tajuissaan = true;
                 this.hp = this.maxHp;

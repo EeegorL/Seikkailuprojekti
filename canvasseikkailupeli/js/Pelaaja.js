@@ -133,7 +133,6 @@ class Pelaaja extends Hahmo{
             kohde.hp-=this.dmg;
             kohde.vari1="red";
             kohde.vari2="red";
-            console.log(this.raha);
             setTimeout(()=>{
                 kohde.vari1=kohde.alkPerVarit[1];
                 kohde.vari2=kohde.alkPerVarit[0];
@@ -249,6 +248,26 @@ class Pelaaja extends Hahmo{
 
             moottori();
         }
+    }
+    lisaaRahaa(){
+        let rahanMaara=Math.round(Math.random())==1?0:Math.round(Math.random()*9+1);
+        this.raha+=rahanMaara;
+
+        if(rahanMaara>=1){
+            saiJuuriRahnaa=true;
+            setTimeout(()=>saiJuuriRahnaa=false,500);    
+        }
+    }
+    rahaPlus(){
+        k.fillStyle="yellow";
+        k.beginPath();
+        k.arc(pelaaja.koord.x+pelaaja.leveys/2.7,pelaaja.koord.y-50, 10, 0, 2 * Math.PI);
+        k.fill();
+        k.strokeStyle="orange";
+        k.beginPath();
+        k.lineWidth=2;
+        k.arc(pelaaja.koord.x+pelaaja.leveys/2.7,pelaaja.koord.y-50, 10, 0, 2 * Math.PI);
+        k.stroke();
     }
 };
 

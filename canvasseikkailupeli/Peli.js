@@ -13,6 +13,7 @@ let huonekalut=[];
 let pauseVar=false;
 let huoneenOvet;
 let huoneenHuonekalut;
+let saiJuuriRahnaa=false;
 
 
 async function alusta(huoneNro){//alustaa huoneen
@@ -133,9 +134,14 @@ async function moottori() { //päivittää jokaisen framen
             pelaaja.paivita();
             pelaaja.tarkistaTormaaminen(seinat,huonekalut);
             pelaaja.avaaOvi(ovet);
+            if(saiJuuriRahnaa){
+                pelaaja.rahaPlus();
+            }
+
             
         }
-
+        k.fillStyle="red";
+        k.fillText(`Rahaa takataskussa: ${pelaaja.raha}`,kanvaasi.width*0.65,50);    
         for(let vihollinen of viholliset){// päivittää kaikki tajuissaan olevat viholliset
             if(vihollinen?.tajuissaan){
                 vihollinen.paivitaVihollinen();
