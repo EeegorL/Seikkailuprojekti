@@ -31,7 +31,7 @@ class Hahmo { //pohjaluokka kaikille spriteille
 
         k.font = "Bold 40px Brush Script MT";
         k.fillStyle=this.vari1;
-        k.fillText(Math.round(this.hp), this.koord.x+3.5,this.koord.y);
+        k.fillText(Math.round(this.hp) || "", this.koord.x+3.5,this.koord.y);
         k.font = "20px Monospace";
         k.fillStyle=this.vari2;
         k.fillText(this.nimi||"", this.koord.x-this.nimi?.length*3,this.koord.y-33);

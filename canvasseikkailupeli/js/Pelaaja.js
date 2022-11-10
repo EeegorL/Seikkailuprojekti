@@ -269,6 +269,15 @@ class Pelaaja extends Hahmo{
         k.arc(pelaaja.koord.x+pelaaja.leveys/2.7,pelaaja.koord.y-50, 10, 0, 2 * Math.PI);
         k.stroke();
     }
+    rahankulutustesti(){
+        if(pelaaja.raha>=10){
+            pelaaja.raha-=10;
+            console.log("10 € lahjoitettu Bosnia-Hertsegovinaan");
+        }
+        else{
+            console.log("Menepä hankkimaan edes 10 € lahjoitettavaksi");
+        }
+    }
 };
 
 
@@ -289,6 +298,7 @@ const liikenappaimet = {
 };
 
 //nappikuuntelijat
+let voiHyokata;
 window.addEventListener("keydown", (event) => {
     switch (event.key.toLowerCase()) {
         case "d":
@@ -308,13 +318,19 @@ window.addEventListener("keydown", (event) => {
             pelaaja.viimeisin = "s";
             break;
         case "enter":
-            for(let vihollinen of viholliset){
-                pelaaja.hyokkaa(vihollinen);
+            if(voiHyokata){
+                for(let vihollinen of viholliset){
+                    pelaaja.hyokkaa(vihollinen);
+                }
+                voiHyokata=false;
             }
             break;
         case "escape":
             pelaaja.pause();
-        break;
+            break;
+        case "r":
+            pelaaja.rahankulutustesti();
+            break;
     }
 });
 window.addEventListener("keyup", (event) => {
@@ -330,6 +346,9 @@ window.addEventListener("keyup", (event) => {
             break;
         case "s":
             liikenappaimet.s.pohjassa = false;
+            break;
+        case "enter":
+            voiHyokata=true;
             break;
     }
 });

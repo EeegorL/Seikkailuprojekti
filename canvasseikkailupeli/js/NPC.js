@@ -1,26 +1,23 @@
 "use strict";
 
 
-class Vihollinen extends Hahmo {
-    constructor(id,koord,leveys,korkeus, hp,vari1, vari2, tajuissaan, nimi, dmg, nopeus, kuvasrc) {
-        super(koord, vari1, vari2, tajuissaan, hp, id, nimi);//ottaa käyttöön parent-classin
-        this.dmg=dmg;
-        this.nopeus = nopeus;
+class NPC extends Hahmo {
+    constructor(id,koord,leveys,korkeus) {
+        super(koord, "brown", "brown", true, null, id, "");//ottaa käyttöön parent-classin
+        this.nopeus = 0;
         this.kuva = new Image();
-        this.kuva.src = "../kuvat/hahmot/"+kuvasrc ;
+        this.kuva.src = "../kuvat/hahmot/irmeli.png";
         this.menosuuntaX;
         this.menosuuntaY;
+        this.liikkumassaX;
+        this.liikkumassaY;
         this.kiihtyvyys={x:0,y:0};
-        this.vari1=vari1;
-        this.vari2=vari2;
-        this.alkPerVarit=[vari1,vari2];
         this.leveys=leveys;
         this.korkeus=korkeus;
-        this.maxHp=hp;
     }
 
 
-    async paivitaVihollinen() {
+    async paivitaNPC() {
         super.paivita();
     }
 
@@ -31,49 +28,46 @@ class Vihollinen extends Hahmo {
         k.fillStyle = "khaki";
         k.drawImage(this.kuva, this.koord.x, this.koord.y,this.leveys,this.korkeus);
         k.closePath();
-        this.kiihtyvyys.y = 0;
-        this.kiihtyvyys.x = 0;
-        if (this.hp <= 0) {
-            this.tajuissaan = false;
-            pelaaja.lisaaRahaa();
-            setTimeout(() => {//respawn koska miks ei
-                this.tajuissaan = true;
-                this.hp = this.maxHp;
-                this.koord = { x: 500, y: 500 }
-            }, 100);
-        }
+        setTimeout(() => {//respawn koska miks ei
+            suunnanVaihto=true;
+        }, 100);
+    }
+    vaihdaSuunta(){
+        let akseli=Math.round(Math.random())==1?"x":"y";
 
-        //vaihtoehto 1: vihollinen seuraa pelaajaa
-        //Math.abs:illa voi myös halutessaan asettaa vihollisille etäisyyden, jonka jälkeen ne alkaa seuraa, eli voisi tehdä näkökenttämekaniikan
-        //oletusnopeus
-        /*
-        katsoo vihollisen sijainnin suhteessa pelaajaan, ja sen liikkuu sen perusteella
-        Math.round pyöristää pelaajan koordinaatit, jottei vihollisen tarvitsisi tavoitella täydellistä osumaa
-        Math.abs luo viholliselle etäisyyden, jonka ulkopuolella tämän tulee seurata pelaajaa, esim.
-        halietäisyydellä vihollinen lopettaa seuraamisen
-        */
-        if (Math.round(pelaaja.koord.x) > Math.round(this.koord.x) && Math.abs(Math.round(pelaaja.koord.x) - Math.round(this.koord.x)) > 5) {
-            this.koord.x += this.nopeus;
-            this.menosuuntaX = "oikea";
+        if(akseli=="x"){
+            this.kiihtyvyys.x=0;
+            let liikkuuko=Math.round(Math.random())==1?true:false;
+            if(liikkuuko){
+                let suunta=Math.round(Math.random())==1?"vasen":"oikea";
+                if(suunta=="vasen"){
+                    this.kiihtyvyys.x=this.nopeus;
+                }
+                else{
+                    this.kiihtyvyys.x=-this.nopeus;
+                }
+            }
+            else{
+                this.kiihtyvyys.x=0;
+            }
         }
-        else if (Math.round(pelaaja.koord.x) < Math.round(this.koord.x) && Math.abs(Math.round(pelaaja.koord.x) - Math.round(this.koord.x)) > 5) {
-            this.koord.x -= this.nopeus;
-            this.menosuuntaX = "vasen";
-        }
-        if (Math.round(pelaaja.koord.y) >= Math.round(this.koord.y) && Math.abs(Math.round(pelaaja.koord.y) - Math.round(this.koord.y)) > 5) {
-            this.koord.y += this.nopeus;
-            this.menosuuntaY = "alas";
-        }
-        else if (Math.round(pelaaja.koord.y) <= Math.round(this.koord.y) && Math.abs(Math.round(pelaaja.koord.y) - Math.round(this.koord.y)) > 5) {
-            this.koord.y -= this.nopeus;
-            this.menosuuntaY = "ylos";
-        }
-        // console.log(`MenosuuntaX: ${this.menosuuntaX}`);
-        // console.log(`MenosuuntaY: ${this.menosuuntaY}`);
+        else if(akseli=="y"){
+            this.kiihtyvyys.x=0;
+            let liikkuuko=Math.round(Math.random())==1?true:false;
+            if(liikkuuko){
+                let suunta=Math.round(Math.random())==1?"ylos":"alas";
+                if(suunta=="ylos"){
+                    this.kiihtyvyys.y=-this.nopeus;
+                }
+                else{
+                    this.kiihtyvyys.y=this.nopeus;
+                }
+            }
+            else{
+                this.kiihtyvyys.y=0;
+            }
 
-        if (Math.abs(Math.round(pelaaja.koord.x) - Math.round(this.koord.x)) < 52 &&
-            Math.abs(Math.round(pelaaja.koord.y) - Math.round(this.koord.y)) < 90) {
-            pelaaja.hp -= (this.dmg - pelaaja.dmgRed);
+            
         }
     }
     async tarkistaTormaaminen(seinat, huonekalut) { //nimensä mukaan tarkistaa seinät sekä huonekalut ja estää niiden läpi kulkemisen
@@ -104,7 +98,6 @@ class Vihollinen extends Hahmo {
         if (huonekalut) {
             for (let huonekalu of huonekalut) {
                 if (!huonekalu.koriste) {
-
                         const onTormannyt=()=>{
                             if (this.koord.x + this.leveys > huonekalu.koord.x-5 &&
                                 this.koord.x < huonekalu.koord.x + huonekalu.koko.leveys+5 &&

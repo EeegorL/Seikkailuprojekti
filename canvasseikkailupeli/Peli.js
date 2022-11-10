@@ -9,6 +9,7 @@ let huonenumero="4-1";
 let seinat=[];
 let ovet=[];
 let viholliset=[];
+let npct=[];
 let huonekalut=[];
 let pauseVar=false;
 let huoneenOvet;
@@ -17,14 +18,19 @@ let saiJuuriRahnaa=false;
 
 
 async function alusta(huoneNro){//alustaa huoneen
-
+    seinat.length=0;
+    ovet.length=0;
+    viholliset.length=0;
+    npct.length=0;
+    huonekalut.length=0;
+    
     huoneenOvet=await fetch(`huoneenOvet/${huoneNro}`).then(tulos=>tulos.json());
     huoneenHuonekalut=await fetch(`huoneenHuonekalut/${huoneNro}`).then(tulos=>tulos.json());
 
     huonenumero=huoneenOvet.id;
     
     document.getElementById("huoneenNimi").innerHTML=`${huoneenOvet[0]?.nimi || ""}`// käy läpi huoneen viholliset ja luo ne
-viholliset=[];
+    viholliset=[];
 
 let huoneenViholliset=await fetch(`huoneenViholliset/${huoneNro}`).then(tulos=>tulos.json());
     for(let vihollinen of huoneenViholliset){
@@ -122,6 +128,9 @@ async function teeEsteetJaOvet(){
         
 }
 
+let npc1=new NPC(1,{x:100,y:100},70,50);
+console.log(npc1);
+let suunnanVaihto=false;
 async function moottori() { //päivittää jokaisen framen
 
     if(kaynnissa){ //muuttuja, jolla voi lopettaa pelin tyyliin kaynnissa=false
@@ -130,15 +139,17 @@ async function moottori() { //päivittää jokaisen framen
 
         k.fillStyle = "#222222"; //taustaväri
         k.fillRect(0, 0, kanvaasi.width, kanvaasi.height);
-        if(pelaaja.tajuissaan){ //päivittää pelaajaa jos tämä on tajuissaam
+        if(pelaaja?.tajuissaan){ //päivittää pelaajaa jos tämä on tajuissaam
             pelaaja.paivita();
             pelaaja.tarkistaTormaaminen(seinat,huonekalut);
             pelaaja.avaaOvi(ovet);
             if(saiJuuriRahnaa){
                 pelaaja.rahaPlus();
             }
-
-            
+            if(suunnanVaihto){
+                npc1.paivitaNPC();
+                suunnanVaihto=false;
+            }
         }
         k.fillStyle="red";
         k.fillText(`Rahaa takataskussa: ${pelaaja.raha}`,kanvaasi.width*0.65,50);    
