@@ -9,7 +9,6 @@ let huonenumero="4-1";
 let seinat=[];
 let ovet=[];
 let viholliset=[];
-let npct=[];
 let huonekalut=[];
 let pauseVar=false;
 let huoneenOvet;
@@ -21,7 +20,7 @@ async function alusta(huoneNro){//alustaa huoneen
     seinat.length=0;
     ovet.length=0;
     viholliset.length=0;
-    npct.length=0;
+    // npct.length=0;
     huonekalut.length=0;
     
     huoneenOvet=await fetch(`huoneenOvet/${huoneNro}`).then(tulos=>tulos.json());
@@ -50,6 +49,7 @@ let huoneenViholliset=await fetch(`huoneenViholliset/${huoneNro}`).then(tulos=>t
             vihollinen.dmg,
             vihollinen.nopeus,
             vihollinen.kuva,
+            false
     ));
     }
 
@@ -127,12 +127,19 @@ async function teeEsteetJaOvet(){
         seinat=[seinaE,seinaP,seinaL,seinaI];
         
 }
+let pelinAlku=new Date().getTime()/1000;
 
 let npc1=new NPC(1,{x:100,y:100},70,50);
-console.log(npc1);
-let suunnanVaihto=false;
+let npct=[];
+npct.push(npc1);
+
 async function moottori() { //päivittää jokaisen framen
 
+    let nykyhetki=new Date().getTime()/1000;
+
+    if(Math.round(nykyhetki-pelinAlku)%3===0){
+        npc1.vaihdaSuunta();
+    }
     if(kaynnissa){ //muuttuja, jolla voi lopettaa pelin tyyliin kaynnissa=false
         k.clearRect(0,0,kanvaasi.width,kanvaasi.height);
         window.requestAnimationFrame(moottori);
@@ -146,19 +153,20 @@ async function moottori() { //päivittää jokaisen framen
             if(saiJuuriRahnaa){
                 pelaaja.rahaPlus();
             }
-            if(suunnanVaihto){
-                npc1.paivitaNPC();
-                suunnanVaihto=false;
-            }
+
         }
         k.fillStyle="red";
         k.fillText(`Rahaa takataskussa: ${pelaaja.raha}`,kanvaasi.width*0.65,50);    
+
         for(let vihollinen of viholliset){// päivittää kaikki tajuissaan olevat viholliset
             if(vihollinen?.tajuissaan){
                 vihollinen.paivitaVihollinen();
                 vihollinen.tarkistaTormaaminen(seinat,huonekalut);
-                
             }
+        for(let npc of npct){
+            npc.paivitaNPC();
+            npc.tarkistaTormaaminen(seinat,huonekalut);
+        }
         }
         k.fillStyle="brown"
         teeEsteetJaOvet();
@@ -181,7 +189,8 @@ const pelaaja = new Pelaaja(
     true, //elossa-boolean
     100, //hp
     10, //dmg
-    null//nimi, voi pistää tyhjäks tyyliin null tai ""
+    null,//nimi, voi pistää tyhjäks tyyliin null tai ""
+    false //isNpc==false
 );
 
 alusta(huonenumero);

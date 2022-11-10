@@ -4,7 +4,7 @@
 class Pelaaja extends Hahmo{
     
     constructor(id,koord, kiihtyvyys, vari1,vari2,tajuissaan,hp,dmg,nimi){
-        super(koord, vari1,vari2, tajuissaan, hp,id,nimi);//ottaa käyttöön parent-classin
+        super(koord, vari1,vari2, tajuissaan, hp,id,nimi,false);//ottaa käyttöön parent-classin
         this.kuva = new Image(this.leveys,this.korkeus);
         this.kuva.src="../kuvat/hahmot/jari.png";
         this.huonenro;
@@ -13,6 +13,7 @@ class Pelaaja extends Hahmo{
         this.dmg=dmg;
         this.kiihtyvyys=kiihtyvyys;
         this.raha=0;
+        this.isNpc=false;
     }
     avaaOvi(ovet){ //pelaajan ovien kautta liikkuminen
         let e=null;
@@ -178,10 +179,10 @@ class Pelaaja extends Hahmo{
             k.fillRect(this.ase.position.x, this.ase.position.y+30, this.ase.width=100, this.ase.height=10);
         }
         else if(this.menosuunta=="ylos"){
-            k.fillRect(this.ase.position.x+20, this.ase.position.y-75, this.ase.width=10, this.ase.height=100);
+            k.fillRect(this.ase.position.x+15, this.ase.position.y-60, this.ase.width=10, this.ase.height=100);
         }
         else if(this.menosuunta=="alas"){
-            k.fillRect(this.ase.position.x+20, this.ase.position.y, this.ase.width=10, this.ase.height=100);
+            k.fillRect(this.ase.position.x+20, this.ase.position.y+15, this.ase.width=10, this.ase.height=100);
         }
         k.globalAlpha=1;
 //jos tän ottaa pois, nii jää kiva humalaefekti jota vois käyttää

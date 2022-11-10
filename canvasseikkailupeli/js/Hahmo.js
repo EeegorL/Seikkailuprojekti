@@ -1,7 +1,8 @@
 "use strict";
 
 class Hahmo { //pohjaluokka kaikille spriteille
-    constructor( koord, vari1,vari2, tajuissaan, hp,id,nimi) {
+    constructor( koord, vari1,vari2, tajuissaan, hp,id,nimi,isNpc=false) {
+        this.isNpc=isNpc;
         this.koord = koord;
         this.kiihtyvyys = {x:0,y:0};
         this.korkeus = 75;
@@ -37,8 +38,11 @@ class Hahmo { //pohjaluokka kaikille spriteille
         k.fillText(this.nimi||"", this.koord.x-this.nimi?.length*3,this.koord.y-33);
         this.koord.y += this.kiihtyvyys.y;
         this.koord.x += this.kiihtyvyys.x;
-        this.kiihtyvyys.y=0;
-        this.kiihtyvyys.x=0;
+        if(!this.isNpc){
+            this.kiihtyvyys.y=0;
+            this.kiihtyvyys.x=0;
+        }
+
     }
     
     

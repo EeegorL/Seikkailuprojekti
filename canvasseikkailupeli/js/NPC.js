@@ -3,8 +3,8 @@
 
 class NPC extends Hahmo {
     constructor(id,koord,leveys,korkeus) {
-        super(koord, "brown", "brown", true, null, id, "");//ottaa käyttöön parent-classin
-        this.nopeus = 0;
+        super(koord, "brown", "brown", true, null, id, "",true);//ottaa käyttöön parent-classin
+        this.nopeus = 1;
         this.kuva = new Image();
         this.kuva.src = "../kuvat/hahmot/irmeli.png";
         this.menosuuntaX;
@@ -28,9 +28,6 @@ class NPC extends Hahmo {
         k.fillStyle = "khaki";
         k.drawImage(this.kuva, this.koord.x, this.koord.y,this.leveys,this.korkeus);
         k.closePath();
-        setTimeout(() => {//respawn koska miks ei
-            suunnanVaihto=true;
-        }, 100);
     }
     vaihdaSuunta(){
         let akseli=Math.round(Math.random())==1?"x":"y";
@@ -42,13 +39,14 @@ class NPC extends Hahmo {
                 let suunta=Math.round(Math.random())==1?"vasen":"oikea";
                 if(suunta=="vasen"){
                     this.kiihtyvyys.x=this.nopeus;
+                    this.menosuuntaX="vasen";
                 }
                 else{
-                    this.kiihtyvyys.x=-this.nopeus;
+                    this.kiihtyvyys.x=this.nopeus*-1;
+                    this.menosuuntaX="oikea";
                 }
             }
             else{
-                this.kiihtyvyys.x=0;
             }
         }
         else if(akseli=="y"){
@@ -57,14 +55,15 @@ class NPC extends Hahmo {
             if(liikkuuko){
                 let suunta=Math.round(Math.random())==1?"ylos":"alas";
                 if(suunta=="ylos"){
-                    this.kiihtyvyys.y=-this.nopeus;
+                    this.kiihtyvyys.y=this.nopeus*-1;
+                    this.menosuuntaY="ylos";
                 }
                 else{
                     this.kiihtyvyys.y=this.nopeus;
+                    this.menosuuntaY="alas";
                 }
             }
             else{
-                this.kiihtyvyys.y=0;
             }
 
             
@@ -73,26 +72,22 @@ class NPC extends Hahmo {
     async tarkistaTormaaminen(seinat, huonekalut) { //nimensä mukaan tarkistaa seinät sekä huonekalut ja estää niiden läpi kulkemisen
         //huoneiden seinät
         if (seinat) {
-            if (this.menosuunta == "oikea") {
                 if (this.koord.x + this.leveys >= seinat[2].koord.x) {
                     this.koord.x = seinat[2].koord.x - this.leveys;
                 }
-            }
-            if (this.menosuunta == "vasen") {
+            
                 if (this.koord.x - 10 <= seinat[3].koord.x) {
-                    this.koord.x = seinat[3].koord.x + this.leveys - 35;
+                    this.koord.x = seinat[3].koord.x + this.leveys - 25;
                 }
-            }
-            if (this.menosuunta == "alas") {
+            
                 if (this.koord.y + this.korkeus >= seinat[0].koord.y) {
                     this.koord.y = seinat[0].koord.y - this.korkeus;
                 }
-            }
-            if (this.menosuunta == "ylos") {
+            
                 if (this.koord.y - this.korkeus + 70 <= seinat[1].koord.y) {
                     this.koord.y = seinat[1].koord.y + this.korkeus - 65;
                 }
-            }
+            
         }
         // huoneiden huonekalut
         if (huonekalut) {

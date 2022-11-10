@@ -3,7 +3,7 @@
 
 class Vihollinen extends Hahmo {
     constructor(id,koord,leveys,korkeus, hp,vari1, vari2, tajuissaan, nimi, dmg, nopeus, kuvasrc) {
-        super(koord, vari1, vari2, tajuissaan, hp, id, nimi);//ottaa käyttöön parent-classin
+        super(koord, vari1, vari2, tajuissaan, hp, id, nimi,false);//ottaa käyttöön parent-classin
         this.dmg=dmg;
         this.nopeus = nopeus;
         this.kuva = new Image();
@@ -17,6 +17,7 @@ class Vihollinen extends Hahmo {
         this.leveys=leveys;
         this.korkeus=korkeus;
         this.maxHp=hp;
+        this.isNpc=false;
     }
 
 
