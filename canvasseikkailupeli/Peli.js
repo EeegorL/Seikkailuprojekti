@@ -129,7 +129,7 @@ async function teeEsteetJaOvet(){
 }
 let pelinAlku=new Date().getTime()/1000;
 
-let npc1=new NPC(1,{x:400,y:250},70,50);
+let npc1=new NPC(1,{x:650,y:15},70,50);
 let npct=[];
 npct.push(npc1);
 
@@ -157,16 +157,15 @@ async function moottori() { //päivittää jokaisen framen
         }
         k.fillStyle="red";
         k.fillText(`Rahaa takataskussa: ${pelaaja.raha}`,kanvaasi.width*0.65,50);    
-
+        for(let npc of npct){
+            npc.paivitaNPC();
+            npc.tarkistaTormaaminen(seinat,huonekalut);
+        }
         for(let vihollinen of viholliset){// päivittää kaikki tajuissaan olevat viholliset
             if(vihollinen?.tajuissaan){
                 vihollinen.paivitaVihollinen();
                 vihollinen.tarkistaTormaaminen(seinat,huonekalut);
             }
-        for(let npc of npct){
-            npc.paivitaNPC();
-            npc.tarkistaTormaaminen(seinat,huonekalut);
-        }
         }
         k.fillStyle="brown"
         teeEsteetJaOvet();

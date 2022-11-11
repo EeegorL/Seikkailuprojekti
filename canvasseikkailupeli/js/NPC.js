@@ -103,14 +103,13 @@ class NPC extends Hahmo {
                                 this.koord.y + this.korkeus > huonekalu.koord.y-5 &&
                                 this.koord.y < huonekalu.koord.y + huonekalu.koko.korkeus+5) {
                                     this.vaihdaSuunta();
-
                             return true
                             }
                             else return false;
                         };
                         const onTormannytX=()=>{
                             if (this.koord.x + this.leveys > huonekalu.koord.x-5 &&
-                                this.koord.x < huonekalu.koord.x + huonekalu.koko.leveys+5) {
+                                this.koord.x < huonekalu.koord.x + huonekalu.koko.leveys+50) {
                             return true
                             }
                             else return false;

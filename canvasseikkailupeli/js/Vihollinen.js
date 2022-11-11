@@ -48,7 +48,7 @@ class Vihollinen extends Hahmo {
         //Math.abs:illa voi myös halutessaan asettaa vihollisille etäisyyden, jonka jälkeen ne alkaa seuraa, eli voisi tehdä näkökenttämekaniikan
         //oletusnopeus
         /*
-        katsoo vihollisen sijainnin suhteessa pelaajaan, ja sen liikkuu sen perusteella
+        katsoo vihollisen sijainnin suhteessa pelaajaan, ja liikkuu sen perusteella
         Math.round pyöristää pelaajan koordinaatit, jottei vihollisen tarvitsisi tavoitella täydellistä osumaa
         Math.abs luo viholliselle etäisyyden, jonka ulkopuolella tämän tulee seurata pelaajaa, esim.
         halietäisyydellä vihollinen lopettaa seuraamisen
