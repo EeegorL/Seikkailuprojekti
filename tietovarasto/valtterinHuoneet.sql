@@ -28,10 +28,10 @@ INSERT INTO `huone` VALUES ('3-6',NULL,'3-5',NULL,'4-6','Minibossi')
 --   `elossa` tinyint(1) DEFAULT NULL,
 --   `kuva` varchar(100) DEFAULT NULL,
 
-INSERT INTO `vihollinen` VALUES (1,200,100,'4-3','Prisman Eliitti',400,250,1,'darkkhaki','brown',1,'BullMentula.png'); --prisma
-INSERT INTO `vihollinen` VALUES (1,130,7,'2-4','Itiksen Irmeli',400,250,1,'darkkhaki','brown',1,'irmeli.png'); --aukio
-INSERT INTO `vihollinen` VALUES (1,120,6,'2-4','Itiksen Aapeli',400,250,1.5,'darkkhaki','brown',1,'aapeli.png'); --aukio
-INSERT INTO `vihollinen` VALUES (1,100,5,'2-4','Jari the Man',400,250,2,'darkkhaki','brown',1,'jari.png'); --aukio
-INSERT INTO `vihollinen` VALUES (1,140,6,'3-5','Teppo',400,250,1,'darkkhaki','brown',1,'risumies.png'); --käytävä
-INSERT INTO `vihollinen` VALUES (1,135,5,'3-5','Veikko',400,250,2,'darkkhaki','brown',1,'verstappen.png'); --käytävä
-INSERT INTO `vihollinen` VALUES (1,300,8,'3-6','Varkaan Hamsteri',400,250,2,'darkkhaki','brown',1,'hamsteri.png'); --miniboss
+INSERT INTO `vihollinen`(hp,dmg,huone,nimi,x,y,nopeus,vari1,vari2,elossa,kuva,leveys,korkeus) VALUES (200,100,'4-3','Prisman Eliitti',400,250,1,'darkkhaki','brown',1,'BullMentula.png',40,70); --prisma
+INSERT INTO `vihollinen`(hp,dmg,huone,nimi,x,y,nopeus,vari1,vari2,elossa,kuva,leveys,korkeus) VALUES (230,7,'2-4','Itiksen Irmeli',400,250,1,'darkkhaki','brown',1,'irmeli.png',40,70); --aukio
+INSERT INTO `vihollinen`(hp,dmg,huone,nimi,x,y,nopeus,vari1,vari2,elossa,kuva,leveys,korkeus) VALUES (220,6,'2-4','Itiksen Aapeli',400,250,1.5,'darkkhaki','brown',1,'aapeli.png',40,70); --aukio
+INSERT INTO `vihollinen`(hp,dmg,huone,nimi,x,y,nopeus,vari1,vari2,elossa,kuva,leveys,korkeus) VALUES (200,5,'2-4','Jari the Man',400,250,2,'darkkhaki','brown',1,'jari.png',40,70); --aukio
+INSERT INTO `vihollinen`(hp,dmg,huone,nimi,x,y,nopeus,vari1,vari2,elossa,kuva,leveys,korkeus) VALUES (240,6,'3-5','Teppo',400,250,1,'darkkhaki','brown',1,'risumies.png',40,70); --käytävä
+INSERT INTO `vihollinen`(hp,dmg,huone,nimi,x,y,nopeus,vari1,vari2,elossa,kuva,leveys,korkeus) VALUES (235,5,'3-5','Veikko',400,250,2,'darkkhaki','brown',1,'verstappen.png',40,70); --käytävä
+INSERT INTO `vihollinen`(hp,dmg,huone,nimi,x,y,nopeus,vari1,vari2,elossa,kuva,leveys,korkeus) VALUES (800,8,'3-6','Varkaan Hamsteri',400,250,2,'darkkhaki','brown',1,'hamsteri.png',40,70); --miniboss
