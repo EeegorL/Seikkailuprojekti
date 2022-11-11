@@ -129,7 +129,7 @@ async function teeEsteetJaOvet(){
 }
 let pelinAlku=new Date().getTime()/1000;
 
-let npc1=new NPC(1,{x:100,y:100},70,50);
+let npc1=new NPC(1,{x:400,y:250},70,50);
 let npct=[];
 npct.push(npc1);
 
@@ -137,7 +137,7 @@ async function moottori() { //päivittää jokaisen framen
 
     let nykyhetki=new Date().getTime()/1000;
 
-    if(Math.round(nykyhetki-pelinAlku)%3===0){
+    if(Math.round(nykyhetki-pelinAlku)%5===0){
         npc1.vaihdaSuunta();
     }
     if(kaynnissa){ //muuttuja, jolla voi lopettaa pelin tyyliin kaynnissa=false

@@ -38,11 +38,11 @@ class NPC extends Hahmo {
             if(liikkuuko){
                 let suunta=Math.round(Math.random())==1?"vasen":"oikea";
                 if(suunta=="vasen"){
-                    this.kiihtyvyys.x=this.nopeus;
+                    this.kiihtyvyys.x=this.nopeus*-1;
                     this.menosuuntaX="vasen";
                 }
                 else{
-                    this.kiihtyvyys.x=this.nopeus*-1;
+                    this.kiihtyvyys.x=this.nopeus;
                     this.menosuuntaX="oikea";
                 }
             }
@@ -74,18 +74,22 @@ class NPC extends Hahmo {
         if (seinat) {
                 if (this.koord.x + this.leveys >= seinat[2].koord.x) {
                     this.koord.x = seinat[2].koord.x - this.leveys;
+                    this.vaihdaSuunta();
                 }
             
                 if (this.koord.x - 10 <= seinat[3].koord.x) {
-                    this.koord.x = seinat[3].koord.x + this.leveys - 25;
+                    this.koord.x = seinat[3].koord.x+15;
+                    this.vaihdaSuunta();
                 }
             
                 if (this.koord.y + this.korkeus >= seinat[0].koord.y) {
                     this.koord.y = seinat[0].koord.y - this.korkeus;
+                    this.vaihdaSuunta();
                 }
             
-                if (this.koord.y - this.korkeus + 70 <= seinat[1].koord.y) {
-                    this.koord.y = seinat[1].koord.y + this.korkeus - 65;
+                if (this.koord.y - this.korkeus+40 <= seinat[1].koord.y) {
+                    this.koord.y = seinat[1].koord.y + this.korkeus-38;
+                    this.vaihdaSuunta();
                 }
             
         }
@@ -98,6 +102,8 @@ class NPC extends Hahmo {
                                 this.koord.x < huonekalu.koord.x + huonekalu.koko.leveys+5 &&
                                 this.koord.y + this.korkeus > huonekalu.koord.y-5 &&
                                 this.koord.y < huonekalu.koord.y + huonekalu.koko.korkeus+5) {
+                                    this.vaihdaSuunta();
+
                             return true
                             }
                             else return false;
