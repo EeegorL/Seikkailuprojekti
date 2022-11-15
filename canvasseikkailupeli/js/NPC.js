@@ -71,7 +71,8 @@ class NPC extends Hahmo {
     }
     async tarkistaTormaaminen(seinat, huonekalut) { //nimensä mukaan tarkistaa seinät sekä huonekalut ja estää niiden läpi kulkemisen
         //huoneiden seinät
-        if (seinat) {
+        try{
+            if (seinat) {
                 if (this.koord.x + this.leveys >= seinat[2].koord.x) {
                     this.koord.x = seinat[2].koord.x - this.leveys;
                     this.vaihdaSuunta();
@@ -161,6 +162,10 @@ class NPC extends Hahmo {
                 }
             }
         }
+        }
+        catch(err){
+        }
+
 
     }
 

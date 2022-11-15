@@ -273,7 +273,8 @@ class Pelaaja extends Hahmo{
     rahankulutustesti(){
         if(pelaaja.raha>=10){
             pelaaja.raha-=10;
-            console.log("10 € lahjoitettu Bosnia-Hertsegovinaan");
+            console.log("10 € lahjoitettu Bosnia-Hertsegovinaan. Bosnialaiset ylemmät voimat hymyilevät sinulle.");
+            pelaaja.dmgRed+=1;
         }
         else{
             console.log("Menepä hankkimaan edes 10 € lahjoitettavaksi");

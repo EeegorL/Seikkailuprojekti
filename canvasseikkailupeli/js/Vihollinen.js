@@ -74,7 +74,10 @@ class Vihollinen extends Hahmo {
 
         if (Math.abs(Math.round(pelaaja.koord.x) - Math.round(this.koord.x)) < 52 &&
             Math.abs(Math.round(pelaaja.koord.y) - Math.round(this.koord.y)) < 90) {
-            pelaaja.hp -= (this.dmg - pelaaja.dmgRed);
+                if(this.dmg>=pelaaja.dmgRed){
+                    pelaaja.hp -= (this.dmg - pelaaja.dmgRed);
+                }
+
         }
     }
     async tarkistaTormaaminen(seinat, huonekalut) { //nimensä mukaan tarkistaa seinät sekä huonekalut ja estää niiden läpi kulkemisen

@@ -10,18 +10,20 @@ let seinat=[];
 let ovet=[];
 let viholliset=[];
 let huonekalut=[];
+let npct=[];
 let pauseVar=false;
 let huoneenOvet;
 let huoneenHuonekalut;
 let saiJuuriRahnaa=false;
+let onNPCeita=false;
 
 
 async function alusta(huoneNro){//alustaa huoneen
     seinat.length=0;
     ovet.length=0;
     viholliset.length=0;
-    // npct.length=0;
     huonekalut.length=0;
+    npct.length=0;
     
     huoneenOvet=await fetch(`huoneenOvet/${huoneNro}`).then(tulos=>tulos.json());
     huoneenHuonekalut=await fetch(`huoneenHuonekalut/${huoneNro}`).then(tulos=>tulos.json());
@@ -52,7 +54,22 @@ let huoneenViholliset=await fetch(`huoneenViholliset/${huoneNro}`).then(tulos=>t
             false
     ));
     }
-
+        //npc-luonti
+        if(await huoneenOvet[0]?.onNPCeita){
+            npct=[
+                new NPC(1,{x:650,y:15},70,50),
+                new NPC(1,{x:400,y:150},70,50),
+                new NPC(1,{x:300,y:400},70,50),
+                new NPC(1,{x:200,y:500},70,50),
+                new NPC(1,{x:100,y:600},70,50),
+                new NPC(1,{x:50,y:450},70,50),
+                new NPC(1,{x:125,y:350},70,50),
+                new NPC(1,{x:325,y:200},70,50),
+                new NPC(1,{x:450,y:250},70,50),
+                new NPC(1,{x:700,y:75},70,50)
+            ];
+            onNPCeita=true;
+        }else onNPCeita=false;
 // käy läpi huoneen huonekalut ja luo ne
 
 
@@ -129,17 +146,11 @@ async function teeEsteetJaOvet(){
 }
 let pelinAlku=new Date().getTime()/1000;
 
-let npc1=new NPC(1,{x:650,y:15},70,50);
-let npct=[];
-npct.push(npc1);
 
 async function moottori() { //päivittää jokaisen framen
 
     let nykyhetki=new Date().getTime()/1000;
 
-    if(Math.round(nykyhetki-pelinAlku)%5===0){
-        npc1.vaihdaSuunta();
-    }
     if(kaynnissa){ //muuttuja, jolla voi lopettaa pelin tyyliin kaynnissa=false
         k.clearRect(0,0,kanvaasi.width,kanvaasi.height);
         window.requestAnimationFrame(moottori);
@@ -156,11 +167,16 @@ async function moottori() { //päivittää jokaisen framen
 
         }
         k.fillStyle="red";
-        k.fillText(`Rahaa takataskussa: ${pelaaja.raha}`,kanvaasi.width*0.65,50);    
+
+        if(onNPCeita){
         for(let npc of npct){
             npc.paivitaNPC();
             npc.tarkistaTormaaminen(seinat,huonekalut);
+            if(Math.round(nykyhetki-pelinAlku)%5===0){
+                npc.vaihdaSuunta();
+            }
         }
+    }
         for(let vihollinen of viholliset){// päivittää kaikki tajuissaan olevat viholliset
             if(vihollinen?.tajuissaan){
                 vihollinen.paivitaVihollinen();
@@ -169,6 +185,8 @@ async function moottori() { //päivittää jokaisen framen
         }
         k.fillStyle="brown"
         teeEsteetJaOvet();
+        k.fillText(`Rahaa takataskussa: ${pelaaja.raha}`,kanvaasi.width*0.65,50);    
+
         window.cancelAnimationFrame(requestAnimationFrame(moottori));// peruuttaa äskeisen framen jottei ohjelma ylikuormitu
     }
 }
