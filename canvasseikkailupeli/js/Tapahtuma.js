@@ -6,10 +6,12 @@ class Tapahtuma{
     };
 
     savu(){
-
+// metodi, joka tekee over-time vahinkoa, jos pelaaja on tietyssä huoneessa
     }
     osto(){
-
+// osto-operaatio, joka poistaa pelaajalta rahaa ja lisää hänelle esineen, palauttaa hp, tms.
     }
+// ja mitä muuta sitten tuleekaa mieleen tai mitä tarvitaan
+
 
 }

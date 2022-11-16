@@ -57,18 +57,21 @@ let huoneenViholliset=await fetch(`huoneenViholliset/${huoneNro}`).then(tulos=>t
         //npc-luonti
         if(await huoneenOvet[0]?.onNPCeita){
             npct=[
-                new NPC(1,{x:650,y:15},70,50),
-                new NPC(1,{x:400,y:150},70,50),
-                new NPC(1,{x:300,y:400},70,50),
-                new NPC(1,{x:200,y:500},70,50),
-                new NPC(1,{x:100,y:600},70,50),
-                new NPC(1,{x:50,y:450},70,50),
-                new NPC(1,{x:125,y:350},70,50),
-                new NPC(1,{x:325,y:200},70,50),
-                new NPC(1,{x:450,y:250},70,50),
-                new NPC(1,{x:700,y:75},70,50)
+                new NPC(1,{x:650,y:15},70,50,5),
+                new NPC(2,{x:400,y:150},70,50,6),
+                new NPC(3,{x:300,y:400},70,50,3),
+                new NPC(4,{x:200,y:500},70,50,4),
+                new NPC(5,{x:100,y:550},70,50,4),
+                new NPC(6,{x:50,y:450},70,50,4),
+                new NPC(7,{x:125,y:350},70,50,8),
+                new NPC(8,{x:325,y:200},70,50,10),
+                new NPC(9,{x:450,y:250},70,50,8),
+                new NPC(10,{x:700,y:75},70,50,9)
             ];
             onNPCeita=true;
+            for(let npc of npct){
+                npc.vaihdaSuunta();
+            }
         }else onNPCeita=false;
 // käy läpi huoneen huonekalut ja luo ne
 
@@ -159,7 +162,7 @@ async function moottori() { //päivittää jokaisen framen
         k.fillRect(0, 0, kanvaasi.width, kanvaasi.height);
         if(pelaaja?.tajuissaan){ //päivittää pelaajaa jos tämä on tajuissaam
             pelaaja.paivita();
-            pelaaja.tarkistaTormaaminen(seinat,huonekalut);
+            pelaaja.tarkistaTormaaminen(seinat,huonekalut,npct);
             pelaaja.avaaOvi(ovet);
             if(saiJuuriRahnaa){
                 pelaaja.rahaPlus();
@@ -172,7 +175,7 @@ async function moottori() { //päivittää jokaisen framen
         for(let npc of npct){
             npc.paivitaNPC();
             npc.tarkistaTormaaminen(seinat,huonekalut);
-            if(Math.round(nykyhetki-pelinAlku)%5===0){
+            if(Math.round(nykyhetki-pelinAlku)%npc.vaihtovali===0){
                 npc.vaihdaSuunta();
             }
         }

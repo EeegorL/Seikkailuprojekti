@@ -2,7 +2,7 @@
 
 
 class NPC extends Hahmo {
-    constructor(id,koord,leveys,korkeus) {
+    constructor(id,koord,leveys,korkeus,vaihtovali) {
         super(koord, "brown", "brown", true, null, id, "",true);//ottaa käyttöön parent-classin
         this.nopeus = 1;
         this.kuva = new Image();
@@ -14,6 +14,7 @@ class NPC extends Hahmo {
         this.kiihtyvyys={x:0,y:0};
         this.leveys=leveys;
         this.korkeus=korkeus;
+        this.vaihtovali=vaihtovali;
     }
 
 

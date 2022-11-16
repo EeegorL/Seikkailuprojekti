@@ -188,7 +188,7 @@ class Pelaaja extends Hahmo{
 //jos tän ottaa pois, nii jää kiva humalaefekti jota vois käyttää
         
     }
-    tarkistaTormaaminen(seinat,huonekalut){ //nimensä mukaan tarkistaa seinät sekä huonekalut ja estää niiden läpi kulkemisen
+    tarkistaTormaaminen(seinat,huonekalut,npct){ //nimensä mukaan tarkistaa seinät sekä huonekalut ja estää niiden läpi kulkemisen
         //huoneiden seinät
             if(this.menosuunta=="oikea"){
                 if(this.koord.x+this.leveys>=seinat[2].koord.x){
@@ -232,6 +232,30 @@ class Pelaaja extends Hahmo{
                                }
 
                     
+                }
+            }
+            for(let npc of npct){
+                if(!npc.koriste){
+                            if(this.koord.x + this.leveys > npc.koord.x &&
+                               this.koord.x<npc.koord.x+npc.leveys &&
+                               this.koord.y+this.korkeus > npc.koord.y &&
+                               this.koord.y < npc.koord.y + npc.korkeus){
+                                switch(this.menosuunta){
+                                case "ylos":
+                                    this.koord.y+=10;
+                                    break;
+                                case "alas":
+                                    this.koord.y-=10;
+                                    break;
+                                case "oikea":
+                                    this.koord.x-=10;
+                                    break;
+                                case "vasen":
+                                    this.koord.x+=10;
+                                    break;
+                               }
+                               
+                               }
                 }
             }
     }
