@@ -36,12 +36,13 @@ class Vihollinen extends Hahmo {
         this.kiihtyvyys.x = 0;
         if (this.hp <= 0) {
             this.tajuissaan = false;
+            viholliset.length-=1;
             pelaaja.lisaaRahaa();
-            setTimeout(() => {//respawn koska miks ei
-                this.tajuissaan = true;
-                this.hp = this.maxHp;
-                this.koord = { x: 500, y: 500 }
-            }, 100);
+            // setTimeout(() => {//respawn koska miks ei
+            //     this.tajuissaan = true;
+            //     this.hp = this.maxHp;
+            //     this.koord = { x: 500, y: 500 }
+            // }, 100);
         }
 
         //vaihtoehto 1: vihollinen seuraa pelaajaa

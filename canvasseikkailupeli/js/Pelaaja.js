@@ -235,7 +235,6 @@ class Pelaaja extends Hahmo{
                 }
             }
             for(let npc of npct){
-                if(!npc.koriste){
                             if(this.koord.x + this.leveys > npc.koord.x &&
                                this.koord.x<npc.koord.x+npc.leveys &&
                                this.koord.y+this.korkeus > npc.koord.y &&
@@ -255,7 +254,7 @@ class Pelaaja extends Hahmo{
                                     break;
                                }
                                
-                               }
+                               
                 }
             }
     }
@@ -307,7 +306,6 @@ class Pelaaja extends Hahmo{
 };
 
 
-
 const liikenappaimet = {
     a: {
         pohjassa: false,
@@ -356,6 +354,8 @@ window.addEventListener("keydown", (event) => {
             break;
         case "r":
             pelaaja.rahankulutustesti();
+            break;
+        case "e":
             break;
     }
 });

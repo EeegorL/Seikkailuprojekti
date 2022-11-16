@@ -163,7 +163,9 @@ async function moottori() { //päivittää jokaisen framen
         if(pelaaja?.tajuissaan){ //päivittää pelaajaa jos tämä on tajuissaam
             pelaaja.paivita();
             pelaaja.tarkistaTormaaminen(seinat,huonekalut,npct);
-            pelaaja.avaaOvi(ovet);
+            if(viholliset.length==0){
+                pelaaja.avaaOvi(ovet);
+            }
             if(saiJuuriRahnaa){
                 pelaaja.rahaPlus();
             }
