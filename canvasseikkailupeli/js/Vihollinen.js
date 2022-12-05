@@ -75,11 +75,11 @@ class Vihollinen extends Hahmo {
 
         if (Math.abs(Math.round(pelaaja.koord.x) - Math.round(this.koord.x)) < 52 &&
             Math.abs(Math.round(pelaaja.koord.y) - Math.round(this.koord.y)) < 90) {
-                if(this.dmg>=pelaaja.dmgRed){ // jos pelaajan dmgRed ei estä kaikkea vahinkoa
+                if(this.dmg>pelaaja.dmgRed){ // jos pelaajan dmgRed ei estä kaikkea vahinkoa
                     pelaaja.hp -= (this.dmg - pelaaja.dmgRed);
                 }
                 else{ // jos estää, niin tekee kuitenkin hieman vahinkoa
-                    pelaaja.hp-=this.dmg*0.1;
+                    pelaaja.hp-=0.1;
                 }
 
         }

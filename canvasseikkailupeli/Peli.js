@@ -76,7 +76,7 @@ let huoneenViholliset=await fetch(`huoneenViholliset/${huoneNro}`).then(tulos=>t
 // käy läpi huoneen huonekalut ja luo ne
 
 
-
+console.log(huoneenOvet);
 };
 
 async function teeEsteetJaOvet(){
@@ -163,9 +163,9 @@ async function moottori() { //päivittää jokaisen framen
         if(pelaaja?.tajuissaan){ //päivittää pelaajaa jos tämä on tajuissaam
             pelaaja.paivita();
             pelaaja.tarkistaTormaaminen(seinat,huonekalut,npct);
-            if(viholliset.length==0){
+            // if(viholliset.length==0){ // ei päästä pelaajaa kulkemaan ovista niin kauan kun huoneessa on vihollisia
                 pelaaja.avaaOvi(ovet);
-            }
+            // }
             if(saiJuuriRahnaa){
                 pelaaja.rahaPlus();
             }

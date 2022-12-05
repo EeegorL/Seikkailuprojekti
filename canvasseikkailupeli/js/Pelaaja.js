@@ -9,7 +9,6 @@ class Pelaaja extends Hahmo{
         this.kuva.src="../kuvat/hahmot/jari.png";
         this.huonenro;
         this.dmgRed=0;
-        this.dmgRed=0;
         this.dmg=dmg;
         this.kiihtyvyys=kiihtyvyys;
         this.raha=0;
