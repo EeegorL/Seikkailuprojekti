@@ -25,8 +25,16 @@ class Vihollinen extends Hahmo {
         super.paivita();
     }
 
+    async lahetaVihollinenTuonelaan(){
+        try{
+            await fetch(`vihollinenElossaFalse/${this.id}`,{method:"POST"});
+        }
+        catch(virhe){
+            throw new Error(virhe);
+        }
+    }
 
-    liikehdinta() { //liikkuminen ja sitä vastaava piirtäminen
+    async liikehdinta() { //liikkuminen ja sitä vastaava piirtäminen
         this.tarkistaTormaaminen();
         k.beginPath();
         k.fillStyle = "khaki";
@@ -36,6 +44,7 @@ class Vihollinen extends Hahmo {
         this.kiihtyvyys.x = 0;
         if (this.hp <= 0) {
             this.tajuissaan = false;
+            await this.lahetaVihollinenTuonelaan();
             viholliset.length-=1;
             pelaaja.lisaaRahaa();
             // setTimeout(() => {//respawn koska miks ei
