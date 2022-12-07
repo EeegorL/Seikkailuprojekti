@@ -262,7 +262,6 @@ class Pelaaja extends Hahmo{
             pauseVar=true;
             kaynnissa=false;
             document.getElementById("menu").classList.remove("hiddenClass");
-
         }
         else if(pauseVar==true){
             pauseVar=false;
@@ -273,7 +272,6 @@ class Pelaaja extends Hahmo{
         }
     }
     lisaaRahaa(){
-        console.log("eiorjgkerjhgijwroglhjelirgjker");
         let rahanMaara=Math.round(Math.random()*15+1);
         this.raha+=rahanMaara;
 
@@ -296,7 +294,7 @@ class Pelaaja extends Hahmo{
     lisaaDmg(){
         if(pelaaja.raha>=2){
             pelaaja.raha-=2;
-            console.log("10 € lahjoitettu Bosnia-Hertsegovinaan. Vahvuuden jumalat hymyilevät sinulle.");
+            console.log("2 € lahjoitettu Bosnia-Hertsegovinaan. Vahvuuden jumalat hymyilevät sinulle.");
             pelaaja.dmg+=1;
         }
         else{
@@ -306,14 +304,23 @@ class Pelaaja extends Hahmo{
     lisaaHp(){
         if(pelaaja.raha>=2){
             pelaaja.raha-=2;
-            console.log("10 € lahjoitettu Bulgariaan. Kestävyyden jumalat iloitsevat.");
+            console.log("2 € lahjoitettu Bulgariaan. Kestävyyden jumalat iloitsevat.");
             pelaaja.hp+=15;
         }
         else{
             console.log("Menepä hankkimaan edes 5 € lahjoitettavaksi");
         }
     }
+    peliLoppui(){
+        pauseOnMahdollinen=false;
+        kaynnissa=false;
+    setTimeout(()=>{
+        document.getElementById("voitto").classList.remove("hiddenClass");
+    },1000);
+
+    };
 };
+
 
 
 const liikenappaimet = {
@@ -360,7 +367,9 @@ window.addEventListener("keydown", (event) => {
             }
             break;
         case "escape":
-            pelaaja.pause();
+            if(pauseOnMahdollinen){
+                pelaaja.pause();
+            }
             break;
         case "r":
             pelaaja.lisaaDmg();

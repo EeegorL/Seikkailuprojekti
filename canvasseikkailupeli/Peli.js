@@ -5,7 +5,7 @@ const k = kanvaasi.getContext("2d");
 kanvaasi.width = 800;
 kanvaasi.height = 650;
 let kaynnissa=true;
-let huonenumero="4-1";
+let huonenumero="6-7";
 let seinat=[];
 let ovet=[];
 let viholliset=[];
@@ -17,9 +17,11 @@ let huoneenHuonekalut;
 let saiJuuriRahnaa=false;
 let onNPCeita=false;
 let huoneenVari;
+let pauseOnMahdollinen=true;
+
 
 document.getElementById("uusiPeli").addEventListener("click",async()=>{
-    huonenumero="4-1";
+    huonenumero="6-7";
     location.reload();
     pelaaja.hp=100;
     pelaaja.dmg=10;
@@ -27,7 +29,14 @@ document.getElementById("uusiPeli").addEventListener("click",async()=>{
     pelaaja.elossa=true;
     await fetch("uusiPeli",{method:"POST"}).then(alusta(huonenumero));
 });
-
+window.addEventListener("DOMContentLoaded",async()=>{
+    huonenumero="6-7";
+    pelaaja.hp=100;
+    pelaaja.dmg=10;
+    pelaaja.dmgRed=0;
+    pelaaja.elossa=true;
+    await fetch("uusiPeli",{method:"POST"}).then(alusta(huonenumero));
+});
 async function alusta(huoneNro){//alustaa huoneen
     seinat.length=0;
     ovet.length=0;
@@ -162,7 +171,6 @@ let pelinAlku=new Date().getTime()/1000;
 async function moottori() { //päivittää jokaisen framen
 
     let nykyhetki=new Date().getTime()/1000;
-
     if(kaynnissa){ //muuttuja, jolla voi lopettaa pelin tyyliin kaynnissa=false
         k.clearRect(0,0,kanvaasi.width,kanvaasi.height);
         window.requestAnimationFrame(moottori);
@@ -172,7 +180,13 @@ async function moottori() { //päivittää jokaisen framen
         if(pelaaja?.tajuissaan){ //päivittää pelaajaa jos tämä on tajuissaam
             pelaaja.paivita();
             pelaaja.tarkistaTormaaminen(seinat,huonekalut,npct);
-            if(viholliset.length==0){ // ei päästä pelaajaa kulkemaan ovista niin kauan kun huoneessa on vihollisia
+            let onVihollisia=false;
+            for(let vih of viholliset){
+                if(vih.tajuissaan){
+                    onVihollisia=true;
+                }
+            }
+            if(!onVihollisia){ // ei päästä pelaajaa kulkemaan ovista niin kauan kun huoneessa on vihollisia
                 pelaaja.avaaOvi(ovet);
             if(saiJuuriRahnaa){
                 pelaaja.rahaPlus();
@@ -195,6 +209,9 @@ async function moottori() { //päivittää jokaisen framen
             if(vihollinen?.tajuissaan){
                 vihollinen.paivitaVihollinen();
                 vihollinen.tarkistaTormaaminen(seinat,huonekalut);
+            }
+            if(vihollinen.nimi=="LOMPAKKOVARAS"&&!vihollinen.tajuissaan){
+                pelaaja.peliLoppui();
             }
         }
         k.fillStyle="brown"
@@ -219,7 +236,7 @@ const pelaaja = new Pelaaja(
     "brown",
     true, //elossa-boolean
     100, //hp
-    10, //dmg
+    10000, //dmg
     null,//nimi, voi pistää tyhjäks tyyliin null tai ""
     false //isNpc==false
 );
