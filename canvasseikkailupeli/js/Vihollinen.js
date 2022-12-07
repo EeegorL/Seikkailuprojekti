@@ -26,12 +26,15 @@ class Vihollinen extends Hahmo {
     }
 
     async lahetaVihollinenTuonelaan(){
-        try{
-            await fetch(`vihollinenElossaFalse/${this.id}`,{method:"POST"});
-        }
-        catch(virhe){
-            throw new Error(virhe);
-        }
+        return new Promise(async(resolve,reject)=>{
+            try{
+                let tulos=await fetch(`vihollinenElossaFalse/${this.id}`,{method:"POST"});
+                resolve(tulos);
+            }
+            catch(err){
+                reject(err);
+            }
+        });
     }
 
     async liikehdinta() { //liikkuminen ja sitä vastaava piirtäminen
@@ -42,16 +45,13 @@ class Vihollinen extends Hahmo {
         k.closePath();
         this.kiihtyvyys.y = 0;
         this.kiihtyvyys.x = 0;
+
         if (this.hp <= 0) {
+
             this.tajuissaan = false;
-            await this.lahetaVihollinenTuonelaan();
             viholliset.length-=1;
             pelaaja.lisaaRahaa();
-            // setTimeout(() => {//respawn koska miks ei
-            //     this.tajuissaan = true;
-            //     this.hp = this.maxHp;
-            //     this.koord = { x: 500, y: 500 }
-            // }, 100);
+            await this.lahetaVihollinenTuonelaan();
         }
 
         //vaihtoehto 1: vihollinen seuraa pelaajaa

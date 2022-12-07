@@ -12,11 +12,21 @@ let viholliset=[];
 let huonekalut=[];
 let npct=[];
 let pauseVar=false;
-let huoneenOvet;
+let huonetiedot;
 let huoneenHuonekalut;
 let saiJuuriRahnaa=false;
 let onNPCeita=false;
+let huoneenVari;
 
+document.getElementById("uusiPeli").addEventListener("click",async()=>{
+    huonenumero="4-1";
+    location.reload();
+    pelaaja.hp=100;
+    pelaaja.dmg=10;
+    pelaaja.dmgRed=0;
+    pelaaja.elossa=true;
+    await fetch("uusiPeli",{method:"POST"}).then(alusta(huonenumero));
+});
 
 async function alusta(huoneNro){//alustaa huoneen
     seinat.length=0;
@@ -25,12 +35,12 @@ async function alusta(huoneNro){//alustaa huoneen
     huonekalut.length=0;
     npct.length=0;
     
-    huoneenOvet=await fetch(`huoneenOvet/${huoneNro}`).then(tulos=>tulos.json());
+    huonetiedot=await fetch(`huoneenOvet/${huoneNro}`).then(tulos=>tulos.json());
     huoneenHuonekalut=await fetch(`huoneenHuonekalut/${huoneNro}`).then(tulos=>tulos.json());
-
-    huonenumero=huoneenOvet.id;
-    
-    document.getElementById("huoneenNimi").innerHTML=`${huoneenOvet[0]?.nimi || ""}`// käy läpi huoneen viholliset ja luo ne
+    huonenumero=await huonetiedot[0]?.id;
+    huoneenVari=await huonetiedot[0]?.vari;
+    document.getElementById("huoneenNimi").innerHTML=`Sijaintisi on ${huonetiedot[0]?.nimi || ""}`// käy läpi huoneen viholliset ja luo ne
+    document.getElementById("huoneenKuvaus").innerHTML=huonetiedot[0]?.kuvaus;
     viholliset=[];
 
 let huoneenViholliset=await fetch(`huoneenViholliset/${huoneNro}`).then(tulos=>tulos.json());
@@ -55,7 +65,7 @@ let huoneenViholliset=await fetch(`huoneenViholliset/${huoneNro}`).then(tulos=>t
     ));
     }
         //npc-luonti
-        if(await huoneenOvet[0]?.onNPCeita){
+        if(await huonetiedot[0]?.onNPCeita){
             npct=[
                 new NPC(1,{x:650,y:15},70,50,5),
                 new NPC(2,{x:400,y:150},70,50,6),
@@ -76,7 +86,6 @@ let huoneenViholliset=await fetch(`huoneenViholliset/${huoneNro}`).then(tulos=>t
 // käy läpi huoneen huonekalut ja luo ne
 
 
-console.log(huoneenOvet);
 };
 
 async function teeEsteetJaOvet(){
@@ -109,24 +118,24 @@ async function teeEsteetJaOvet(){
 
 
 
-    if(await huoneenOvet){
-        if(await huoneenOvet[0]?.etela!=null){
-            const OviE=new Ovi("etela",huoneenOvet[0].etela);
+    if(await huonetiedot){
+        if(await huonetiedot[0]?.etela!=null){
+            const OviE=new Ovi("etela",huonetiedot[0].etela);
             OviE.piirra();
             ovet.push(OviE);
         }
-        if(await huoneenOvet[0]?.pohjoinen!=null){
-            const OviP=new Ovi("pohjoinen",huoneenOvet[0].pohjoinen);
+        if(await huonetiedot[0]?.pohjoinen!=null){
+            const OviP=new Ovi("pohjoinen",huonetiedot[0].pohjoinen);
             OviP.piirra();
             ovet.push(OviP);
         }
-        if(await huoneenOvet[0]?.lansi!=null){
-            const OviL=new Ovi("lansi",huoneenOvet[0].lansi);
+        if(await huonetiedot[0]?.lansi!=null){
+            const OviL=new Ovi("lansi",huonetiedot[0].lansi);
             OviL.piirra();
             ovet.push(OviL);
         }
-        if(await huoneenOvet[0]?.ita!=null){
-            const OviI=new Ovi("ita",huoneenOvet[0].ita);
+        if(await huonetiedot[0]?.ita!=null){
+            const OviI=new Ovi("ita",huonetiedot[0].ita);
             OviI.piirra();
             ovet.push(OviI);
         }
@@ -158,17 +167,17 @@ async function moottori() { //päivittää jokaisen framen
         k.clearRect(0,0,kanvaasi.width,kanvaasi.height);
         window.requestAnimationFrame(moottori);
 
-        k.fillStyle = "#222222"; //taustaväri
+        k.fillStyle = huoneenVari; //taustaväri
         k.fillRect(0, 0, kanvaasi.width, kanvaasi.height);
         if(pelaaja?.tajuissaan){ //päivittää pelaajaa jos tämä on tajuissaam
             pelaaja.paivita();
             pelaaja.tarkistaTormaaminen(seinat,huonekalut,npct);
-            // if(viholliset.length==0){ // ei päästä pelaajaa kulkemaan ovista niin kauan kun huoneessa on vihollisia
+            if(viholliset.length==0){ // ei päästä pelaajaa kulkemaan ovista niin kauan kun huoneessa on vihollisia
                 pelaaja.avaaOvi(ovet);
-            // }
             if(saiJuuriRahnaa){
                 pelaaja.rahaPlus();
             }
+        }
 
         }
         k.fillStyle="red";

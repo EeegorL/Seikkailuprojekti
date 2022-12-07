@@ -62,6 +62,18 @@ module.exports = class Tietovarasto{
             }
         })
     }
+    uusiPeli(){
+        return new Promise(async(resolve,reject)=>{
+            try{
+                let tulos=this.Omakanta.suoritaKysely(sql.kaikkiEloon);
+                resolve(tulos);
+
+            }
+            catch(err){
+                reject(err);
+            }
+        })
+    }
 
     
 

@@ -190,21 +190,21 @@ class Pelaaja extends Hahmo{
     tarkistaTormaaminen(seinat,huonekalut,npct){ //nimensä mukaan tarkistaa seinät sekä huonekalut ja estää niiden läpi kulkemisen
         //huoneiden seinät
             if(this.menosuunta=="oikea"){
-                if(this.koord.x+this.leveys>=seinat[2].koord.x){
+                if(this.koord.x+this.leveys>=seinat[2]?.koord.x){
                     this.koord.x = seinat[2].koord.x-this.leveys;        
                 }
             }
             if(this.menosuunta=="vasen"){
-                if(this.koord.x-10<=seinat[3].koord.x){
+                if(this.koord.x-10<=seinat[3]?.koord.x){
                     this.koord.x = seinat[3].koord.x+this.leveys-35; 
                 }
             }
             if(this.menosuunta=="alas"){
-                if(this.koord.y+this.korkeus>=seinat[0].koord.y){
+                if(this.koord.y+this.korkeus>=seinat[0]?.koord.y){
                     this.koord.y = seinat[0].koord.y-this.korkeus;        }
             }
             if(this.menosuunta=="ylos"){
-                if(this.koord.y-this.korkeus+70<=seinat[1].koord.y){
+                if(this.koord.y-this.korkeus+70<=seinat[1]?.koord.y){
                     this.koord.y = seinat[1].koord.y+this.korkeus-65;        }
             }
             for(let huonekalu of huonekalut){
@@ -273,7 +273,8 @@ class Pelaaja extends Hahmo{
         }
     }
     lisaaRahaa(){
-        let rahanMaara=Math.round(Math.random())==1?0:Math.round(Math.random()*9+1);
+        console.log("eiorjgkerjhgijwroglhjelirgjker");
+        let rahanMaara=Math.round(Math.random()*15+1);
         this.raha+=rahanMaara;
 
         if(rahanMaara>=1){
@@ -292,14 +293,24 @@ class Pelaaja extends Hahmo{
         k.arc(pelaaja.koord.x+pelaaja.leveys/2.7,pelaaja.koord.y-50, 10, 0, 2 * Math.PI);
         k.stroke();
     }
-    rahankulutustesti(){
-        if(pelaaja.raha>=10){
-            pelaaja.raha-=10;
-            console.log("10 € lahjoitettu Bosnia-Hertsegovinaan. Bosnialaiset ylemmät voimat hymyilevät sinulle.");
-            pelaaja.dmgRed+=1;
+    lisaaDmg(){
+        if(pelaaja.raha>=2){
+            pelaaja.raha-=2;
+            console.log("10 € lahjoitettu Bosnia-Hertsegovinaan. Vahvuuden jumalat hymyilevät sinulle.");
+            pelaaja.dmg+=1;
         }
         else{
-            console.log("Menepä hankkimaan edes 10 € lahjoitettavaksi");
+            console.log("Menepä hankkimaan edes 5 € lahjoitettavaksi");
+        }
+    }
+    lisaaHp(){
+        if(pelaaja.raha>=2){
+            pelaaja.raha-=2;
+            console.log("10 € lahjoitettu Bulgariaan. Kestävyyden jumalat iloitsevat.");
+            pelaaja.hp+=15;
+        }
+        else{
+            console.log("Menepä hankkimaan edes 5 € lahjoitettavaksi");
         }
     }
 };
@@ -352,9 +363,10 @@ window.addEventListener("keydown", (event) => {
             pelaaja.pause();
             break;
         case "r":
-            pelaaja.rahankulutustesti();
+            pelaaja.lisaaDmg();
             break;
         case "e":
+            pelaaja.lisaaHp();
             break;
     }
 });

@@ -22,23 +22,30 @@
         </div>
 
         <div class="dialogiboksi" id="dialogiboksi"><img src="" style="position:absolute;"/>
-            <pre style="margin-left:300px;margin-top: 70px;" id="huoneenNimi"></pre> <!--tähän hahmojen puhe/dialogi/kertoja-->
+            <pre id="huoneenNimi"></pre>
+            <pre id="huoneenKuvaus" class="kuvaus"></pre>
+            <img src="./kuvat/kartta.png"/>
+            <hr>
+            <div class="ohjeet">
+                Ohjaaminen:
+                <p>W: Ylös</p>
+                <p>A: Vasemmalle</p>
+                <p>S: Alas</p>
+                <p>D: Oikealle</p>
+                <p>Enter: Hyökkää</p>
+                <p>Esc: Pause/Unpause</p>
+                <p>R: Rukoile Ylä-Malmin jumalille saadaksesi 15 hp lisää (2€)</p>
+                <p>E: Rukoile Ala-Malmin jumalille saadaksesi nyrkkeihisi lisää voimaa (2€)</p>
+            </div>
         </div>
     <canvas id="canvas" class="canvas"></canvas>
 
 
     </div>
     </body>
-    <div>
-        Ohjaaminen:
-        <p>W: Ylös</p>
-        <p>A: Vasemmalle</p>
-        <p>S: Alas</p>
-        <p>D: Oikealle</p>
-        <p>Enter: Hyökkää</p>
-        <p>Esc: Pause/Unpause</p>
-        <p>R: Lahjoita 10 € Bosniaan ja Hertsegovinaan</p>
-    </div>
+
+    <button id="uusiPeli" class="uusiPeli">Aloita uusi peli</button>
+    <p class="uusiPeliInfo">(PELI EI TALLENNU, JOTEN MENETÄT NYKYISEN EDISTYMISESI)</p>
 
     <script src="js/Hahmo.js"></script>
     <script src="js/Seina.js"></script>

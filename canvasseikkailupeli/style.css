@@ -3,7 +3,9 @@ html {
 }
 
 body {
-    background-color: darkkhaki;
+    background-image: url("./kuvat/itispelinTakaseina.png");
+    background-repeat:no-repeat;
+    background-size:cover;
 }
 
 p {
@@ -25,8 +27,14 @@ p {
     font-size: 65px;
 }
 
-.pelitieto {
-    text-align: right;
+.uusiPeli{
+    background-color:yellow;
+    border:none;
+}
+.uusiPeliInfo{
+    font-size:small;
+    color:black;
+    font-weight:800;
 }
 
 .huonetiedot {
@@ -64,18 +72,33 @@ p {
     text-align: center;
     opacity:1;
 }
-
+hr{
+    color:darkred;
+    background-color:darkred;
+    height:5px;
+}
 .dialogiboksi {
     position: absolute;
     margin-left: 840px;
-    background-color: brown;
-    border: 3px solid burlywood;
+    background-image: url("./kuvat/pinboard.png");
+    background-repeat:no-repeat;
+    background-size:cover;
+    border: 10px solid transparent;
+    padding: 15px;
+    border-image: url("./kuvat/dialogiboksitausta.png") 30 stretch;
     padding: 8px;
-    color: whitesmoke;
+    color: darkred;
     font-weight: bold;
     font-size: xx-large;
 }
 
 .hiddenClass {
     visibility: hidden;
+}
+.ohjeet{
+    font-size:medium;
+    margin-bottom:5px;
+}
+.kuvaus{
+    font-size:large;
 }
