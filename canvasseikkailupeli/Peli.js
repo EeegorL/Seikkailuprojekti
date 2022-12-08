@@ -32,9 +32,9 @@ document.getElementById("uusiPeli").addEventListener("click",async()=>{
     await fetch("uusiPeli",{method:"POST"}).then(alusta(huonenumero));
 });
 window.addEventListener("DOMContentLoaded",async()=>{
-    huonenumero="2-3";
-    pelaaja.hp=100000e+100;
-    pelaaja.dmg=100000e+100;
+    huonenumero="4-1";
+    pelaaja.hp=100;
+    pelaaja.dmg=10;
     pelaaja.dmgRed=0;
     pelaaja.elossa=true;
     await fetch("uusiPeli",{method:"POST"}).then(alusta(huonenumero));
@@ -98,7 +98,10 @@ let huoneenViholliset=await fetch(`huoneenViholliset/${huoneNro}`).then(tulos=>t
 
 
 };
-
+function asetaStatus(teksti){
+    document.getElementById("status").innerHTML=teksti;
+    setTimeout(()=>{document.getElementById("status").innerHTML=""},1500);
+}
 async function teeEsteetJaOvet(){
     // tekee pelin seinät ja ovet
     ovet.length=0;
@@ -243,8 +246,8 @@ const pelaaja = new Pelaaja(
     "green",//värit
     "brown",
     true, //elossa-boolean
-    10000000, //hp
-    10000, //dmg
+    100, //hp
+    10, //dmg
     null,//nimi, voi pistää tyhjäks tyyliin null tai ""
     false //isNpc==false
 );

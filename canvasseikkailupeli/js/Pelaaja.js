@@ -298,7 +298,8 @@ class Pelaaja extends Hahmo{
             pelaaja.dmg+=1;
         }
         else{
-            console.log("Menepä hankkimaan edes 5 € lahjoitettavaksi");
+            console.log("Menepä hankkimaan edes 2 € lahjoitettavaksi");
+            asetaStatus("Menepä hankkimaan edes 2 € lahjoitettavaksi");
         }
     }
     lisaaHp(){
@@ -308,7 +309,8 @@ class Pelaaja extends Hahmo{
             pelaaja.hp+=15;
         }
         else{
-            console.log("Menepä hankkimaan edes 5 € lahjoitettavaksi");
+            console.log("Menepä hankkimaan edes 2 € lahjoitettavaksi");
+            asetaStatus("Menepä hankkimaan edes 2 € lahjoitettavaksi");
         }
     }
     peliLoppui(){

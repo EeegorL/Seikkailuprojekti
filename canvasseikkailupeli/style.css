@@ -72,6 +72,14 @@ p {
     text-align: center;
     opacity:1;
 }
+.statuslaatikko{
+    position:absolute;
+    margin-top:110px;
+    margin-left:200px;
+    color:whitesmoke;
+    font-size: x-large;
+    background-color:rgb(240, 240, 240,0.2);
+}
 hr{
     color:darkred;
     background-color:darkred;
