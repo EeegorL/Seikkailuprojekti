@@ -28,6 +28,7 @@ class Vihollinen extends Hahmo {
     async lahetaVihollinenTuonelaan(){
         return new Promise(async(resolve,reject)=>{
             try{
+                tuonelaanLahetettyMaara++;
                 let tulos=await fetch(`vihollinenElossaFalse/${this.id}`,{method:"POST"});
                 resolve(tulos);
             }
@@ -51,7 +52,7 @@ class Vihollinen extends Hahmo {
             this.tajuissaan = false;
             viholliset.length-=1;
             pelaaja.lisaaRahaa();
-            await this.lahetaVihollinenTuonelaan();
+            // await this.lahetaVihollinenTuonelaan();
         }
 
         //vaihtoehto 1: vihollinen seuraa pelaajaa

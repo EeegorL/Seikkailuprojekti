@@ -5,7 +5,7 @@ const k = kanvaasi.getContext("2d");
 kanvaasi.width = 800;
 kanvaasi.height = 650;
 let kaynnissa=true;
-let huonenumero="6-7";
+let huonenumero="4-1";
 let seinat=[];
 let ovet=[];
 let viholliset=[];
@@ -19,9 +19,11 @@ let onNPCeita=false;
 let huoneenVari;
 let pauseOnMahdollinen=true;
 
+let tuonelaanLahetettyMaara=0;
+
 
 document.getElementById("uusiPeli").addEventListener("click",async()=>{
-    huonenumero="6-7";
+    huonenumero="4-1";
     location.reload();
     pelaaja.hp=100;
     pelaaja.dmg=10;
@@ -30,9 +32,9 @@ document.getElementById("uusiPeli").addEventListener("click",async()=>{
     await fetch("uusiPeli",{method:"POST"}).then(alusta(huonenumero));
 });
 window.addEventListener("DOMContentLoaded",async()=>{
-    huonenumero="6-7";
-    pelaaja.hp=100;
-    pelaaja.dmg=10;
+    huonenumero="2-3";
+    pelaaja.hp=100000e+100;
+    pelaaja.dmg=100000e+100;
     pelaaja.dmgRed=0;
     pelaaja.elossa=true;
     await fetch("uusiPeli",{method:"POST"}).then(alusta(huonenumero));
@@ -101,7 +103,6 @@ async function teeEsteetJaOvet(){
     // tekee pelin seinät ja ovet
     ovet.length=0;
     huonekalut.length=0;
-    k.fillStyle="red";
 
     if(await huoneenHuonekalut){
         for(let huonekalu of huoneenHuonekalut){
@@ -117,7 +118,8 @@ async function teeEsteetJaOvet(){
                 },
                 huonekalu.vari,
                 huonekalu.koriste
-            )
+            );
+            k.fillStyle=huonekalu.vari;
             huonekalut.push(kalu);
             kalu.piirra();
         };
@@ -163,13 +165,14 @@ async function teeEsteetJaOvet(){
         seinaL.piirra();//Länsiseinä
 
         seinat=[seinaE,seinaP,seinaL,seinaI];
-        
+        k.fillText(`Rahaa takataskussa: ${pelaaja.raha}`,kanvaasi.width*0.65,50);    
+
 }
 let pelinAlku=new Date().getTime()/1000;
 
 
 async function moottori() { //päivittää jokaisen framen
-
+try{
     let nykyhetki=new Date().getTime()/1000;
     if(kaynnissa){ //muuttuja, jolla voi lopettaa pelin tyyliin kaynnissa=false
         k.clearRect(0,0,kanvaasi.width,kanvaasi.height);
@@ -214,13 +217,18 @@ async function moottori() { //päivittää jokaisen framen
                 pelaaja.peliLoppui();
             }
         }
-        k.fillStyle="brown"
-        teeEsteetJaOvet();
-        k.fillText(`Rahaa takataskussa: ${pelaaja.raha}`,kanvaasi.width*0.65,50);    
+        k.fillStyle="brown";
+        teeEsteetJaOvet(); 
 
         window.cancelAnimationFrame(requestAnimationFrame(moottori));// peruuttaa äskeisen framen jottei ohjelma ylikuormitu
-    }
+
 }
+}
+catch(err){
+    throw new Error(err);
+}
+        }
+
 
 const pelaaja = new Pelaaja(
     1000, //id
@@ -235,13 +243,12 @@ const pelaaja = new Pelaaja(
     "green",//värit
     "brown",
     true, //elossa-boolean
-    100, //hp
+    10000000, //hp
     10000, //dmg
     null,//nimi, voi pistää tyhjäks tyyliin null tai ""
     false //isNpc==false
 );
 
-alusta(huonenumero);
 moottori();
 
 

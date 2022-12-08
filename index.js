@@ -66,7 +66,7 @@ exp.get("/huoneenHuonekalut/:huoneId", async (req, res) => {
 });
 exp.post("/vihollinenElossaFalse/:vihollisenId", async (req, res) => {
     try {
-        let tulos = await varasto.vihollinenElossaFalse(req.params.vihollisenId);
+        varasto.vihollinenElossaFalse(req.params.vihollisenId);
 
     } catch (err) {
         res.send(err);
@@ -74,7 +74,7 @@ exp.post("/vihollinenElossaFalse/:vihollisenId", async (req, res) => {
 });
 exp.post("/uusiPeli", async (req, res) => {
     try {
-        let tulos=await varasto.uusiPeli();
+        let tulos=varasto.uusiPeli();
     }
     catch (err) {
         res.send(err);

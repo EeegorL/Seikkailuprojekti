@@ -377,6 +377,9 @@ window.addEventListener("keydown", (event) => {
         case "e":
             pelaaja.lisaaHp();
             break;
+        case "z":
+            console.log(tuonelaanLahetettyMaara);
+            break;
     }
 });
 window.addEventListener("keyup", (event) => {

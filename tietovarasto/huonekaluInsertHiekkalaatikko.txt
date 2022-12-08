@@ -1,0 +1,43 @@
+insert into huonekalut(huone,tyyppi,x,y,vari,leveys,korkeus,koriste) values ("4-4","kaappi",200,200,"green",75,350,0);
+
+
+//testihuone
+insert into huonekalut(huone,tyyppi,x,y,vari,leveys,korkeus,koriste) values ("0-0","kaappi",0,30,"red",1000,10,1);
+insert into huonekalut(huone,tyyppi,x,y,vari,leveys,korkeus,koriste) values ("0-0","kaappi",0,60,"red",1000,10,1);
+insert into huonekalut(huone,tyyppi,x,y,vari,leveys,korkeus,koriste) values ("0-0","kaappi",0,90,"red",1000,10,1);
+insert into huonekalut(huone,tyyppi,x,y,vari,leveys,korkeus,koriste) values ("0-0","kaappi",0,120,"red",1000,10,1);
+insert into huonekalut(huone,tyyppi,x,y,vari,leveys,korkeus,koriste) values ("0-0","kaappi",0,150,"red",1000,10,1);
+insert into huonekalut(huone,tyyppi,x,y,vari,leveys,korkeus,koriste) values ("0-0","kaappi",0,180,"red",1000,10,1);
+insert into huonekalut(huone,tyyppi,x,y,vari,leveys,korkeus,koriste) values ("0-0","kaappi",0,210,"red",1000,10,1);
+insert into huonekalut(huone,tyyppi,x,y,vari,leveys,korkeus,koriste) values ("0-0","kaappi",0,240,"red",1000,10,1);
+insert into huonekalut(huone,tyyppi,x,y,vari,leveys,korkeus,koriste) values ("0-0","kaappi",0,270,"red",1000,10,1);
+insert into huonekalut(huone,tyyppi,x,y,vari,leveys,korkeus,koriste) values ("0-0","kaappi",0,300,"red",1000,10,1);
+insert into huonekalut(huone,tyyppi,x,y,vari,leveys,korkeus,koriste) values ("0-0","kaappi",0,330,"red",1000,10,1);
+insert into huonekalut(huone,tyyppi,x,y,vari,leveys,korkeus,koriste) values ("0-0","kaappi",0,360,"red",1000,10,1);
+insert into huonekalut(huone,tyyppi,x,y,vari,leveys,korkeus,koriste) values ("0-0","kaappi",0,390,"red",1000,10,1);
+insert into huonekalut(huone,tyyppi,x,y,vari,leveys,korkeus,koriste) values ("0-0","kaappi",0,420,"red",1000,10,1);
+insert into huonekalut(huone,tyyppi,x,y,vari,leveys,korkeus,koriste) values ("0-0","kaappi",0,450,"red",1000,10,1);
+insert into huonekalut(huone,tyyppi,x,y,vari,leveys,korkeus,koriste) values ("0-0","kaappi",0,480,"red",1000,10,1);
+insert into huonekalut(huone,tyyppi,x,y,vari,leveys,korkeus,koriste) values ("0-0","kaappi",0,510,"red",1000,10,1);
+insert into huonekalut(huone,tyyppi,x,y,vari,leveys,korkeus,koriste) values ("0-0","kaappi",0,540,"red",1000,10,1);
+insert into huonekalut(huone,tyyppi,x,y,vari,leveys,korkeus,koriste) values ("0-0","kaappi",0,570,"red",1000,10,1);
+insert into huonekalut(huone,tyyppi,x,y,vari,leveys,korkeus,koriste) values ("0-0","kaappi",0,600,"red",1000,10,1);
+insert into huonekalut(huone,tyyppi,x,y,vari,leveys,korkeus,koriste) values ("0-0","kaappi",0,630,"red",1000,10,1);
+insert into huonekalut(huone,tyyppi,x,y,vari,leveys,korkeus,koriste) values ("0-0","kaappi",0,660,"red",1000,10,1);
+insert into huonekalut(huone,tyyppi,x,y,vari,leveys,korkeus,koriste) values ("0-0","kaappi",0,690,"red",1000,10,1);
+
+//
+KFC
+//eka pöytä ja penkit
+insert into huonekalut(huone,tyyppi,x,y,vari,leveys,korkeus,koriste) values ("5-2","kaappi",150,150,"red",125,125,0);
+insert into huonekalut(huone,tyyppi,x,y,vari,leveys,korkeus,koriste) values ("5-2","kaappi",120,175,"white",15,75,1);
+insert into huonekalut(huone,tyyppi,x,y,vari,leveys,korkeus,koriste) values ("5-2","kaappi",290,175,"white",15,75,1);
+//toka pöytä ja penkit
+insert into huonekalut(huone,tyyppi,x,y,vari,leveys,korkeus,koriste) values ("5-2","kaappi",300,450,"red",125,125,0);
+insert into huonekalut(huone,tyyppi,x,y,vari,leveys,korkeus,koriste) values ("5-2","kaappi",270,475,"white",15,75,1);
+insert into huonekalut(huone,tyyppi,x,y,vari,leveys,korkeus,koriste) values ("5-2","kaappi",430,475,"white",15,75,1);
+//kolmas pöytä ja penkit
+insert into huonekalut(huone,tyyppi,x,y,vari,leveys,korkeus,koriste) values ("5-2","kaappi",600,300,"red",125,125,0);
+insert into huonekalut(huone,tyyppi,x,y,vari,leveys,korkeus,koriste) values ("5-2","kaappi",570,325,"white",15,75,1);
+insert into huonekalut(huone,tyyppi,x,y,vari,leveys,korkeus,koriste) values ("5-2","kaappi",730,325,"white",15,75,1);
+
