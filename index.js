@@ -50,7 +50,7 @@ exp.get("/pelaaja", async (req, res) => {
 });
 exp.get("/huoneenOvet/:huoneId", async (req, res) => {
     try {
-        res.json(await varasto.huoneenOvet(req.params.huoneId))
+        res.json(await varasto.huoneenOvet(req.params.huoneId));
     } catch (err) {
         res.send(err);
     }
@@ -64,9 +64,9 @@ exp.get("/huoneenHuonekalut/:huoneId", async (req, res) => {
 
     }
 });
-exp.post("/vihollinenElossaFalse/:vihollisenId", async (req, res) => {
+exp.put("/vihollinenElossaFalse/:vihollisenId", async (req, res) => {
     try {
-        varasto.vihollinenElossaFalse(req.params.vihollisenId);
+        let tulos=varasto.vihollinenElossaFalse(req.params.vihollisenId);
 
     } catch (err) {
         res.send(err);

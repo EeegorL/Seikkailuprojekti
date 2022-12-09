@@ -28,8 +28,7 @@ class Vihollinen extends Hahmo {
     async lahetaVihollinenTuonelaan(){
         return new Promise(async(resolve,reject)=>{
             try{
-                tuonelaanLahetettyMaara++;
-                let tulos=await fetch(`vihollinenElossaFalse/${this.id}`,{method:"POST"});
+                let tulos=await fetch(`vihollinenElossaFalse/${this.id}`,{method:"PUT"});
                 resolve(tulos);
             }
             catch(err){

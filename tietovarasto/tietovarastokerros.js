@@ -36,6 +36,7 @@ module.exports = class Tietovarasto{
         return new Promise(async(resolve,reject)=>{
             try{
                 let tulos=this.Omakanta.suoritaKysely(sql.huoneenOvet,[huoneId]);
+                console.log(await tulos);
                 resolve(tulos);
             }catch(err){
                 reject(err);
