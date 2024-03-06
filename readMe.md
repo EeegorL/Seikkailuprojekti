@@ -1,3 +1,5 @@
+Tämä on kouluprojekti, jota ei ajanpuutteen vuoksi saatu tehtyä loppuun
+
 # Seikkailupeli - Keskiverto päivä Itäkeskuksessa
 ## Pelin käynnistäminen ja askeleet ennen sitä:
 
